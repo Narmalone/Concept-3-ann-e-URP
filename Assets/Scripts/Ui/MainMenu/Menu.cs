@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
 public class Menu : MonoBehaviour
 {
     [Header("Premier boutton sélectionné")]
@@ -16,6 +16,7 @@ public class Menu : MonoBehaviour
 
     public void SetFirstSelected(Button firstSelectedButton)
     {
-        firstSelectedButton.Select();
+        //firstSelectedButton.Select();
+        //firstSelectedButton.Focus();
     }
 }

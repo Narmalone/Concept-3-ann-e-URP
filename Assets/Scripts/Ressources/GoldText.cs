@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
-
+using UnityEngine.UIElements;
 public class GoldText : MonoBehaviour, IDataPersistence
 {
 
     #region variables
+
+    [Header("Ui Document")]
+    [SerializeField] private UIDocument m_Document;
     //Objectifs d'or du joueur
     [Header("Objectifs à atteindre d'or du joueur")]
     [SerializeField] private float[] m_playerGoldObjectives;
@@ -16,7 +18,8 @@ public class GoldText : MonoBehaviour, IDataPersistence
     //Si le joueur est rang max
     private bool m_isMaxReached = false;
 
-    private TextMeshProUGUI m_playerGoldText;
+    private Label m_playerMoneyLabel;
+    private Button m_freeGoldButton;
 
     //Indicateur d'or du joueur
     private float m_playerGoldCount = 0;
@@ -41,16 +44,19 @@ public class GoldText : MonoBehaviour, IDataPersistence
     #endregion
 
     //Fonction de debug pour tester la montée en or du joueur, les objectifs et l'update de ces dernier//
-    public void OnClicked()
+    public void FreeGoldClicked()
     {
         m_playerGoldCount += 50;
         UpdateGold();
         Debug.Log(Application.persistentDataPath);
     }
-
     private void Awake()
     {
-        m_playerGoldText = GetComponent<TextMeshProUGUI>();
+        var rootElement = m_Document.rootVisualElement;
+
+        m_playerMoneyLabel = rootElement.Q<Label>("PlayersMoneyLabel");
+        m_freeGoldButton = rootElement.Q<Button>("GiveFreeGolds");
+        m_freeGoldButton.clickable.clicked += FreeGoldClicked;
     }
     private void Start()
     {
@@ -60,18 +66,19 @@ public class GoldText : MonoBehaviour, IDataPersistence
     //Pour update le texte et lancer la fonction pour vérifier si le joueur à atteint un objectif ou non
     private void UpdateGold()
     {
-        if(m_isMaxReached == false)
+        if (m_isMaxReached == false)
         {
             CheckGoldObjectives();
         }
-        m_playerGoldText.text = "" + m_playerGoldCount;
+        m_playerMoneyLabel.text =  "Gold: " + m_playerGoldCount.ToString();
+        Debug.Log(m_playerGoldCount);
     }
 
     //Vérifie si le joueur a remplis un objectif, si oui passe au titre suivant, si le joueur est rang max
     //On ne vérifie plus
     private void CheckGoldObjectives()
     {
-        if (m_playerGoldObjectivesCount == m_playerGoldObjectives.Length-1)
+        if (m_playerGoldObjectivesCount == m_playerGoldObjectives.Length - 1)
         {
             m_isMaxReached = true;
         }
@@ -87,7 +94,5 @@ public class GoldText : MonoBehaviour, IDataPersistence
             }
             return;
         }
-
-  
     }
 }

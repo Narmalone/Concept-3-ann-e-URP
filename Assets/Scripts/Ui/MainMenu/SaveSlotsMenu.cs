@@ -3,23 +3,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class SaveSlotsMenu : Menu
 {
+
+    [Header("Ui Document")]
+    [SerializeField] private UIDocument m_UiDocument;
+
     [Header("Navigation du Menu")]
     [SerializeField] private MainMenu m_mainMenu;
 
     [Header("Bouttons du Menu")]
-    [SerializeField] private Button m_backButton;
-
+    private Button m_backButton;
     private SaveSlots[] m_saveSlots;
 
     private bool m_isLoadingGame = false;
 
     private void Awake()
     {
-        m_saveSlots = this.GetComponentsInChildren<SaveSlots>();
+        var rootElement = m_UiDocument.rootVisualElement;
+        
+        m_saveSlots = this.GetComponents<SaveSlots>();
     }
 
     //Quand le joueur appuie sur le bouton Back
@@ -42,7 +47,7 @@ public class SaveSlotsMenu : Menu
         Dictionary<string, GameData> profilesGamedata = DataPersistenceManager.instance.GetAllProfilesGameData();
 
         //fix si la première slot ne peut pas être sélectionnée par défaut
-        GameObject firstSelected = m_backButton.gameObject;
+        //GameObject firstSelected = m_backButtonObject;
 
         //looper à traver chaques dans l'interface et set le contenu de manière approriée
         foreach (SaveSlots saveSlot in m_saveSlots)
@@ -58,16 +63,16 @@ public class SaveSlotsMenu : Menu
             else
             {
                 saveSlot.SetInteractible(true);
-                if (firstSelected.Equals(m_backButton.gameObject))
-                {
-                    firstSelected = saveSlot.gameObject;
-                }
+                //if (firstSelected.Equals(m_backButtonObject))
+                //{
+                    //firstSelected = saveSlot.gameObject;
+                //}
             }
         }
 
         //Set le premier boutton sélectionné
-        Button firstSelectedButton = firstSelected.GetComponent<Button>();
-        this.SetFirstSelected(firstSelectedButton);
+        //Button firstSelectedButton = firstSelected.GetComponent<Button>();
+        //this.SetFirstSelected(firstSelectedButton);
     }
 
     //Quand le menu est désactivé
@@ -78,6 +83,7 @@ public class SaveSlotsMenu : Menu
 
     public void OnSaveSlotClicked(SaveSlots saveSlot)
     {
+        Debug.Log("on save slot cliqued");
         //Désactiver tous les boutons quand la slot sauvegardées est cliqué pour éviter double click etc...
         DisableMenusButtons();
 
@@ -102,6 +108,6 @@ public class SaveSlotsMenu : Menu
         {
             saveSlot.SetInteractible(false);
         }
-        m_backButton.interactable = false;
+        m_backButton.focusable = false;
     }
 }

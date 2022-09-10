@@ -16,7 +16,6 @@ public class Raycastable : MonoBehaviour
 
         if (Physics.Raycast(ray, 1000, m_interactible))
         {
-            Debug.Log("Raycasted");
             m_thisRenderer = gameObject.GetComponent<Renderer>();
 
             m_thisRenderer.material.color = m_selectedColor;

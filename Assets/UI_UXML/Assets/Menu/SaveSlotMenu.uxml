@@ -1,0 +1,15 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:GroupBox style="position: absolute; left: 0; width: 100%; height: 100%;">
+        <ui:VisualElement style="width: 100%; height: 100%;">
+            <ui:Button display-tooltip-when-elided="true" name="SaveSlot" style="position: absolute; font-size: 50px; left: 583px; width: 37%; height: 147px; top: 250px;">
+                <ui:GroupBox name="HasDataContent" style="height: 120px; display: flex; width: 693px;">
+                    <ui:Label text="Title: " display-tooltip-when-elided="true" name="PlayerTitle" style="justify-content: center; width: 163px; height: 55px; position: absolute; top: 37px; left: 260px;" />
+                    <ui:Label text="Gold: 2000000" display-tooltip-when-elided="true" name="PlayerMoney" style="justify-content: center; width: 626px; height: 128px; position: absolute; top: 47px; left: 29px; font-size: 35px;" />
+                </ui:GroupBox>
+                <ui:GroupBox name="NoDataContent" style="height: 67px; width: 695px;">
+                    <ui:Label text="EMPTY" display-tooltip-when-elided="true" name="EmptyNoData" style="height: 80px; position: absolute; top: -107px; left: 253px;" />
+                </ui:GroupBox>
+            </ui:Button>
+        </ui:VisualElement>
+    </ui:GroupBox>
+</ui:UXML>

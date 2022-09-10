@@ -2,25 +2,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
 public class SaveSlots : MonoBehaviour
 {
+
+    [Header("Ui Document")]
+    [SerializeField] private UIDocument m_UiDocument;
+
+    [SerializeField] private SaveSlotsMenu m_saveSlotMenu;
+
     [Header("Profile")]
     [SerializeField] private string profileId = "";
 
     [Header("Content")]
-    [SerializeField] private GameObject noDataContent;
-    [SerializeField] private GameObject hasDataContent;
+    private GroupBox m_hasDataContentBox;
+    private GroupBox m_noDataContentBox;
 
-    [SerializeField] private TextMeshProUGUI titlePlayer;
+    //[SerializeField] private GameObject noDataContent;
+    //[SerializeField] private GameObject hasDataContent;
 
-    [SerializeField] private TextMeshProUGUI playersMoney;
+    //[SerializeField] private TextMeshProUGUI titlePlayer;
+    private Label m_titlePlayer;
+
+    //[SerializeField] private TextMeshProUGUI playersMoney;
+    private Label m_playersMoney;
 
     private Button m_saveSlotButton;
 
     private void Awake()
     {
-        m_saveSlotButton = this.GetComponent<Button>();
+        //Attributions des différentes variables et Querrying
+        var rootElement = m_UiDocument.rootVisualElement;
+
+        m_noDataContentBox = rootElement.Q<GroupBox>("NoDataContent");
+        m_hasDataContentBox = rootElement.Q<GroupBox>("HasDataContent");
+
+        m_titlePlayer = rootElement.Q<Label>("PlayerTitle");
+        m_playersMoney = rootElement.Q<Label>("PlayerMoney");
+
+        m_saveSlotButton = rootElement.Q<Button>("SaveSlot");
+
+        //Trouver un moyen de souscrire à save slot menu
     }
 
     //Mettre les informations dans la save slot
@@ -28,16 +50,21 @@ public class SaveSlots : MonoBehaviour
     {
         if(data == null)
         {
-            noDataContent.SetActive(true);
-            hasDataContent.SetActive(false);
+            m_hasDataContentBox.visible = false;
+            m_noDataContentBox.visible = true;
+            //noDataContent.SetActive(true);
+            //hasDataContent.SetActive(false);
         }
         else
         {
-            noDataContent.SetActive(false);
-            hasDataContent.SetActive(true);
+            m_hasDataContentBox.visible = true;
+            m_noDataContentBox.visible = false;
 
-            titlePlayer.text = data.m_currentPlayersTitle;
-            playersMoney.text = "Argent: " + data.m_playerMoney;
+            //noDataContent.SetActive(false);
+            //hasDataContent.SetActive(true);
+
+            m_titlePlayer.text = data.m_currentPlayersTitle.ToString();
+            m_playersMoney.text = "Gold: " + data.m_playerMoney.ToString();
 
         }
     }
@@ -50,6 +77,6 @@ public class SaveSlots : MonoBehaviour
 
     public void SetInteractible(bool interactable)
     {
-        m_saveSlotButton.interactable = interactable;
+        m_saveSlotButton.focusable = interactable;
     }
 }
