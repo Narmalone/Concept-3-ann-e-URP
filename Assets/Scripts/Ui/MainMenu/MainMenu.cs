@@ -2,26 +2,69 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 public class MainMenu : Menu
 {
     [Header("Navigation du Menu")]
     [SerializeField] private SaveSlotsMenu m_savesSlotsMenu;
 
+    [Header("Ui Document")]
+    [SerializeField] private UIDocument m_UiDocument;
+
     [Header("Références")]
-    [SerializeField, Tooltip("Référence au boutton nouvelle partie")] private Button m_newGameButton;
-    [SerializeField, Tooltip("Référence au boutton continuer une partie")] private Button m_continueGameButton;
-    [SerializeField, Tooltip("Référence au bouton charger une partie")] private Button m_loadGameButton;
+    private Button m_newGameButton;
+    private Button m_continueGameButton;
+    private Button m_loadGameButton;
+    private Button m_quitButton;
 
+    private void Awake()
+    {
+        var rootElement = m_UiDocument.rootVisualElement;
 
+        //Querrying variables
+        m_newGameButton = rootElement.Q<Button>("NewGameButton");
+        m_continueGameButton = rootElement.Q<Button>("ContinueGameButton");
+        m_loadGameButton = rootElement.Q<Button>("LoadGameButton");
+        m_quitButton = rootElement.Q<Button>("QuitGameButton");
+
+        //Subscriptions aux fonctions
+        m_newGameButton.clickable.clicked += OnNewGameClicked;
+        m_continueGameButton.clickable.clicked += OnContinueGameClicked;
+        m_loadGameButton.clickable.clicked += OnLoadGameClicked;
+        m_quitButton.clickable.clicked += OnQuitGameClicked;
+    }
     private void Start()
     {
         if (!DataPersistenceManager.instance.HasGameData())
         {
-            m_continueGameButton.interactable = false;
-            m_loadGameButton.interactable = false;
+            m_continueGameButton.focusable = false;
+            m_loadGameButton.focusable = false;
         }
+    }
+    private void OnEnable()
+    {
+
+        var rootElement = m_UiDocument.rootVisualElement;
+
+        //Querrying variables
+        m_newGameButton = rootElement.Q<Button>("NewGameButton");
+        m_continueGameButton = rootElement.Q<Button>("ContinueGameButton");
+        m_loadGameButton = rootElement.Q<Button>("LoadGameButton");
+        m_quitButton = rootElement.Q<Button>("QuitGameButton");
+
+        //Subscriptions aux fonctions
+        m_newGameButton.clickable.clicked += OnNewGameClicked;
+        m_continueGameButton.clickable.clicked += OnContinueGameClicked;
+        m_loadGameButton.clickable.clicked += OnLoadGameClicked;
+        m_quitButton.clickable.clicked += OnQuitGameClicked;
+    }
+    private void OnDisable()
+    {
+        m_newGameButton.clickable.clicked -= OnNewGameClicked;
+        m_continueGameButton.clickable.clicked -= OnContinueGameClicked;
+        m_loadGameButton.clickable.clicked -= OnLoadGameClicked;
+        m_quitButton.clickable.clicked -= OnQuitGameClicked;
     }
 
     #region Boutons
@@ -29,12 +72,14 @@ public class MainMenu : Menu
     //Fonction lorsque le joueur clique sur new game
     public void OnNewGameClicked()
     {
+        Debug.Log("Nouvelle partie cliquée");
         m_savesSlotsMenu.ActivateMenu(false);
         this.DeactivateMenu();
     }
 
     public void OnLoadGameClicked()
     {
+        Debug.Log("Charger partie cliquée");
         m_savesSlotsMenu.ActivateMenu(true);
         this.DeactivateMenu();
     }
@@ -42,6 +87,7 @@ public class MainMenu : Menu
     //Fonction quand le joueur clique sur charger une partie
     public void OnContinueGameClicked()
     {
+        Debug.Log("Continuer partie cliquée");
 
         DisableMenusButtons();
 
@@ -54,6 +100,12 @@ public class MainMenu : Menu
 
         //Charger la partie avec les données du jeu
         //DataPersistenceManager.instance.LoadGame();
+    }
+
+    //Fonction quitter le jeu
+    public void OnQuitGameClicked()
+    {
+        Application.Quit();
     }
 
     //Désactiver le MainMenu
@@ -70,8 +122,8 @@ public class MainMenu : Menu
 
     private void DisableMenusButtons()
     {
-        m_newGameButton.interactable = false;
-        m_continueGameButton.interactable = false;
+        m_newGameButton.focusable = false;
+        m_continueGameButton.focusable = false;
     }
 
     #endregion

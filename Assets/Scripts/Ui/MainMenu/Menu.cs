@@ -9,13 +9,20 @@ public class Menu : MonoBehaviour
     [SerializeField] private Button m_firstSelected;
 
     //Protected virtual pour que d'autres scripts puissent l'override
-    protected virtual void OnEnable()
-    {
-        SetFirstSelected(m_firstSelected);
-    }
+    //protected virtual void OnEnable()
+    //{
+        //if (m_firstSelected != null)
+        //{
+            //SetFirstSelected(m_firstSelected);
+        //}
+    //}
 
     public void SetFirstSelected(Button firstSelectedButton)
     {
-        firstSelectedButton.Select();
+        if(firstSelectedButton != null)
+        {
+            firstSelectedButton.Select();
+            return;
+        }
     }
 }

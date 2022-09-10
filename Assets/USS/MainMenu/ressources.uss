@@ -1,0 +1,9 @@
+.MenuButtons:hover {
+    display: flex;
+    background-color: rgb(15, 159, 192);
+    color: rgb(204, 93, 33);
+    justify-content: center;
+    align-items: center;
+    width: 1000px;
+    height: 500px;
+}
