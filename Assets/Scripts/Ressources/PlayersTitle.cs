@@ -1,12 +1,12 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
 public class PlayersTitle : MonoBehaviour, IDataPersistence
 {
-    [Header("Titre du joueur, titre suivant à chaque fois que le joueur atteint un objectif")]
-    [SerializeField, Tooltip("Liste des différents titre que le joueur obtient suivant sa progression.")] private string[] m_playersTitle;
+    [Header("Titre du joueur, titre suivant ï¿½ chaque fois que le joueur atteint un objectif")]
+    [SerializeField, Tooltip("Liste des diffï¿½rents titre que le joueur obtient suivant sa progression.")] private string[] m_playersTitle;
     private int m_currentPlayerTitle;
 
     private TextMeshProUGUI m_TitleText;
@@ -23,7 +23,7 @@ public class PlayersTitle : MonoBehaviour, IDataPersistence
     }
 
     #endregion
-    
+
     private void Awake()
     {
         m_TitleText = GetComponent<TextMeshProUGUI>();
@@ -32,7 +32,7 @@ public class PlayersTitle : MonoBehaviour, IDataPersistence
     //Fonction lorsque le joueur a suffisamment d'or pour passer au titre suivant
     public void UpdatePlayersTitle()
     {
-        if(m_currentPlayerTitle <= m_playersTitle.Length-1)
+        if (m_currentPlayerTitle <= m_playersTitle.Length - 1)
         {
             m_currentPlayerTitle++;
             m_TitleText.text = "" + m_playersTitle[m_currentPlayerTitle];
