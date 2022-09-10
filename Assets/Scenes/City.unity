@@ -962,6 +962,7 @@ MonoBehaviour:
   - 100
   - 200
   - 400
+  - 1000
   m_playersTitle: {fileID: 2134362861}
 --- !u!114 &2134362860
 MonoBehaviour:
