@@ -13,14 +13,34 @@ public class Navigate : MonoBehaviour
 
     [Header("Button")]
     [SerializeField, Tooltip("Référence au bouton servant à faire apparaître/disparaître l'interface de navigation")] private Button m_navigateButton;
-    private Button m_backButton;
 
+    [Header("ActivePannels")]
+    [SerializeField] private GameObject m_TestPannelObject;
+    [SerializeField] private GameObject m_expeditionPannelObject;
+
+    private Button m_backButton;
+    private Button m_expeditionPannel;
+    private Button m_leaveExpeditionPannel;
     private void Awake()
     {
         var rootElement = m_UiDocument.rootVisualElement;
 
         m_backButton = rootElement.Q<Button>("B_MainMenu");
         m_backButton.clickable.clicked += OnBackButtonClicked;
+
+        m_expeditionPannel = rootElement.Q<Button>("B_ExpeditionPannel");
+        m_expeditionPannel.clickable.clicked += OnExpeditionCliqued;
+    }
+
+    private void OnExpeditionCliqued()
+    {
+        m_TestPannelObject.SetActive(false);
+        m_expeditionPannelObject.SetActive(true);
+    }
+
+    private void OnLeaveExpeditionCliqued()
+    {
+
     }
 
     private void OnBackButtonClicked()

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class GameData
@@ -14,6 +14,9 @@ public class GameData
     public string m_currentPlayersTitle;
     public bool isMaxPlayerTitleReached;
 
+    public bool levelLocked;
+    public int m_currentPlayersProgression;
+
     //valeurs définies dans le constructeur seront les valeurs par défauts
     //La game commence quand il n'ya a pas de données à charger
     public GameData()
@@ -21,5 +24,7 @@ public class GameData
         this.m_playerMoney = 0;
         this.m_currentPlayersTitle = "Débutant de la mine";
         this.isMaxPlayerTitleReached = false;
+        this.m_currentPlayersProgression = 0;
     }
+
 }

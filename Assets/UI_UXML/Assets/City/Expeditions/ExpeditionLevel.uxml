@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:GroupBox name="ExpeditionsSlot" style="position: absolute; width: 604px; height: 95px;">
+        <ui:Label text="Level: " display-tooltip-when-elided="true" name="LevelName" style="position: absolute;" />
+        <ui:Button text="Button" display-tooltip-when-elided="true" name="StartExpedition" style="position: absolute; top: 24px; left: 115px; width: 356px; height: 39px;" />
+    </ui:GroupBox>
+</ui:UXML>

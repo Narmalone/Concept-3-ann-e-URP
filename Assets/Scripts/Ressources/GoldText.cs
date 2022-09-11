@@ -71,7 +71,6 @@ public class GoldText : MonoBehaviour, IDataPersistence
             CheckGoldObjectives();
         }
         m_playerMoneyLabel.text = "Gold: " + m_playerGoldCount.ToString();
-        Debug.Log(m_playerGoldCount);
     }
 
     //Vérifie si le joueur a remplis un objectif, si oui passe au titre suivant, si le joueur est rang max

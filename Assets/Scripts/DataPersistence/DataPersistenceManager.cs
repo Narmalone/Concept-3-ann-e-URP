@@ -56,7 +56,7 @@ public class DataPersistenceManager : MonoBehaviour
         //Création du singleton
         if(instance != null)
         {
-            Debug.LogError("Plus d'une data persistence manager dans la scene, destruction du nouveau manager");
+            //Debug.LogError("Plus d'une data persistence manager dans la scene, destruction du nouveau manager");
             Destroy(this.gameObject);
             return;
         }

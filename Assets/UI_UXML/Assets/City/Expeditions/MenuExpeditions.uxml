@@ -1,6 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:VisualElement style="height: 104px;">
-        <ui:IMGUIContainer style="height: 100%; background-image: none; background-color: rgb(106, 106, 106); position: absolute; width: 80%; top: 0; left: 0; margin-left: 0; margin-right: 0; align-items: stretch; justify-content: center; overflow: visible; -unity-text-align: upper-center; -unity-background-scale-mode: stretch-to-fill;" />
-        <ui:Label text="Gold: XXX" display-tooltip-when-elided="true" style="position: absolute; font-size: 50px; align-items: stretch; -unity-text-align: upper-left; flex-direction: column; transform-origin: right top; top: 22px; left: 1537px;" />
+        <ui:IMGUIContainer style="height: 100%; background-image: none; background-color: rgb(106, 106, 106); position: absolute; width: 100%; top: 0; left: 0; margin-left: 0; margin-right: 0; align-items: stretch; justify-content: center; overflow: visible; -unity-text-align: upper-center; -unity-background-scale-mode: stretch-to-fill;" />
+        <ui:Label text="Gold: XXX" display-tooltip-when-elided="true" name="PlayerGoldLabel" style="position: absolute; font-size: 50px; align-items: stretch; -unity-text-align: upper-left; flex-direction: column; transform-origin: right top; top: 22px; left: 1537px;" />
+        <ui:Label text="EXPEDITIONS" display-tooltip-when-elided="true" name="Expedition" style="position: absolute; font-size: 50px; align-items: stretch; -unity-text-align: upper-left; flex-direction: column; transform-origin: right top; top: 22px; left: 40%;" />
     </ui:VisualElement>
 </ui:UXML>
