@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 51073851}
   - component: {fileID: 51073854}
   - component: {fileID: 51073853}
-  - component: {fileID: 51073852}
+  - component: {fileID: 51073855}
   m_Layer: 0
   m_Name: UiExpeditionMap
   m_TagString: Untagged
@@ -175,24 +175,6 @@ MonoBehaviour:
   sourceAsset: {fileID: 9197481963319205126, guid: 21356b4e5bbaabd43bc6c726257323c5,
     type: 3}
   m_SortingOrder: 0
---- !u!114 &51073852
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 51073849}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19090aa74100e8645bbb433ac57bbc1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_UiDocument: {fileID: 51073851}
-  m_levelName: TaDaronne
-  m_levelId: 1
-  m_LEC: {fileID: 51073854}
-  isLevelUnlocked: 0
-  m_playersProgressionsCount: 0
 --- !u!114 &51073853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,10 +187,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19090aa74100e8645bbb433ac57bbc1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiDocument: {fileID: 51073851}
-  m_levelName: 'Niveau:'
-  m_levelId: 0
+  m_uiDocument: {fileID: 51073851}
   m_LEC: {fileID: 51073854}
+  m_levelName: 'Niveau: '
+  m_SceneToLoad: Level_1
+  m_levelId: 0
   isLevelUnlocked: 0
   m_playersProgressionsCount: 0
 --- !u!114 &51073854
@@ -226,9 +209,28 @@ MonoBehaviour:
   m_UiDocument: {fileID: 51073851}
   m_levels:
   - {fileID: 51073853}
-  - {fileID: 51073852}
+  - {fileID: 51073855}
   m_expeditionSlotTemplate: {fileID: 9197481963319205126, guid: 46cb0bc111800f842b798ce7074163b0,
     type: 3}
+--- !u!114 &51073855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51073849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19090aa74100e8645bbb433ac57bbc1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_uiDocument: {fileID: 51073851}
+  m_LEC: {fileID: 51073854}
+  m_levelName: 'Niveau: '
+  m_SceneToLoad: Level_2
+  m_levelId: 1
+  isLevelUnlocked: 0
+  m_playersProgressionsCount: 0
 --- !u!1 &70872266
 GameObject:
   m_ObjectHideFlags: 0
@@ -572,6 +574,50 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
+--- !u!1 &920824865
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 920824866}
+  - component: {fileID: 920824867}
+  m_Layer: 0
+  m_Name: GenerateCharacters
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &920824866
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920824865}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1517915494}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &920824867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920824865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe236527f8a7ee34bb9f9cac34eb8717, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -742,6 +788,7 @@ Transform:
   - {fileID: 1358645172}
   - {fileID: 1746735229}
   - {fileID: 1470557261}
+  - {fileID: 920824866}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

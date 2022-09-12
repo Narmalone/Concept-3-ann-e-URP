@@ -48,7 +48,6 @@ public class GoldText : MonoBehaviour, IDataPersistence
     {
         m_playerGoldCount += 50;
         UpdateGold();
-        Debug.Log(Application.persistentDataPath);
     }
     private void Awake()
     {

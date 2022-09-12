@@ -72,7 +72,7 @@ public class DataPersistenceManager : MonoBehaviour
         //Application.persistant datapath donne le répertoire standard tu syst exploitation pour la persistance des données dans le projet unity
         //https://docs.unity3d.com/ScriptReference/Application-persistentDataPath.html//
         this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEncryption);
-
+        Debug.Log(Application.persistentDataPath);
         this.selectedProfileId = dataHandler.GetMostRecentlyUpdatedProfileId();
 
         if (overrideSelectedProfileId)
@@ -124,7 +124,6 @@ public class DataPersistenceManager : MonoBehaviour
         {
             dataPersistenceObj.LoadData(gameData);
         }
-        //Debug.Log("argent chargé: " + gameData.m_playerMoney);
     }
     public void SaveGame()
     {

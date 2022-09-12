@@ -2,19 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
+
 public class Level : MonoBehaviour, IDataPersistence
 {
     [Header("References")]
-    [SerializeField] private UIDocument m_UiDocument;
-    [SerializeField] LevelExpeditionsCreator m_LEC;
 
     [Header("Propriétés")]
     [SerializeField] public string m_levelName;
+    [SerializeField, Tooltip("Scene à charger lorsque le joueur appuis sur le bouton")] public string m_SceneToLoad;
     public int m_levelId = 0;
     public bool isLevelUnlocked = false;
 
     public Label m_levelDescription;
-    private Button m_thisButton;
+    public Button m_thisButton;
     [HideInInspector] public int m_playersProgressionsCount;
 
     //TO DO: Booléen qui nous sert à savoir si le niveau est bloqué faire un int dans la data pour savoir ou on en est dans la progression
@@ -22,22 +23,15 @@ public class Level : MonoBehaviour, IDataPersistence
     //Sinon focusable
     //Trouver un moyen de fournir informations dans la database
     //peut etre pas besoin de mettre infos de la game dans data base mais plutôt scriptable object
-
-    private void Awake()
+    private void Start()
     {
-
-        if (m_levelId <= m_playersProgressionsCount)
-        {
-            isLevelUnlocked = true;
-            m_LEC.CreateLevelUi();
-            Debug.Log("Le joueur a débloqué le niveau: " + m_levelId);
-        }
 
     }
     public void OnCliquedExpedition()
     {
         //To DO: Lancer la mission on button cliqued + load scene with level ID;
-        Debug.Log("Le joueur a cliqué sur un niveau débloqué: " + m_levelId);
+        SceneManager.LoadSceneAsync(m_levelName);
+        Debug.Log("Le joueur a cliqué lancé le niveau: " + m_levelName + m_levelId);
     }
     public void LoadData(GameData data)
     {
