@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class PlayersCharacter
+public class Character
 {
     //Initialiser les statistiques d'un personnage
-    private string m_charactersName;
-    private float m_life;
-    private float m_damage;
-    private float m_defense;
-    private int m_rarity;
+    [SerializeField] private string m_charactersName;
+    [SerializeField] private float m_life;
+    [SerializeField] private float m_damage;
+    [SerializeField] private float m_defense;
+    [SerializeField] private int m_rarity;
+    [SerializeField] private Spells m_characterSpells;
     enum mRarity{
        Normal,
        Rare,
@@ -50,13 +51,15 @@ public class PlayersCharacter
         set { m_rarity = value; }
     }
 
-    public PlayersCharacter(string name, float life, float damage, float defense, int rarity)
+    
+    public Character(string name, float life, float damage, float defense, int rarity, Spells spells)
     {
         m_charactersName = name;
         m_life = life;
-        CharactersDamage = damage;
-        CharactersDefense = defense;
-        CharactersRarity = rarity;
+        m_damage = damage;
+        m_defense = defense;
+        m_rarity = rarity;
+        m_characterSpells = spells;
     }
         
 }

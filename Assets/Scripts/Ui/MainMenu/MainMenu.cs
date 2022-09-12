@@ -38,8 +38,8 @@ public class MainMenu : Menu
     {
         if (!DataPersistenceManager.instance.HasGameData())
         {
-            m_continueGameButton.focusable = false;
-            m_loadGameButton.focusable = false;
+            m_continueGameButton.SetEnabled(false);
+            m_loadGameButton.SetEnabled(false);
         }
     }
     private void OnEnable()
@@ -72,14 +72,12 @@ public class MainMenu : Menu
     //Fonction lorsque le joueur clique sur new game
     public void OnNewGameClicked()
     {
-        Debug.Log("Nouvelle partie cliquée");
         m_savesSlotsMenu.ActivateMenu(false);
         this.DeactivateMenu();
     }
 
     public void OnLoadGameClicked()
     {
-        Debug.Log("Charger partie cliquée");
         m_savesSlotsMenu.ActivateMenu(true);
         this.DeactivateMenu();
     }
@@ -87,8 +85,6 @@ public class MainMenu : Menu
     //Fonction quand le joueur clique sur charger une partie
     public void OnContinueGameClicked()
     {
-        Debug.Log("Continuer partie cliquée");
-
         DisableMenusButtons();
 
         //Sauvegarder la partie avant de charger une nouvelle scene
@@ -122,8 +118,8 @@ public class MainMenu : Menu
 
     private void DisableMenusButtons()
     {
-        m_newGameButton.focusable = false;
-        m_continueGameButton.focusable = false;
+        m_newGameButton.SetEnabled(true);
+        m_continueGameButton.SetEnabled(true);
     }
 
     #endregion

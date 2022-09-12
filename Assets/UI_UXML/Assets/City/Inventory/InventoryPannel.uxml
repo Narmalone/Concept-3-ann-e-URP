@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement style="height: 140px;">
+        <ui:Label text="Name" display-tooltip-when-elided="true" name="CharaName" style="font-size: 93px; position: absolute;" />
+    </ui:VisualElement>
+    <ui:VisualElement style="height: 140px;">
+        <ui:Label text="Life" display-tooltip-when-elided="true" name="CharaLife" style="font-size: 93px; position: absolute;" />
+    </ui:VisualElement>
+    <ui:VisualElement style="height: 140px;">
+        <ui:Label text="Damage" display-tooltip-when-elided="true" name="CharaDamage" style="font-size: 93px; position: absolute;" />
+    </ui:VisualElement>
+    <ui:ListView focusable="true" style="height: 524px;" />
+</ui:UXML>

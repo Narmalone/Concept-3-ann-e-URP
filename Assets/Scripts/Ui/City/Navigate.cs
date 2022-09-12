@@ -45,7 +45,6 @@ public class Navigate : MonoBehaviour
 
     private void OnBackButtonClicked()
     {
-        Debug.Log("OnBackButtonCliqued");
         //sauvegarder le jeux
         DataPersistenceManager.instance.SaveGame();
 

@@ -24,14 +24,15 @@ public class Level : MonoBehaviour, IDataPersistence
     //Sinon focusable
     //Trouver un moyen de fournir informations dans la database
     //peut etre pas besoin de mettre infos de la game dans data base mais plutôt scriptable object
+
     private void Start()
     {
         var rootElement = m_uiDocument.rootVisualElement;
-        m_thisButton = m_lec.m_startExpeditionButton;
+        m_thisButton = rootElement.Q<Button>("Expedition" + m_levelId);
 
-        if (isLevelUnlocked)
+        if (m_playersProgressionsCount >= m_levelId)
         {
-            m_thisButton.SetEnabled(true);
+            isLevelUnlocked = true;
         }
         else
         {

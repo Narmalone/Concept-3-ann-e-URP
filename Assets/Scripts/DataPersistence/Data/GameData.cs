@@ -18,17 +18,24 @@ public class GameData
     public int m_currentPlayersProgression;
 
     //Trouver un moyen de save la liste dans le fichier gamedata elle n'y apparait pas
-    public List<PlayersCharacter> m_playerCharactersOwnedData;
-
+    public List<Character> m_playerCharactersOwnedData;
+    public bool isIniated;
+    public Character m_character;
     //valeurs définies dans le constructeur seront les valeurs par défauts
     //La game commence quand il n'ya a pas de données à charger
     public GameData()
     {
+        //Or du joueur
         this.m_playerMoney = 0;
+
+        //Titres du joueur
         this.m_currentPlayersTitle = "Débutant de la mine";
         this.isMaxPlayerTitleReached = false;
         this.m_currentPlayersProgression = 0;
-        this.m_playerCharactersOwnedData = new List<PlayersCharacter>();
+
+        //Data si les persos ont déjà été crées
+        this.isIniated = false;
+        this.m_playerCharactersOwnedData = new List<Character>();
     }
 
 }

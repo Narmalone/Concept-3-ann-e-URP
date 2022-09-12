@@ -243,7 +243,6 @@ GameObject:
   - component: {fileID: 70872270}
   - component: {fileID: 70872269}
   - component: {fileID: 70872268}
-  - component: {fileID: 70872271}
   m_Layer: 6
   m_Name: Seller
   m_TagString: Untagged
@@ -329,22 +328,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 70872266}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &70872271
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 70872266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e819c77c8c7e4534dbf792b2a9b32434, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_interactible:
-    serializedVersion: 2
-    m_Bits: 64
-  m_selectedColor: {r: 0.7924528, g: 0.23549305, b: 0.23549305, a: 0}
 --- !u!1 &572155318
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,7 +340,6 @@ GameObject:
   - component: {fileID: 572155323}
   - component: {fileID: 572155322}
   - component: {fileID: 572155321}
-  - component: {fileID: 572155324}
   m_Layer: 6
   m_Name: Trainer
   m_TagString: Untagged
@@ -443,22 +425,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 572155318}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &572155324
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 572155318}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e819c77c8c7e4534dbf792b2a9b32434, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_interactible:
-    serializedVersion: 2
-    m_Bits: 64
-  m_selectedColor: {r: 0.8450321, g: 1, b: 0, a: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -585,7 +551,7 @@ GameObject:
   - component: {fileID: 920824866}
   - component: {fileID: 920824867}
   m_Layer: 0
-  m_Name: GenerateCharacters
+  m_Name: CaractersManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -618,6 +584,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe236527f8a7ee34bb9f9cac34eb8717, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCharaCreated: 0
+  charactersName:
+  - Jean
+  - Pierre
+  - Gourdin
+  - Statements
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -739,6 +711,7 @@ Transform:
   m_Children:
   - {fileID: 2134362858}
   - {fileID: 51073850}
+  - {fileID: 1613637545}
   m_Father: {fileID: 1517915494}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -792,6 +765,53 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1613637544
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1613637545}
+  - component: {fileID: 1613637546}
+  m_Layer: 0
+  m_Name: SpellsManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1613637545
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613637544}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1470557261}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1613637546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613637544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e050893cb5c63647abab8eba814f7f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireballIcon: {fileID: -4521532143779581420, guid: 5c06fe21ba8367b4a922db5c42a5a406,
+    type: 3}
+  m_BasicCharaSpellList: []
 --- !u!1 &1746735228
 GameObject:
   m_ObjectHideFlags: 0
