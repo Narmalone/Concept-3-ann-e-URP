@@ -8,11 +8,10 @@ public class LevelExpeditionsCreator : MonoBehaviour
     [Header("Ui Document")]
     [SerializeField] public UIDocument m_UiDocument;
 
-    private GroupBox m_expeditionSlot;
-    private Button m_startExpeditionButton;
+    public Button m_startExpeditionButton;
 
     private Label m_levelName;
-    public Level m_levels;
+    public Level[] m_levels;
     
     [SerializeField] VisualTreeAsset m_expeditionSlotTemplate;
 
@@ -30,36 +29,27 @@ public class LevelExpeditionsCreator : MonoBehaviour
 
         var rootElement = m_UiDocument.rootVisualElement;
         //Instantier et ajouter dans la hiérarchie les templates de niveaux
-        Debug.Log(rootElement.childCount);
 
-        TemplateContainer levelUi = m_expeditionSlotTemplate.Instantiate();
+        //TemplateContainer levelUi = m_expeditionSlotTemplate.Instantiate();
 
-        rootElement.Add(levelUi);
+        //rootElement.Add(levelUi);
 
-        //Attribution du nom et level
-        m_levelName = rootElement.Q<Label>("LevelName");
-        m_levelName.text = m_levels.m_levelName + m_levels.m_levelId;
-
-        //Changer le nom du visual element pour pouvoir le récupérer dans la hiérarchie
-        m_levelName.name = "Level: " + m_levels.m_levelId.ToString();
-
-        if (m_levels.m_levelId == 0)
+        foreach(Level level in m_levels)
         {
+            //Attribution du nom et level
+            m_levelName = rootElement.Q<Label>("LevelName");
+            m_levelName.text = level.m_levelName + level.m_levelId;
+
+            //Changer le nom du visual element pour pouvoir le récupérer dans la hiérarchie
+            m_levelName.name = "Level: " + level.m_levelId.ToString();
+
             m_startExpeditionButton = rootElement.Q<Button>("StartExpedition");
-            if (m_startExpeditionButton != null)
-            {
-                Debug.Log(m_startExpeditionButton.parent.name);
-            }
-            else
-            {
-                Debug.Log("ntm il est pas là");
-            }
+            m_startExpeditionButton.name = "Expedition" + level.m_levelId;
+
+            m_startExpeditionButton.clickable.clicked += level.OnCliquedExpedition;
         }
 
-        //foreach (Level level in m_levels)
-        //{
-           
-        //}
+        
        
     }
 }

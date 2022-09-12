@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/City.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/Expeditions/Level_1.unity
+    guid: 1e567d132f28e9147ba9722276eaf242
+  - enabled: 1
+    path: Assets/Scenes/Expeditions/Level_2.unity
+    guid: d1c79d6f4b5ecbf409a8f9042c6a91ba
   m_configObjects: {}

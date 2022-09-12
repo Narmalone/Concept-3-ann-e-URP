@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_uiDocument: {fileID: 51073851}
-  m_LEC: {fileID: 51073854}
+  m_lec: {fileID: 51073854}
   m_levelName: 'Niveau: '
   m_SceneToLoad: Level_1
   m_levelId: 0
@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_uiDocument: {fileID: 51073851}
-  m_LEC: {fileID: 51073854}
+  m_lec: {fileID: 51073854}
   m_levelName: 'Niveau: '
   m_SceneToLoad: Level_2
   m_levelId: 1
