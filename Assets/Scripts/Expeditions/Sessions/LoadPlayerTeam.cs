@@ -10,13 +10,16 @@ public class LoadPlayerTeam : MonoBehaviour, IDataPersistence
 
     private void Start()
     {
-        foreach(Character chara in m_charactersTeam)
+        StartCoroutine(CoroutineInstantiate());
+    }
+    public IEnumerator CoroutineInstantiate()
+    {
+        foreach (Character chara in m_charactersTeam)
         {
-            Instantiate(prefabToInstatiate, new Vector3(0, 0, 0), Quaternion.identity);
-            Debug.Log("Doit avoir été crée");
+            Instantiate(prefabToInstatiate, new Vector3(0f, 0f, 0f), Quaternion.identity);
+            yield return new WaitForSeconds(2);
         }
     }
-
     public void LoadData(GameData data)
     {
         this.m_charactersTeam = data.m_playerCharactersOwnedData; 

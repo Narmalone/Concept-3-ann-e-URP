@@ -5,7 +5,8 @@ using UnityEngine;
 public class CreateCharacters : MonoBehaviour, IDataPersistence
 {
     private Character m_characters;
-    private Spells m_fireBallSpell;
+    private Character m_secondaryBasicCharacter;
+
     private List<Character> charactersPlayerList;
     public bool isCharaCreated = false;
 
@@ -18,14 +19,12 @@ public class CreateCharacters : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        this.m_characters = data.m_character;
         this.charactersPlayerList = data.m_playerCharactersOwnedData;
         this.isCharaCreated = data.isIniated;
     }
 
     public void SaveData(GameData data)
     {
-        data.m_character = this.m_characters;
         data.m_playerCharactersOwnedData = this.charactersPlayerList;
         data.isIniated = this.isCharaCreated;
     }
@@ -50,9 +49,11 @@ public class CreateCharacters : MonoBehaviour, IDataPersistence
 
         string charaName = charactersName[Random.Range(0, charactersName.Length)];
 
-        m_characters = new Character(charaName, charactersLife, charactersDamage, charactersDefense, charactersRarity, m_fireBallSpell);
+        m_characters = new Character(charaName, charactersLife, charactersDamage, charactersDefense, charactersRarity);
+        m_secondaryBasicCharacter = new Character(charaName, charactersLife, charactersDamage, charactersDefense, charactersRarity);
         
         charactersPlayerList.Add(m_characters);
+        charactersPlayerList.Add(m_secondaryBasicCharacter);
         isCharaCreated = true;
     }
 }

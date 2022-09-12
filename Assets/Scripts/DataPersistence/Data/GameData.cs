@@ -20,7 +20,6 @@ public class GameData
     //Trouver un moyen de save la liste dans le fichier gamedata elle n'y apparait pas
     public List<Character> m_playerCharactersOwnedData;
     public bool isIniated;
-    public Character m_character;
     //valeurs définies dans le constructeur seront les valeurs par défauts
     //La game commence quand il n'ya a pas de données à charger
     public GameData()

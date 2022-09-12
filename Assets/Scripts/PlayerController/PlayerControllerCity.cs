@@ -1,18 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.InputSystem;
 public class PlayerControllerCity : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Rigidbody rb;
+    [SerializeField] private float moveSpeed;
+    public InputAction playerControls;
+    Vector2 moveDirection = Vector2.zero;
+
+    private void OnEnable()
     {
-        
+        playerControls.Enable();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
-        
+        playerControls.Disable();
+    }
+
+    private void Update()
+    {
+        moveDirection = playerControls.ReadValue<Vector2>();
+    }
+
+    private void FixedUpdate()
+    {
+        rb.velocity = new Vector2(moveDirection.x * moveSpeed, 0f);
     }
 }

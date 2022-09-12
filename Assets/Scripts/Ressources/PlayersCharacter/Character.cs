@@ -11,14 +11,12 @@ public class Character
     [SerializeField] private float m_damage;
     [SerializeField] private float m_defense;
     [SerializeField] private int m_rarity;
-    [SerializeField] private Spells m_characterSpells;
     enum mRarity{
        Normal,
        Rare,
        Épique,
        Légendaire
     }
-    //Ajouter l'esquive
 
     //Créer les accesseurs qui pourront être modifiées
     public string CharactersName
@@ -52,14 +50,13 @@ public class Character
     }
 
     
-    public Character(string name, float life, float damage, float defense, int rarity, Spells spells)
+    public Character(string name, float life, float damage, float defense, int rarity)
     {
         m_charactersName = name;
         m_life = life;
         m_damage = damage;
         m_defense = defense;
         m_rarity = rarity;
-        m_characterSpells = spells;
     }
         
 }
