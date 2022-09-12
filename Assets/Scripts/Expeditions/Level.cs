@@ -4,17 +4,18 @@ using UnityEngine;
 using UnityEngine.UIElements;
 public class Level : MonoBehaviour, IDataPersistence
 {
-    [Header("OnGUI")]
+    [Header("References")]
     [SerializeField] private UIDocument m_UiDocument;
-    [SerializeField] public string m_levelName;
-    public Label m_levelDescription;
-    public int m_levelId = 0;
-
     [SerializeField] LevelExpeditionsCreator m_LEC;
 
-    private Button m_thisButton;
+    [Header("Propriétés")]
+    [SerializeField] public string m_levelName;
+    public int m_levelId = 0;
     public bool isLevelUnlocked = false;
-    public int m_playersProgressionsCount;
+
+    public Label m_levelDescription;
+    private Button m_thisButton;
+    [HideInInspector] public int m_playersProgressionsCount;
 
     //TO DO: Booléen qui nous sert à savoir si le niveau est bloqué faire un int dans la data pour savoir ou on en est dans la progression
     //Si bouton bloqué alors il n'est pas focusable
