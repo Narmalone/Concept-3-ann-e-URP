@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6865585537162253575}
   - component: {fileID: 6865585537162253574}
   - component: {fileID: 6865585537162253577}
-  - component: {fileID: 6865585537162253576}
+  - component: {fileID: 5542809767001541755}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -84,17 +84,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &6865585537162253576
-CapsuleCollider:
+--- !u!114 &5542809767001541755
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6865585537162253579}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c3e8ff26c160584bbe71200eacf3427, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_playerPosition: {fileID: 4971238310329644708, guid: 5b10a111f75c28d4f9026b1e4b167710,
+    type: 3}
+  radiusForFollow: 15
+  agentSpeed: 3
