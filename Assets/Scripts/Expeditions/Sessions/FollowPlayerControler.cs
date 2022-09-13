@@ -13,6 +13,15 @@ public class FollowPlayerControler : MonoBehaviour
         if(distance >= 1.5f)
         {
             gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, m_playerPosition.transform.position, agentSpeed * Time.deltaTime);
+            Debug.Log(distance);
+        }
+    }
+
+    private IEnumerator onMoveCoroutine(float p_delay)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(p_delay);
         }
     }
 }

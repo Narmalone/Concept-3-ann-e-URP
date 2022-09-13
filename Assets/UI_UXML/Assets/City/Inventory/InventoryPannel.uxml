@@ -1,12 +1,15 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement style="height: 140px;">
-        <ui:Label text="Name" display-tooltip-when-elided="true" name="CharaName" style="font-size: 93px; position: absolute;" />
+    <ui:ListView focusable="true" header-title="Player" reorderable="false" name="ListView" fixed-item-height="40" virtualization-method="DynamicHeight" show-border="true" style="height: 410px; width: 598px; position: absolute; font-size: 30px; left: 0; top: 220px; color: rgb(255, 255, 255);" />
+    <ui:VisualElement style="height: 792px; position: absolute; width: 770px; top: 86px; left: 832px;">
+        <ui:IMGUIContainer name="Image" style="height: 370px; position: absolute; width: 424px; top: 114px; left: 153px;" />
+        <ui:VisualElement name="V_Statistics" style="position: absolute; height: 186px; width: 764px; top: 594px; left: 2px;">
+            <ui:Label text="LIFE" display-tooltip-when-elided="true" name="Life" style="position: absolute; font-size: 53px;" />
+            <ui:Label text="DAMAGE" display-tooltip-when-elided="true" name="Damage" style="position: absolute; font-size: 53px; top: 118px; left: -2px;" />
+            <ui:Label text="DEFENSE" display-tooltip-when-elided="true" name="Defense" style="position: absolute; font-size: 53px; top: 4px; left: 522px;" />
+            <ui:Label text="RARITY" display-tooltip-when-elided="true" name="Rarity" style="position: absolute; font-size: 53px; top: 116px; left: 520px;" />
+        </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement style="height: 140px;">
-        <ui:Label text="Life" display-tooltip-when-elided="true" name="CharaLife" style="font-size: 93px; position: absolute;" />
+    <ui:VisualElement style="height: 140px; position: absolute; width: 576px; top: 928px; left: 1338px;">
+        <ui:Button text="Retour" display-tooltip-when-elided="true" name="B_BackButton" enable-rich-text="true" style="position: absolute; height: 122px; width: 513px; left: 27px; top: 8px; font-size: 48px;" />
     </ui:VisualElement>
-    <ui:VisualElement style="height: 140px;">
-        <ui:Label text="Damage" display-tooltip-when-elided="true" name="CharaDamage" style="font-size: 93px; position: absolute;" />
-    </ui:VisualElement>
-    <ui:ListView focusable="true" style="height: 524px;" />
 </ui:UXML>

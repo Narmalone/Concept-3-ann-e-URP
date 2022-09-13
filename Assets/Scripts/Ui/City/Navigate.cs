@@ -9,38 +9,65 @@ public class Navigate : MonoBehaviour
 {
 
     [Header("UiDocument")]
-    [SerializeField] private UIDocument m_UiDocument;
+    [SerializeField] private UIDocument m_menuDoc;
+    [SerializeField] private UIDocument m_inventoryDoc;
+    [SerializeField] private UIDocument m_expeditionDoc;
 
     [Header("Button")]
     [SerializeField, Tooltip("Référence au bouton servant à faire apparaître/disparaître l'interface de navigation")] private Button m_navigateButton;
 
     [Header("ActivePannels")]
-    [SerializeField] private GameObject m_TestPannelObject;
+    [SerializeField] private GameObject m_mainMenuPannelObject;
     [SerializeField] private GameObject m_expeditionPannelObject;
+    [SerializeField] private GameObject m_InventoryPannelObject;
 
     private Button m_backButton;
     private Button m_expeditionPannel;
-    private Button m_leaveExpeditionPannel;
-    private void Awake()
+    private Button m_InventoryPannel;
+
+    private void OnDisable()
     {
-        var rootElement = m_UiDocument.rootVisualElement;
+        m_backButton.clickable.clicked -= OnBackButtonClicked;
+        m_expeditionPannel.clickable.clicked -= OnExpeditionCliqued;
+        m_InventoryPannel.clickable.clicked -= OnInventoryCliqued;
+    }
+
+    private void OnEnable()
+    {
+        var rootElement = m_menuDoc.rootVisualElement;
 
         m_backButton = rootElement.Q<Button>("B_MainMenu");
         m_backButton.clickable.clicked += OnBackButtonClicked;
 
         m_expeditionPannel = rootElement.Q<Button>("B_ExpeditionPannel");
         m_expeditionPannel.clickable.clicked += OnExpeditionCliqued;
+
+        m_InventoryPannel = rootElement.Q<Button>("B_InventoryPannel");
+        m_InventoryPannel.clickable.clicked += OnInventoryCliqued;
+
+        var rootExpedition = m_expeditionDoc.rootVisualElement;
+        rootExpedition.style.display = DisplayStyle.None;
+
+        var rootInventory = m_inventoryDoc.rootVisualElement;
+        rootInventory.style.display = DisplayStyle.None;
     }
 
     private void OnExpeditionCliqued()
     {
-        m_TestPannelObject.SetActive(false);
-        m_expeditionPannelObject.SetActive(true);
+        var rootMenu = m_menuDoc.rootVisualElement;
+        rootMenu.style.display = DisplayStyle.None;
+
+        var rootExpedition = m_expeditionDoc.rootVisualElement;
+        rootExpedition.style.display = DisplayStyle.Flex;
     }
 
-    private void OnLeaveExpeditionCliqued()
+    private void OnInventoryCliqued()
     {
+        var rootMenu = m_menuDoc.rootVisualElement;
+        rootMenu.style.display = DisplayStyle.None;
 
+        var rootInventory = m_inventoryDoc.rootVisualElement;
+        rootInventory.style.display = DisplayStyle.Flex;
     }
 
     private void OnBackButtonClicked()
@@ -51,12 +78,5 @@ public class Navigate : MonoBehaviour
         //charger le Main Menu
         SceneManager.LoadSceneAsync("MainMenu");
     }
-
-    private void OnDestroy()
-    {
-        m_backButton.clickable.clicked -= OnBackButtonClicked;
-    }
-
-
 
 }

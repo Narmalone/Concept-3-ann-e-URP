@@ -43,13 +43,7 @@ public class GoldText : MonoBehaviour, IDataPersistence
     }
     #endregion
 
-    //Fonction de debug pour tester la montée en or du joueur, les objectifs et l'update de ces dernier//
-    public void FreeGoldClicked()
-    {
-        m_playerGoldCount += 50;
-        UpdateGold();
-    }
-    private void Awake()
+    private void OnEnable()
     {
         var rootElement = m_Document.rootVisualElement;
 
@@ -57,8 +51,18 @@ public class GoldText : MonoBehaviour, IDataPersistence
         m_freeGoldButton = rootElement.Q<Button>("GiveFreeGolds");
         m_freeGoldButton.clickable.clicked += FreeGoldClicked;
     }
+    private void OnDisable()
+    {
+        m_freeGoldButton.clickable.clicked -= FreeGoldClicked;
+    }
     private void Start()
     {
+        UpdateGold();
+    }
+    //Fonction de debug pour tester la montée en or du joueur, les objectifs et l'update de ces dernier//
+    public void FreeGoldClicked()
+    {
+        m_playerGoldCount += 50;
         UpdateGold();
     }
 

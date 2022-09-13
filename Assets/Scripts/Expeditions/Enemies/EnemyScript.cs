@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController
 {
     //TO DO: Un script qui contient les propriétés basique d'une IA
     //Comme les personnages, leurs statistiques sont relativement aléatoires de bas niveau
