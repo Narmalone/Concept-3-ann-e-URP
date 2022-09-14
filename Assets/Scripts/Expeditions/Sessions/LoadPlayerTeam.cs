@@ -8,19 +8,6 @@ public class LoadPlayerTeam : MonoBehaviour, IDataPersistence
     private List<Character> m_charactersTeam;
     [SerializeField] private GameObject prefabToInstatiate;
 
-    private void Awake()
-    {
-        //StartCoroutine(CoroutineInstantiate());
-        Debug.Log(m_charactersTeam);
-       
-    }
-    private void Start()
-    {
-        foreach (Character chara in m_charactersTeam)
-        {
-            Instantiate(prefabToInstatiate, new Vector3(0f, 0f, 0f), Quaternion.identity);
-        }
-    }
     public IEnumerator CoroutineInstantiate()
     {
         foreach (Character chara in m_charactersTeam)
