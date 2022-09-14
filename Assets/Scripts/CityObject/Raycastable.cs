@@ -4,22 +4,43 @@ using UnityEngine;
 
 public class Raycastable : MonoBehaviour
 {
-    [SerializeField] private LayerMask m_interactible;
-
+    [Header("Références et variables à donner par l'inspecteur")]
+    [SerializeField] private LayerMask m_selectableMask;
     [SerializeField] private Color m_selectedColor;
+    [SerializeField] private Color m_defaultColor;
 
+    //Variables
     private Renderer m_thisRenderer;
+    private Collider collide;
 
-    private void FixedUpdate()
+    private void Awake()
+    {
+        collide = gameObject.GetComponent<Collider>();
+    }
+
+    //Vérifier
+    private void Update()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, 1000, m_interactible))
-        {
-            Debug.Log("Raycasted");
-            m_thisRenderer = gameObject.GetComponent<Renderer>();
+        RaycastHit hit;
 
-            m_thisRenderer.material.color = m_selectedColor;
+        if ((m_selectableMask.value & (1 << collide.gameObject.layer)) > 0)
+        {
+            if (Physics.Raycast(ray, out hit,1000, m_selectableMask))
+            {
+                m_thisRenderer = hit.collider.gameObject.GetComponent<Renderer>();
+                Debug.Log(m_thisRenderer.gameObject.name);
+                if (m_thisRenderer)
+                {
+                    m_thisRenderer.material.SetColor("_Color", m_selectedColor);
+                }
+            }
+            else
+            {
+                m_thisRenderer = collide.gameObject.GetComponent<Renderer>();
+                m_thisRenderer.material.SetColor("_Color", m_defaultColor);
+            }
         }
     }
 }

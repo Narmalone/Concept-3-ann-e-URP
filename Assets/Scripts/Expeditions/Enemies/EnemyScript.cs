@@ -27,7 +27,6 @@ public class EnemyScript: MonoBehaviour
         if((charatersMask.value & (1 << other.gameObject.layer)) > 0)
         {
             GetComponent<Collider>().enabled = false;
-
             //appel delegate mettre le joueur en combat
             CombatManager.instance.OnStartCombat(true);
         }

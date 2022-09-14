@@ -49,8 +49,8 @@ public class CreateCharacters : MonoBehaviour, IDataPersistence
 
         string charaName = charactersName[Random.Range(0, charactersName.Length)];
 
-        m_characters = new Character(charaName, charactersLife, charactersDamage, charactersDefense, charactersRarity);
-        m_secondaryBasicCharacter = new Character(charactersName[Random.Range(0, charactersName.Length)], Random.Range(40, 50), Random.Range(20, 30), Random.Range(10, 15), Random.Range(1, 2));
+        m_characters = new Character(charaName, charactersLife, charactersDamage, charactersDefense, charactersRarity, SpellsManager.instance.RandomSpell);
+        m_secondaryBasicCharacter = new Character(charactersName[Random.Range(0, charactersName.Length)], Random.Range(40, 50), Random.Range(20, 30), Random.Range(10, 15), Random.Range(1, 2), SpellsManager.instance.RandomSpell);
         
         charactersPlayerList.Add(m_characters);
         charactersPlayerList.Add(m_secondaryBasicCharacter);

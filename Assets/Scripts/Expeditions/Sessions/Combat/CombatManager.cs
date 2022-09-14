@@ -37,4 +37,12 @@ public class CombatManager : MonoBehaviour
         }
         return boolValue;
     }
+
+    // TO DO: When players select the spell, the cursor shown = the spell texture and if the players cliqued on a raycastable gameobject like enemies
+    //The spell is launched and the visual element is disabled
+
+    public void SelectEnemies()
+    {
+        
+    }
 }

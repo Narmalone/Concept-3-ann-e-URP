@@ -11,6 +11,8 @@ public class Character
     [SerializeField] private float m_damage;
     [SerializeField] private float m_defense;
     [SerializeField] private int m_rarity;
+    [SerializeField] private Spells m_currentSpell;
+
     enum mRarity{
        Normal,
        Rare,
@@ -49,14 +51,19 @@ public class Character
         set { m_rarity = value; }
     }
 
-    
-    public Character(string name, float life, float damage, float defense, int rarity)
+    public Spells CurrentCharaSpell
+    {
+        get { return m_currentSpell; }
+        set { m_currentSpell = value; }
+    }
+    public Character(string name, float life, float damage, float defense, int rarity, Spells currentSpell)
     {
         m_charactersName = name;
         m_life = life;
         m_damage = damage;
         m_defense = defense;
         m_rarity = rarity;
+        m_currentSpell = currentSpell;
     }
         
 }

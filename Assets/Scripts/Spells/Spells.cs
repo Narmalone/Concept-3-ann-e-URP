@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Spells : MonoBehaviour
+public class Spells
 {
     [SerializeField] private Texture2D m_spellIcon;
     [SerializeField] private string m_spellName;
