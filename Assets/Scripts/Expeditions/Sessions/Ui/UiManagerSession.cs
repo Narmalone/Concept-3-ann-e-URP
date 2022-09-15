@@ -70,7 +70,7 @@ public class UiManagerSession : MonoBehaviour, IDataPersistence
         if (lifeBar != null)
         {
             lifeBar.SetValueWithoutNotify(100);
-            lifeBar.title = "Tadaronne";
+            lifeBar.title = "Vie";
             Debug.Log(lifeBar.Children().ToString() + lifeBar.value);
         }
         else
