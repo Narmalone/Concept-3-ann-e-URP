@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,6 +28,9 @@ public class UiManagerSession : MonoBehaviour, IDataPersistence
 
     //Boutons des sorts
     private Button Spell1;
+
+    //Vie des entités
+    private ProgressBar lifeBar;
     private void Awake()
     {
         if(instance != null)
@@ -59,6 +63,20 @@ public class UiManagerSession : MonoBehaviour, IDataPersistence
         //To DO: Quand le spell est lancé -> joueur doit cliquer sur un ennemie et lui faire des dégâts
         //To do: Désactiver le visual element pendant X tour
         Spell1.clickable.clicked += CombatManager.instance.SelectEnemies;
+
+        lifeBar = rootElement.Q<ProgressBar>("LifeBar");
+
+        //Peut-être essayer de bind le visual element
+        if (lifeBar != null)
+        {
+            lifeBar.SetValueWithoutNotify(100);
+            lifeBar.title = "Tadaronne";
+            Debug.Log(lifeBar.Children().ToString() + lifeBar.value);
+        }
+        else
+        {
+            Debug.Log("life bar pas trouvée");
+        }
 
     }
 

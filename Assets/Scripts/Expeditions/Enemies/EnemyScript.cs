@@ -6,15 +6,13 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 public class EnemyScript: MonoBehaviour
 {
-    //TO DO: Un script qui contient les propriétés basique d'une IA
-    //Comme les personnages, leurs statistiques sont relativement aléatoires de bas niveau
-    //nom, vie -> vie visible en combat par un slider/progressbar
+    //TO DO: nom, vie -> vie visible en combat par un slider/progressbar
 
     //Un autre script permettant de créer des groupes d'Ia directement dans le level afin de tester
     //Ce script contiendras des informations comme nombre d'ennemis dans un groupe
 
     //trouver un moyen d'afficher les données dans l'ui de combat avec les noms des adversaires et de nos personnages
-    //sur des slots bien définies
+    // Ui doc gameobject dans les go player et enemies ?
     //Pas sur une nouvelle scene mais le playercontroller devra être désactivé
 
     [SerializeField] private LayerMask charatersMask;

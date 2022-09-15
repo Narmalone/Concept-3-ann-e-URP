@@ -1,0 +1,21 @@
+.unity-progress-bar__background{
+    height: 200px;
+}
+
+.unity-progress-bar__progress{
+    position: absolute;
+    background-color: #15E0E3;
+    width: auto;
+    height: 100%;
+}
+
+.unity-progress-bar__title-container{
+    position: absolute;
+    height: auto;
+    font-size: 200%;
+}
+
+.unity-progress-bar__title{
+    height: auto;
+    font-size: 40px;
+}
