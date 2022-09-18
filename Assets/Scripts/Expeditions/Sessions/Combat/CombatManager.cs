@@ -12,6 +12,7 @@ public class CombatManager : MonoBehaviour
 
     public ActionDelegate OnStartCombat;
     public ActionDelegate delCombat;
+    public ActionDelegate delLeaveCombat;
     #endregion
 
     public bool canSelectMob = false;
@@ -24,9 +25,13 @@ public class CombatManager : MonoBehaviour
         }
         instance = this;
 
+        //delegates du joueur combat 
         OnStartCombat = StartCombat;
         delCombat = InCombat;
+        delLeaveCombat = EndCombat;
     }
+
+ 
 
     //Si le joueur est en combat
     private bool StartCombat(bool boolValue)
@@ -47,11 +52,25 @@ public class CombatManager : MonoBehaviour
     {
         if (boolValue)
         {
+            FindObjectOfType<PlayerControllerCity>().enabled = false;
             Debug.Log("Joueur ne peut plus se déplacer car il est en combat: " + boolValue);
         }
         else
         {
             Debug.LogError("Le joueur ne peut pas se déplacer mais il n'est plus en combat ? " + boolValue);
+        }
+        return boolValue;
+    }
+
+    private bool EndCombat(bool boolValue)
+    {
+        if (boolValue)
+        {
+            Debug.Log("Le joueur a terminé le combat: " + boolValue);
+        }
+        else
+        {
+            Debug.LogError("Le joueur a terminé le combat mais il est en combat ? " + boolValue);
         }
         return boolValue;
     }

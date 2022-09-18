@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Ennemies : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class Ennemies : MonoBehaviour
     public void GetDamage(Spells target)
     {
         ApplyDamage(target.SpellBasicDamage);
+
+        //Désactiver le bouton sort que le joueur à lancé
+        UiManagerSession.instance.SpellUsed();
     }
 
     //Dégâts reçus par un sort
@@ -30,7 +34,9 @@ public class Ennemies : MonoBehaviour
         Debug.Log("défense de l'ennemi: " + defense);
 
         life -= damage;
-        
+
+        UiManagerSession.instance.UpdateCombatUi();
+
         if(life <= 0)
         {
             Destroy(gameObject);

@@ -30,6 +30,9 @@ public class PlayerAttack : MonoBehaviour
             if (Physics.Raycast(ray, out hit, 1000, m_enemyMask))
             {
                 hit.collider.gameObject.GetComponent<Ennemies>().GetDamage(m_currentSpellSelected);
+
+                //une fois que le joueur a appuyé il ne doit plus avoir le sort comme sélectionné
+                m_currentSpellSelected = null;
             }
         }
     }

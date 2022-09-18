@@ -31,6 +31,8 @@ public class UiManagerSession : MonoBehaviour
     //Boutons des sorts
     private Button Spell1;
 
+
+    private Button m_spellUsed;
     //Vie des entités
     private ProgressBar lifeBar;
 
@@ -77,7 +79,6 @@ public class UiManagerSession : MonoBehaviour
         SpellDamage1.text = m_characters[0].CurrentCharaSpell.SpellBasicDamage.ToString();
 
         Spell1 = rootElement.Q<Button>("BSpell1");
-       
         Spell1.clickable.clicked += FirstSpellCliqued;
 
         lifeBar = rootElement.Q<ProgressBar>("LifeBar");
@@ -105,6 +106,7 @@ public class UiManagerSession : MonoBehaviour
     //Changer cette fonction
     public void FirstSpellCliqued()
     {
+        m_spellUsed = Spell1;
         CombatManager.instance.canSelectMob = true;
         PlayerAttack.instance.m_currentSpellSelected = m_characters[0].CurrentCharaSpell;
     } 
@@ -124,6 +126,16 @@ public class UiManagerSession : MonoBehaviour
         CombatManager.instance.canSelectMob = true;
     }
 
+    //Lorsque le joueur utilise un sort doit désactiver le bouton -> lancé depuis classe ennemy dans GetDamage
+    public void SpellUsed()
+    {
+        m_spellUsed.SetEnabled(false);
+        CombatManager.instance.canSelectMob = false;
+    }
+
+    // TO DO: Fonction update la bar d'UI lancé depuis la classe enemy dans ApplyDamage
+    //Actuellement non fonctionnelle car on display vie de nos persos au lieux de celui de l'ennemi touché
+    //Barre de vie 3D ? Par l'ancienne interface ?
     public void UpdateCombatUi()
     {
         var rootElement = m_uiDocCombat.rootVisualElement;
