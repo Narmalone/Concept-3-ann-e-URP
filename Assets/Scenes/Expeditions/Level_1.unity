@@ -167,6 +167,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b44cb88dd94984942bba6632a37b855c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy:
+    m_charactersName: 
+    m_life: 0
+    m_damage: 0
+    m_defense: 0
+    m_rarity: 0
+    m_currentSpell:
+      m_spellIcon: {fileID: 0}
+      m_spellName: 
+      m_spellDescription: 
+      m_spellId: 0
+      m_spellBasicDamage: 0
   enemyPrefab: {fileID: 1661041351}
   enemiesName:
   - Rat
@@ -447,12 +459,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e819c77c8c7e4534dbf792b2a9b32434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_selectableMask:
-    serializedVersion: 2
-    m_Bits: 256
-  m_selectedColor: {r: 0.07058823, g: 0.14152172, b: 0.8980392, a: 0}
-  m_defaultColor: {r: 1, g: 0, b: 0, a: 0}
-  mobId: 1
 --- !u!1001 &475203996
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -908,6 +914,53 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 320fcc1d7075b984b90cc7d349b25c26, type: 3}
+--- !u!1 &973202906
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 973202907}
+  - component: {fileID: 973202908}
+  m_Layer: 0
+  m_Name: PlayerAttackManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &973202907
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 973202906}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1867841815}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &973202908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 973202906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f518665567d34444791fdd300471f80f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_enemyMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &973603909
 GameObject:
   m_ObjectHideFlags: 0
@@ -1310,12 +1363,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e819c77c8c7e4534dbf792b2a9b32434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_selectableMask:
-    serializedVersion: 2
-    m_Bits: 256
-  m_selectedColor: {r: 0.056114297, g: 0.2008954, b: 0.9150943, a: 0}
-  m_defaultColor: {r: 0.9137255, g: 0.0796222, b: 0.054901958, a: 0}
-  mobId: 0
 --- !u!1 &1528384612
 GameObject:
   m_ObjectHideFlags: 0
@@ -1453,6 +1500,7 @@ Transform:
   - {fileID: 991533463}
   - {fileID: 1164203450}
   - {fileID: 52739954}
+  - {fileID: 973202907}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -78,7 +78,6 @@ public class UiManagerSession : MonoBehaviour
 
         Spell1 = rootElement.Q<Button>("BSpell1");
        
-        Spell1.clickable.clicked += CombatManager.instance.SelectEnemies;
         Spell1.clickable.clicked += FirstSpellCliqued;
 
         lifeBar = rootElement.Q<ProgressBar>("LifeBar");
@@ -98,7 +97,6 @@ public class UiManagerSession : MonoBehaviour
         {
             Debug.Log("life bar pas trouvée");
         }
-
     }
 
     //To DO: Quand le spell est lancé -> joueur doit cliquer sur un ennemie et lui faire des dégâts
@@ -106,6 +104,22 @@ public class UiManagerSession : MonoBehaviour
 
     //Changer cette fonction
     public void FirstSpellCliqued()
+    {
+        CombatManager.instance.canSelectMob = true;
+        PlayerAttack.instance.m_currentSpellSelected = m_characters[0].CurrentCharaSpell;
+    } 
+    
+    public void SecondSpellCliqued()
+    {
+        CombatManager.instance.canSelectMob = true;
+    } 
+    
+    public void ThirdSpellCliqued()
+    {
+        CombatManager.instance.canSelectMob = true;
+    }
+    
+    public void FourSpellCliqued()
     {
         CombatManager.instance.canSelectMob = true;
     }

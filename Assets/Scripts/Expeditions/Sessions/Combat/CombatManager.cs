@@ -9,10 +9,9 @@ public class CombatManager : MonoBehaviour
     public static CombatManager instance { get; private set; }
 
     public delegate bool ActionDelegate(bool boolValue);
-    public delegate void FunctionDelegate(Character target, Spells fromSpell);
 
     public ActionDelegate OnStartCombat;
-    public FunctionDelegate OnAttack;
+    public ActionDelegate delCombat;
     #endregion
 
     public bool canSelectMob = false;
@@ -26,12 +25,7 @@ public class CombatManager : MonoBehaviour
         instance = this;
 
         OnStartCombat = StartCombat;
-        OnAttack = CharactersAttack;
-    }
-
-    public void CharactersAttack(Character target, Spells fromSpell)
-    {
-
+        delCombat = InCombat;
     }
 
     //Si le joueur est en combat
@@ -39,21 +33,26 @@ public class CombatManager : MonoBehaviour
     {
         if (boolValue)
         {
-            Debug.Log("démarrage du combat: ");
+            Debug.Log("démarrage du combat: " + boolValue);
             UiManagerSession.instance.CombatUi();
         }
         else
         {
-            Debug.LogError("Quelque chose à lancé un combat mais la value est à false");
+            Debug.LogError("Quelque chose à lancé un combat mais la value est à false ? " + boolValue);
         }
         return boolValue;
     }
 
-    // TO DO: When players select the spell, the cursor shown = the spell texture and if the players cliqued on a raycastable gameobject like enemies
-    //The spell is launched and the visual element is disabled
-
-    public void SelectEnemies()
+    private bool InCombat(bool boolValue)
     {
-        
+        if (boolValue)
+        {
+            Debug.Log("Joueur ne peut plus se déplacer car il est en combat: " + boolValue);
+        }
+        else
+        {
+            Debug.LogError("Le joueur ne peut pas se déplacer mais il n'est plus en combat ? " + boolValue);
+        }
+        return boolValue;
     }
 }
