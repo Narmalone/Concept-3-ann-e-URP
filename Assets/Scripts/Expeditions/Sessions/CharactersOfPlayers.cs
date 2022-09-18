@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class CharactersOfPlayers : MonoBehaviour
 {
-
+    [SerializeField] private int id;
 }
