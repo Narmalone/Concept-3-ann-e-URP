@@ -25,7 +25,7 @@
             </ui:GroupBox>
         </ui:GroupBox>
     </ui:VisualElement>
-    <ui:VisualElement name="VisualElementData" style="position: absolute; height: 94px; width: 616px; top: 500px; left: 1268px;">
+    <ui:VisualElement name="VisualElementData" style="position: absolute; height: 58px; width: 616px; top: 500px; left: 1268px;">
         <ui:ProgressBar low-value="0" name="LifeBar" focusable="true" title="LifeBar" style="position: absolute; width: 610px; height: 58px; font-size: 12px; color: rgba(210, 210, 210, 0);" />
     </ui:VisualElement>
 </ui:UXML>

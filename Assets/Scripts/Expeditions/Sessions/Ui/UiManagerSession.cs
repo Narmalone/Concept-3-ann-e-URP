@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-public class UiManagerSession : MonoBehaviour, IDataPersistence
+public class UiManagerSession : MonoBehaviour
 {
     #region delegates
     public static UiManagerSession instance { get; private set; }
@@ -11,10 +11,12 @@ public class UiManagerSession : MonoBehaviour, IDataPersistence
     public delegate void ActiveActionDelegate();
 
     public ActiveActionDelegate CombatUi;
+    public ActiveActionDelegate delUpdateCombatUi;
     #endregion
 
     [SerializeField] private UIDocument m_uiDocCombat;
     private List<Character> m_characters;
+    private List<Character> m_enemiesCharacter;
 
     //Noms des sorts
     private Label SpellName1;
@@ -31,6 +33,13 @@ public class UiManagerSession : MonoBehaviour, IDataPersistence
 
     //Vie des entités
     private ProgressBar lifeBar;
+
+    //Floats des vies du joueurs
+    private float maxPlayerHP;
+    private float characterLifePercent;
+
+    [SerializeField] private Texture2D fireball;
+    [SerializeField] private Texture2D snowBall;
     private void Awake()
     {
         if(instance != null)
@@ -38,11 +47,19 @@ public class UiManagerSession : MonoBehaviour, IDataPersistence
             return;
         }
         instance = this;
-
+      
         CombatUi = UiCombat;
         SetDisabledUi();
     }
 
+    private void Start()
+    {
+        m_characters = new List<Character>();
+
+        m_characters = LoadPlayerTeam.instance.m_charactersTeam;
+
+        Debug.Log(m_characters[0].CharactersName);
+    }
     public void SetDisabledUi()
     {
         var rootElement = m_uiDocCombat.rootVisualElement;
@@ -60,18 +77,22 @@ public class UiManagerSession : MonoBehaviour, IDataPersistence
         SpellDamage1.text = m_characters[0].CurrentCharaSpell.SpellBasicDamage.ToString();
 
         Spell1 = rootElement.Q<Button>("BSpell1");
-        //To DO: Quand le spell est lancé -> joueur doit cliquer sur un ennemie et lui faire des dégâts
-        //To do: Désactiver le visual element pendant X tour
+       
         Spell1.clickable.clicked += CombatManager.instance.SelectEnemies;
+        Spell1.clickable.clicked += FirstSpellCliqued;
 
         lifeBar = rootElement.Q<ProgressBar>("LifeBar");
 
         //Peut-être essayer de bind le visual element
         if (lifeBar != null)
         {
-            lifeBar.SetValueWithoutNotify(100);
+            //Formule mathématique de conversion
+            //(currentValue / maxValue) * oneHundred = myPercentage;
+
+            maxPlayerHP = m_characters[0].CharactersLife;
+            characterLifePercent = (m_characters[0].CharactersLife / maxPlayerHP) * 100;
+            lifeBar.SetValueWithoutNotify(characterLifePercent);
             lifeBar.title = "Vie";
-            Debug.Log(lifeBar.Children().ToString() + lifeBar.value);
         }
         else
         {
@@ -80,13 +101,22 @@ public class UiManagerSession : MonoBehaviour, IDataPersistence
 
     }
 
-    public void LoadData(GameData data)
+    //To DO: Quand le spell est lancé -> joueur doit cliquer sur un ennemie et lui faire des dégâts
+    //To do: Désactiver le visual element pendant X tour
+
+    //Changer cette fonction
+    public void FirstSpellCliqued()
     {
-        m_characters = data.m_playerCharactersOwnedData;
+        CombatManager.instance.canSelectMob = true;
     }
 
-    public void SaveData(GameData data)
+    public void UpdateCombatUi()
     {
-        return;
+        var rootElement = m_uiDocCombat.rootVisualElement;
+        lifeBar = rootElement.Q<ProgressBar>("LifeBar");
+
+        characterLifePercent = (m_characters[0].CharactersLife / maxPlayerHP) * 100;
+        lifeBar.SetValueWithoutNotify(characterLifePercent);
     }
+   
 }

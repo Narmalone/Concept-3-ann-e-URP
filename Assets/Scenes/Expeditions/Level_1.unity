@@ -452,6 +452,7 @@ MonoBehaviour:
     m_Bits: 256
   m_selectedColor: {r: 0.07058823, g: 0.14152172, b: 0.8980392, a: 0}
   m_defaultColor: {r: 1, g: 0, b: 0, a: 0}
+  mobId: 1
 --- !u!1001 &475203996
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1051,6 +1052,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_uiDocCombat: {fileID: 209989566}
+  fireball: {fileID: 2800000, guid: dffef66376be4fa480fb02b19edbe903, type: 3}
+  snowBall: {fileID: 8228938214290033325, guid: 5c06fe21ba8367b4a922db5c42a5a406,
+    type: 3}
 --- !u!4 &1058773989 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6865585537162253575, guid: ac49b3e15b2ed53468e3f3879f352118,
@@ -1101,6 +1105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d911e28f5b90e64fa7cbbcefccc8e66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canSelectMob: 0
 --- !u!4 &1165081853 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6865585537162253575, guid: ac49b3e15b2ed53468e3f3879f352118,
@@ -1310,6 +1315,7 @@ MonoBehaviour:
     m_Bits: 256
   m_selectedColor: {r: 0.056114297, g: 0.2008954, b: 0.9150943, a: 0}
   m_defaultColor: {r: 0.9137255, g: 0.0796222, b: 0.054901958, a: 0}
+  mobId: 0
 --- !u!1 &1528384612
 GameObject:
   m_ObjectHideFlags: 0

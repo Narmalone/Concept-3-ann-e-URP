@@ -5,12 +5,17 @@ using UnityEngine;
 
 public class CombatManager : MonoBehaviour
 {
+    #region delegates
     public static CombatManager instance { get; private set; }
 
     public delegate bool ActionDelegate(bool boolValue);
+    public delegate void FunctionDelegate(Character target, Spells fromSpell);
 
     public ActionDelegate OnStartCombat;
+    public FunctionDelegate OnAttack;
+    #endregion
 
+    public bool canSelectMob = false;
     private void Awake()
     {
         //création mini-singleton
@@ -21,6 +26,12 @@ public class CombatManager : MonoBehaviour
         instance = this;
 
         OnStartCombat = StartCombat;
+        OnAttack = CharactersAttack;
+    }
+
+    public void CharactersAttack(Character target, Spells fromSpell)
+    {
+
     }
 
     //Si le joueur est en combat

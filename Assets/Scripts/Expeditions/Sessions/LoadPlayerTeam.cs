@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class LoadPlayerTeam : MonoBehaviour, IDataPersistence
 {
-
-    private List<Character> m_charactersTeam;
+    public static LoadPlayerTeam instance { get; private set; }
+    [System.NonSerialized] public List<Character> m_charactersTeam;
     [SerializeField] private GameObject prefabToInstatiate;
 
-    public IEnumerator CoroutineInstantiate()
+    private void Awake()
     {
-        foreach (Character chara in m_charactersTeam)
+        if(instance != null)
         {
-            Instantiate(prefabToInstatiate, new Vector3(0f, 0f, 0f), Quaternion.identity);
-            yield return new WaitForSeconds(2);
+            return;
         }
+        instance = this;
     }
     public void LoadData(GameData data)
     {
