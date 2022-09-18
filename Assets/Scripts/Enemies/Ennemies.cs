@@ -34,11 +34,13 @@ public class Ennemies : MonoBehaviour
     public void ApplyDamage(float damage)
     {
         //Dégâts réduits en fonction de la défense
-        //|V1 - V2|/ [(V1 + V2)/2] × 100 Warning: pas la bonne formule
-        //Final value - initial value / initial value * 100
-        damage = (damage - defense / defense) * 100;
+        //Formule ou on divise par 100 defense pour avoir sa valeur de 0 à 1
+        //puis pour les dégâts on multiplie dégâts - la défense pour que le sort fasse moins de dégâts
+
+        defense = defense / 100;
+        damage = damage * (1 - defense);
         Debug.Log("Dégâts subis: " + damage);
-        Debug.Log("défense de l'ennemi: " + defense);
+        Debug.Log("défense de l'ennemi: " + defense * 100);
 
         life -= damage;
 

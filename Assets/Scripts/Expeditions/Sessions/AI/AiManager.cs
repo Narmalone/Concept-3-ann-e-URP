@@ -18,7 +18,7 @@ public class AiManager : MonoBehaviour
     public void ChoiceSpellAgainstPlayer()
     {
         m_spellAgainstPlayer = mobGroup1[Random.Range(0, mobGroup1.Count)].m_enemySpell;
-        Debug.Log(m_spellAgainstPlayer);
+        Debug.Log(m_spellAgainstPlayer.SpellName);
     }
 
     //Classe qui comme ennemies / Player Attack servira pour lancer une attaque aux personnages du joueur
