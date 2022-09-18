@@ -29,7 +29,6 @@ public class SpellsManager : MonoBehaviour
     {
         fireball = new Spells(spelltexture, "fireball", "Envoie une boule de feu faisant 10 à 15 points de dégâts", 0, Random.Range(10,15));
         m_spellList.Add(fireball);
-
         AttributeRandomSpell();
     }
 

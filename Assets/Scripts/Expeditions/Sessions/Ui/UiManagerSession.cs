@@ -30,6 +30,8 @@ public class UiManagerSession : MonoBehaviour
 
     //Boutons des sorts
     private Button Spell1;
+    private Button Spell2;
+    private Button Spell3;
 
 
     private Button m_spellUsed;
@@ -57,10 +59,7 @@ public class UiManagerSession : MonoBehaviour
     private void Start()
     {
         m_characters = new List<Character>();
-
         m_characters = LoadPlayerTeam.instance.m_charactersTeam;
-
-        Debug.Log(m_characters[0].CharactersName);
     }
     public void SetDisabledUi()
     {
@@ -72,6 +71,7 @@ public class UiManagerSession : MonoBehaviour
         var rootElement = m_uiDocCombat.rootVisualElement;
         rootElement.style.display = DisplayStyle.Flex;
 
+        //Spell 1
         SpellName1 = rootElement.Q<Label>("SpellName1");
         SpellName1.text = m_characters[0].CurrentCharaSpell.SpellName;
        
@@ -80,6 +80,20 @@ public class UiManagerSession : MonoBehaviour
 
         Spell1 = rootElement.Q<Button>("BSpell1");
         Spell1.clickable.clicked += FirstSpellCliqued;
+
+        //Spell 2
+        SpellName2 = rootElement.Q<Label>("SpellName2");
+        SpellName2.text = m_characters[1].CurrentCharaSpell.SpellName;
+
+        SpellDamage2 = rootElement.Q<Label>("SpellDamage2");
+        SpellDamage2.text = m_characters[1].CurrentCharaSpell.SpellBasicDamage.ToString();
+
+        Spell2 = rootElement.Q<Button>("BSpell2");
+        Spell2.clickable.clicked += SecondSpellCliqued;
+
+        //Spell 3
+        Spell3 = rootElement.Q<Button>("BSpell3");
+        Spell3.clickable.clicked += ThirdSpellCliqued;
 
         lifeBar = rootElement.Q<ProgressBar>("LifeBar");
 
@@ -94,16 +108,9 @@ public class UiManagerSession : MonoBehaviour
             lifeBar.SetValueWithoutNotify(characterLifePercent);
             lifeBar.title = "Vie";
         }
-        else
-        {
-            Debug.Log("life bar pas trouvée");
-        }
     }
 
-    //To DO: Quand le spell est lancé -> joueur doit cliquer sur un ennemie et lui faire des dégâts
-    //To do: Désactiver le visual element pendant X tour
-
-    //Changer cette fonction
+    #region Spells
     public void FirstSpellCliqued()
     {
         m_spellUsed = Spell1;
@@ -113,17 +120,22 @@ public class UiManagerSession : MonoBehaviour
     
     public void SecondSpellCliqued()
     {
+        m_spellUsed = Spell2;
         CombatManager.instance.canSelectMob = true;
-    } 
-    
+        PlayerAttack.instance.m_currentSpellSelected = m_characters[1].CurrentCharaSpell;
+    }
+
     public void ThirdSpellCliqued()
     {
+        m_spellUsed = Spell3;
         CombatManager.instance.canSelectMob = true;
+        PlayerAttack.instance.m_currentSpellSelected = m_characters[2].CurrentCharaSpell;
     }
-    
+
     public void FourSpellCliqued()
     {
         CombatManager.instance.canSelectMob = true;
+        PlayerAttack.instance.m_currentSpellSelected = m_characters[3].CurrentCharaSpell;
     }
 
     //Lorsque le joueur utilise un sort doit désactiver le bouton -> lancé depuis classe ennemy dans GetDamage
@@ -133,6 +145,7 @@ public class UiManagerSession : MonoBehaviour
         CombatManager.instance.canSelectMob = false;
     }
 
+    #endregion
     // TO DO: Fonction update la bar d'UI lancé depuis la classe enemy dans ApplyDamage
     //Actuellement non fonctionnelle car on display vie de nos persos au lieux de celui de l'ennemi touché
     //Barre de vie 3D ? Par l'ancienne interface ?
@@ -144,5 +157,18 @@ public class UiManagerSession : MonoBehaviour
         characterLifePercent = (m_characters[0].CharactersLife / maxPlayerHP) * 100;
         lifeBar.SetValueWithoutNotify(characterLifePercent);
     }
-   
+
+    #region Ui par rapport aux tours du joueur
+    public void NotPlayerTurn()
+    {
+        var rootElement = m_uiDocCombat.rootVisualElement;
+        rootElement.style.display = DisplayStyle.None;
+    }
+
+    public void PlayerTurn()
+    {
+        var rootElement = m_uiDocCombat.rootVisualElement;
+        rootElement.style.display = DisplayStyle.Flex;
+    }
+    #endregion
 }

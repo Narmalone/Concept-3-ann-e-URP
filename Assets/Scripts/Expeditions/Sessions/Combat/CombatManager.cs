@@ -13,6 +13,8 @@ public class CombatManager : MonoBehaviour
     public ActionDelegate OnStartCombat;
     public ActionDelegate delCombat;
     public ActionDelegate delLeaveCombat;
+
+    public ActionDelegate delTurn;
     #endregion
 
     public bool canSelectMob = false;
@@ -29,9 +31,9 @@ public class CombatManager : MonoBehaviour
         OnStartCombat = StartCombat;
         delCombat = InCombat;
         delLeaveCombat = EndCombat;
-    }
 
- 
+        delTurn = IsPlayerTurn;
+    }
 
     //Si le joueur est en combat
     private bool StartCombat(bool boolValue)
@@ -39,6 +41,10 @@ public class CombatManager : MonoBehaviour
         if (boolValue)
         {
             Debug.Log("démarrage du combat: " + boolValue);
+
+            //Si combat commence alors c'est le tour du joueur
+            delTurn(true);
+            delCombat(true);
             UiManagerSession.instance.CombatUi();
         }
         else
@@ -66,6 +72,12 @@ public class CombatManager : MonoBehaviour
     {
         if (boolValue)
         {
+            FindObjectOfType<PlayerControllerCity>().enabled = true;
+
+            delTurn(false);
+
+            //Info ui de reward
+
             Debug.Log("Le joueur a terminé le combat: " + boolValue);
         }
         else
@@ -74,4 +86,28 @@ public class CombatManager : MonoBehaviour
         }
         return boolValue;
     }
+
+    //Vérifier si c'est au tour du joueur
+    //Sinon désactiver tous les boutons dans l'interfaces du joueur
+    //Si le spell a déjà été utilisé le spell resteras bloqué
+    private bool IsPlayerTurn(bool boolValue)
+    {
+        if (boolValue)
+        {
+            //Si tour du joueur
+            //Interface joueur activée et l'IA ne joue pas
+            UiManagerSession.instance.PlayerTurn();
+        }
+        else
+        {
+            //si ce n'est pas le temps du joueur
+            //désactiver l'interface puis c'est au tour de l'IA
+            UiManagerSession.instance.NotPlayerTurn();
+
+            //Ai manager pour faire jouer l'IA
+            AiManager.instance.ChoiceSpellAgainstPlayer();
+        }
+        return boolValue;
+    }
+
 }
