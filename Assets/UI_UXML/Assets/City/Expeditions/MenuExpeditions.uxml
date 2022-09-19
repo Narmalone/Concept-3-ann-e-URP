@@ -16,4 +16,5 @@
             <ui:Label text="Level: " display-tooltip-when-elided="true" name="LevelName" style="position: absolute; font-size: 72px;" />
         </ui:GroupBox>
     </ui:GroupBox>
+    <ui:Button text="Back" display-tooltip-when-elided="true" name="BBack" style="position: absolute; top: 904px; left: 1387px; height: 113px; width: 461px; font-size: 61px;" />
 </ui:UXML>

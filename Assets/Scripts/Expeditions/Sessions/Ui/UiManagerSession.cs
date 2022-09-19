@@ -28,11 +28,13 @@ public class UiManagerSession : MonoBehaviour
     private Label SpellDamage1;
     private Label SpellDamage2;
     private Label SpellDamage3;
+    private Label SpellDamage4;
 
     //Boutons des sorts
     private Button Spell1;
     private Button Spell2;
     private Button Spell3;
+    private Button Spell4;
 
     // bouton du sort actuel -> équivaut au boutton Spell1, spell2, spell3 ou spell4
     private Button m_spellUsed;
@@ -95,6 +97,16 @@ public class UiManagerSession : MonoBehaviour
 
         Spell3 = rootElement.Q<Button>("BSpell3");
         Spell3.clickable.clicked += ThirdSpellCliqued;
+
+        //Spell 4
+        SpellName4 = rootElement.Q<Label>("SpellName4");
+        SpellName4.text = m_characters[3].CurrentCharaSpell.SpellName.ToString();
+
+        SpellDamage4 = rootElement.Q<Label>("SpellDamage4");
+        SpellDamage4.text = m_characters[3].CurrentCharaSpell.SpellBasicDamage.ToString();
+
+        Spell4 = rootElement.Q<Button>("BSpell4");
+        Spell4.clickable.clicked += FourSpellCliqued;
         #endregion
         m_restButton = rootElement.Q<Button>("BRest");
         m_restButton.clickable.clicked += OnRestButtonCliqued;
@@ -129,6 +141,7 @@ public class UiManagerSession : MonoBehaviour
 
     public void FourSpellCliqued()
     {
+        m_spellUsed = Spell4;
         CombatManager.instance.canSelectMob = true;
         PlayerAttack.instance.m_currentSpellSelected = m_characters[3].CurrentCharaSpell;
     }
