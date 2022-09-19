@@ -19,7 +19,7 @@
     </ui:GroupBox>
     <ui:GroupBox style="height: 140px; width: 434px;">
         <ui:VisualElement style="height: 876px;">
-            <ui:Button text="Marchand d&apos;esclave" display-tooltip-when-elided="true" name="B_SlaveMerchant" style="position: absolute; height: 107px; width: 434px; top: 8px; left: -12px; font-size: 42px;" />
+            <ui:Button text="Marchand d&apos;esclave" display-tooltip-when-elided="true" name="B_SlaveMerchandPannel" style="position: absolute; height: 107px; width: 434px; top: 8px; left: -12px; font-size: 42px;" />
         </ui:VisualElement>
     </ui:GroupBox>
     <ui:GroupBox style="height: 140px; width: 434px;">

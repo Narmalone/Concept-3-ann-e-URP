@@ -425,6 +425,70 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 572155318}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &605853423
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 605853424}
+  - component: {fileID: 605853425}
+  - component: {fileID: 605853426}
+  m_Layer: 0
+  m_Name: UISlaveMerchant
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &605853424
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605853423}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1622049489}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &605853425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605853423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: 0aeddadfd2f4b684ca1505685af33aca, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: f0c6bb5eb5cb9a447a4e633d466d159a,
+    type: 3}
+  m_SortingOrder: 0
+--- !u!114 &605853426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605853423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9cbfd1357cdf1d48858718749f4f0fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_uiSlaveMerchant: {fileID: 605853425}
+  m_mainMenuDoc: {fileID: 2134362857}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -745,6 +809,7 @@ MonoBehaviour:
   m_InventoryDoc: {fileID: 1399118115}
   m_MainMenuDoc: {fileID: 2134362857}
   m_activateGameobject: {fileID: 2134362856}
+  m_playerTeam: []
 --- !u!1 &1470557260
 GameObject:
   m_ObjectHideFlags: 0
@@ -794,9 +859,7 @@ MonoBehaviour:
   m_menuDoc: {fileID: 2134362857}
   m_inventoryDoc: {fileID: 1399118115}
   m_expeditionDoc: {fileID: 51073851}
-  m_mainMenuPannelObject: {fileID: 2134362856}
-  m_expeditionPannelObject: {fileID: 51073849}
-  m_InventoryPannelObject: {fileID: 1399118113}
+  m_SlaveMerchantDoc: {fileID: 605853425}
 --- !u!1 &1517915493
 GameObject:
   m_ObjectHideFlags: 0
@@ -911,6 +974,7 @@ Transform:
   - {fileID: 2134362858}
   - {fileID: 51073850}
   - {fileID: 1399118114}
+  - {fileID: 605853424}
   m_Father: {fileID: 1470557261}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1251,6 +1315,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_spellList: []
   spelltexture: {fileID: 2800000, guid: dffef66376be4fa480fb02b19edbe903, type: 3}
+  RandomSpell:
+    m_spellIcon: {fileID: 0}
+    m_spellName: 
+    m_spellDescription: 
+    m_spellId: 0
+    m_spellBasicDamage: 0
 --- !u!1 &2022685116
 GameObject:
   m_ObjectHideFlags: 0
@@ -1354,6 +1424,7 @@ MonoBehaviour:
   - 200
   - 400
   - 1000
+  m_playerGoldCount: 0
   m_playersTitle: {fileID: 2134362861}
 --- !u!114 &2134362861
 MonoBehaviour:

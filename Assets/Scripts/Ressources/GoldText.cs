@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine.UIElements;
 public class GoldText : MonoBehaviour, IDataPersistence
 {
-
+    public static GoldText instance;
     #region variables
 
     [Header("Ui Document")]
@@ -22,7 +22,7 @@ public class GoldText : MonoBehaviour, IDataPersistence
     private Button m_freeGoldButton;
 
     //Indicateur d'or du joueur
-    private float m_playerGoldCount = 0;
+    [HideInInspector] public float m_playerGoldCount = 0;
 
     //référence de données au titre du joueur
     [SerializeField, Tooltip("Référence pour avoir les titres du joueur")] private PlayersTitle m_playersTitle;
@@ -50,6 +50,11 @@ public class GoldText : MonoBehaviour, IDataPersistence
         m_playerMoneyLabel = rootElement.Q<Label>("PlayersMoneyLabel");
         m_freeGoldButton = rootElement.Q<Button>("GiveFreeGolds");
         m_freeGoldButton.clickable.clicked += FreeGoldClicked;
+    }
+
+    private void Awake()
+    {
+        instance = this;
     }
     private void OnDisable()
     {

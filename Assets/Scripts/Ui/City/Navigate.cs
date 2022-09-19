@@ -12,24 +12,22 @@ public class Navigate : MonoBehaviour
     [SerializeField] private UIDocument m_menuDoc;
     [SerializeField] private UIDocument m_inventoryDoc;
     [SerializeField] private UIDocument m_expeditionDoc;
+    [SerializeField] private UIDocument m_SlaveMerchantDoc;
 
     [Header("Button")]
     [SerializeField, Tooltip("Référence au bouton servant à faire apparaître/disparaître l'interface de navigation")] private Button m_navigateButton;
 
-    [Header("ActivePannels")]
-    [SerializeField] private GameObject m_mainMenuPannelObject;
-    [SerializeField] private GameObject m_expeditionPannelObject;
-    [SerializeField] private GameObject m_InventoryPannelObject;
-
     private Button m_backButton;
     private Button m_expeditionPannel;
     private Button m_InventoryPannel;
+    private Button m_slaveMerchantPannel;
 
     private void OnDisable()
     {
         m_backButton.clickable.clicked -= OnBackButtonClicked;
         m_expeditionPannel.clickable.clicked -= OnExpeditionCliqued;
         m_InventoryPannel.clickable.clicked -= OnInventoryCliqued;
+        m_slaveMerchantPannel.clickable.clicked -= OnSlaveMerchantCliqued;
     }
 
     private void OnEnable()
@@ -45,11 +43,17 @@ public class Navigate : MonoBehaviour
         m_InventoryPannel = rootElement.Q<Button>("B_InventoryPannel");
         m_InventoryPannel.clickable.clicked += OnInventoryCliqued;
 
+        m_slaveMerchantPannel = rootElement.Q<Button>("B_SlaveMerchandPannel");
+        m_slaveMerchantPannel.clickable.clicked += OnSlaveMerchantCliqued;
+
         var rootExpedition = m_expeditionDoc.rootVisualElement;
         rootExpedition.style.display = DisplayStyle.None;
 
         var rootInventory = m_inventoryDoc.rootVisualElement;
         rootInventory.style.display = DisplayStyle.None;
+
+        var rootMerchant = m_SlaveMerchantDoc.rootVisualElement;
+        rootMerchant.style.display = DisplayStyle.None;
     }
 
     private void OnExpeditionCliqued()
@@ -70,6 +74,15 @@ public class Navigate : MonoBehaviour
         rootInventory.style.display = DisplayStyle.Flex;
     }
 
+    private void OnSlaveMerchantCliqued()
+    {
+        var rootMenu = m_menuDoc.rootVisualElement;
+        rootMenu.style.display = DisplayStyle.None;
+
+        var rootSlaveMerchant = m_SlaveMerchantDoc.rootVisualElement;
+        rootSlaveMerchant.style.display = DisplayStyle.Flex;
+    }
+
     private void OnBackButtonClicked()
     {
         //sauvegarder le jeux
@@ -78,5 +91,4 @@ public class Navigate : MonoBehaviour
         //charger le Main Menu
         SceneManager.LoadSceneAsync("MainMenu");
     }
-
 }
