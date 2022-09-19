@@ -58,7 +58,6 @@ public class charactersOfThePlayer : MonoBehaviour, IDataPersistence
         foreach (Character chara in m_playerTeam)
         {
             items.Add(chara.CharactersName);
-            Debug.Log(items);
         }
 
         // The "makeItem" function will be called as needed

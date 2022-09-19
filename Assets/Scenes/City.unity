@@ -489,6 +489,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_uiSlaveMerchant: {fileID: 605853425}
   m_mainMenuDoc: {fileID: 2134362857}
+  names:
+  - S.Aduin
+  - S.Hydra
+  - S.Saori
+  - S.Hackett
+  - S.Edouard
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

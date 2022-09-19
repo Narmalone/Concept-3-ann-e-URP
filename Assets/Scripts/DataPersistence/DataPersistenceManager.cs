@@ -217,7 +217,6 @@ public class DataPersistenceManager : MonoBehaviour
         {
             yield return new WaitForSeconds(m_sauvegardeAutoDelay);
             SaveGame();
-            Debug.Log("La partie a été sauvegardée automatiquement");
         }
     }
 }

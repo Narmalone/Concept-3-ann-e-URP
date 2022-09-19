@@ -63,7 +63,7 @@ public class CombatManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Le joueur ne peut pas se déplacer mais il n'est plus en combat ? " + boolValue);
+            Debug.Log("Le joueur n'est plus en combat");
         }
         return boolValue;
     }
@@ -74,7 +74,6 @@ public class CombatManager : MonoBehaviour
         {
             FindObjectOfType<PlayerControllerCity>().enabled = true;
 
-            delTurn(false);
 
             //Info ui de reward
 

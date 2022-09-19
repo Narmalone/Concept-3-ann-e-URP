@@ -43,7 +43,7 @@ public class Level : MonoBehaviour, IDataPersistence
     public void OnCliquedExpedition()
     {
         SceneManager.LoadSceneAsync(m_SceneToLoad);
-        Debug.Log("Le joueur a cliqué lancé le niveau: " + m_levelName + m_levelId);
+        //Debug.Log("Le joueur a cliqué lancé le niveau: " + m_levelName + m_levelId);
     }
     public void LoadData(GameData data)
     {

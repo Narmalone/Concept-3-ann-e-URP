@@ -27,23 +27,16 @@ public class UiManagerSession : MonoBehaviour
     //dégâts des sorts
     private Label SpellDamage1;
     private Label SpellDamage2;
+    private Label SpellDamage3;
 
     //Boutons des sorts
     private Button Spell1;
     private Button Spell2;
     private Button Spell3;
 
-
+    // bouton du sort actuel -> équivaut au boutton Spell1, spell2, spell3 ou spell4
     private Button m_spellUsed;
-    //Vie des entités
-    private ProgressBar lifeBar;
 
-    //Floats des vies du joueurs
-    private float maxPlayerHP;
-    private float characterLifePercent;
-
-    [SerializeField] private Texture2D fireball;
-    [SerializeField] private Texture2D snowBall;
     private void Awake()
     {
         if(instance != null)
@@ -92,22 +85,14 @@ public class UiManagerSession : MonoBehaviour
         Spell2.clickable.clicked += SecondSpellCliqued;
 
         //Spell 3
+        SpellName3 = rootElement.Q<Label>("SpellName3");
+        SpellName3.text = m_characters[2].CurrentCharaSpell.SpellName.ToString();
+
+        SpellDamage3 = rootElement.Q<Label>("SpellDamage3");
+        SpellDamage3.text = m_characters[2].CurrentCharaSpell.SpellBasicDamage.ToString();
+
         Spell3 = rootElement.Q<Button>("BSpell3");
         Spell3.clickable.clicked += ThirdSpellCliqued;
-
-        lifeBar = rootElement.Q<ProgressBar>("LifeBar");
-
-        //Peut-être essayer de bind le visual element
-        if (lifeBar != null)
-        {
-            //Formule mathématique de conversion
-            //(currentValue / maxValue) * oneHundred = myPercentage;
-
-            maxPlayerHP = m_characters[0].CharactersLife;
-            characterLifePercent = (m_characters[0].CharactersLife / maxPlayerHP) * 100;
-            lifeBar.SetValueWithoutNotify(characterLifePercent);
-            lifeBar.title = "Vie";
-        }
     }
 
     #region Spells
@@ -146,17 +131,6 @@ public class UiManagerSession : MonoBehaviour
     }
 
     #endregion
-    // TO DO: Fonction update la bar d'UI lancé depuis la classe enemy dans ApplyDamage
-    //Actuellement non fonctionnelle car on display vie de nos persos au lieux de celui de l'ennemi touché
-    //Barre de vie 3D ? Par l'ancienne interface ?
-    public void UpdateCombatUi()
-    {
-        var rootElement = m_uiDocCombat.rootVisualElement;
-        lifeBar = rootElement.Q<ProgressBar>("LifeBar");
-
-        characterLifePercent = (m_characters[0].CharactersLife / maxPlayerHP) * 100;
-        lifeBar.SetValueWithoutNotify(characterLifePercent);
-    }
 
     #region Ui par rapport aux tours du joueur
     public void NotPlayerTurn()

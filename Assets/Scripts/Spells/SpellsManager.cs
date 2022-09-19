@@ -35,6 +35,6 @@ public class SpellsManager : MonoBehaviour
     public void AttributeRandomSpell()
     {
         RandomSpell = m_spellList[Random.Range(0, m_spellList.Count)];
-        Debug.Log("Sort attribué: " + RandomSpell.SpellName);
+        //Debug.Log("Sort attribué: " + RandomSpell.SpellName);
     }
 }

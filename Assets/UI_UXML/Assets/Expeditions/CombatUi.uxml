@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/USS/CombatUi.uss?fileID=7433441132597879392&amp;guid=98392b86bf071964e9f53aa538032195&amp;type=3#CombatUi" />
-    <ui:VisualElement style="position: absolute; height: 241px; width: 946px; top: 833px; left: -6px; background-color: rgb(0, 0, 0);">
-        <ui:GroupBox style="position: absolute; height: 304px; width: 1337px;">
+    <ui:VisualElement style="position: absolute; height: 241px; width: 1332px; top: 813px; left: 16px; background-color: rgb(0, 0, 0);">
+        <ui:GroupBox style="position: absolute; height: 100%; width: 100%;">
             <ui:GroupBox name="SpellBox1" style="height: 190px; width: 265px; position: absolute; left: 32px; top: 17px; background-color: rgb(156, 156, 156);">
                 <ui:VisualElement>
                     <ui:Button display-tooltip-when-elided="true" name="BSpell1" style="height: 197px; position: absolute; width: 268px; top: -9px; left: -8px;" />
@@ -24,8 +24,5 @@
                 </ui:VisualElement>
             </ui:GroupBox>
         </ui:GroupBox>
-    </ui:VisualElement>
-    <ui:VisualElement name="VisualElementData" style="position: absolute; height: 58px; width: 616px; top: 500px; left: 1268px;">
-        <ui:ProgressBar low-value="0" name="LifeBar" focusable="true" title="LifeBar" style="position: absolute; width: 610px; height: 58px; font-size: 12px; color: rgba(210, 210, 210, 0);" />
     </ui:VisualElement>
 </ui:UXML>

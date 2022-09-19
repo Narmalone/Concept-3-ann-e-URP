@@ -25,6 +25,7 @@ public class SlaveMerchantScript : MonoBehaviour
     private Button buyChara1;
 
     //Variables pour génerer les valeurs
+    private string fCharaName1;
     private float fCharaLife1;
     private float fCharaDamage1;
     private float fCharaDefense1;
@@ -36,7 +37,8 @@ public class SlaveMerchantScript : MonoBehaviour
 
     //Personnages générés
     private Character m_firstGenerated;
-    
+
+    [SerializeField] private List<string> names;
     private void Start()
     {
         var rootElement = m_uiSlaveMerchant.rootVisualElement;
@@ -53,12 +55,13 @@ public class SlaveMerchantScript : MonoBehaviour
     public void GenerateCharacters()
     {
         //génération du premier character
+        fCharaName1 = names[Random.Range(0, names.Count)];
         fCharaLife1 = Random.Range(40,50);
         fCharaDamage1 = Random.Range(20, 30);
         fCharaDefense1 = Random.Range(10, 15);
         defaultSpell = SpellsManager.instance.RandomSpell;
         goldCost = Random.Range(150, 200);
-        m_firstGenerated = new Character("default", fCharaLife1, fCharaDamage1, fCharaDefense1, 0, defaultSpell);
+        m_firstGenerated = new Character(fCharaName1, fCharaLife1, fCharaDamage1, fCharaDefense1, 0, defaultSpell);
 
         UpdateUi();
     }
