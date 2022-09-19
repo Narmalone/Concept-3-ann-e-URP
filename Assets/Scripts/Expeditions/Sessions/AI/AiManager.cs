@@ -38,6 +38,9 @@ public class AiManager : MonoBehaviour
         {
             index = playerCharacter.IndexOf(selectedTarget);
             chara.GetDamage(m_spellAgainstPlayer);
+
+            //Démarrer coroutine pour faire réaparaître l'interface après un délai
+            CombatManager.instance.StartCorou();
             Debug.Log(index);
         }
     }

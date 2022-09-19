@@ -14,7 +14,6 @@ public class CharactersOfPlayers : MonoBehaviour
     private void Start()
     {
         thisCharacter = LoadPlayerTeam.instance.m_charactersTeam[id];
-        GetComponentInChildren<LifeBarHandler>().SetMaxHealth(life);
         SetBasicStats();
     }
 
@@ -24,15 +23,14 @@ public class CharactersOfPlayers : MonoBehaviour
         life = thisCharacter.CharactersLife;
         damage = thisCharacter.CharactersDamage;
         defense = thisCharacter.CharactersDefense;
+
+        GetComponentInChildren<LifeBarHandler>().SetMaxHealth(life);
     }
     public void GetDamage(Spells target)
     {
         if(id == AiManager.instance.index)
         {
             ApplyDamage(target.SpellBasicDamage);
-
-            //Passer au tour du joueur quand un de nos personnages prends des dégâts
-            CombatManager.instance.delTurn(true);
         }
     }
 

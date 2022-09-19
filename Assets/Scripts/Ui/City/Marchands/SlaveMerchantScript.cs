@@ -94,7 +94,7 @@ public class SlaveMerchantScript : MonoBehaviour
             GoldText.instance.m_playerGoldCount -= goldCost;
             var CharaSlot = rootElement.Q<GroupBox>("Chara1");
             CharaSlot.style.display = DisplayStyle.None;
-            charactersOfThePlayer.instance.m_playerTeam.Add(m_firstGenerated);
+            charactersOfThePlayer.instance.m_totalCharacters.Add(m_firstGenerated);
             charactersOfThePlayer.instance.UpdatePlayerTeam();
         }
         else

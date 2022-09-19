@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/USS/CombatUi.uss?fileID=7433441132597879392&amp;guid=98392b86bf071964e9f53aa538032195&amp;type=3#CombatUi" />
-    <ui:VisualElement style="position: absolute; height: 241px; width: 1332px; top: 813px; left: 16px; background-color: rgb(0, 0, 0);">
+    <ui:VisualElement style="position: absolute; height: 241px; width: 1813px; top: 813px; left: 16px; background-color: rgb(0, 0, 0);">
         <ui:GroupBox style="position: absolute; height: 100%; width: 100%;">
             <ui:GroupBox name="SpellBox1" style="height: 190px; width: 265px; position: absolute; left: 32px; top: 17px; background-color: rgb(156, 156, 156);">
                 <ui:VisualElement>
@@ -23,6 +23,14 @@
                     <ui:Label text="SpellDamage" display-tooltip-when-elided="true" enable-rich-text="true" name="SpellDamage3" style="font-size: 40px; position: absolute; top: 126px; left: 1px;" />
                 </ui:VisualElement>
             </ui:GroupBox>
+            <ui:GroupBox name="SpellBox4" style="height: 180px; width: 260px; position: absolute; left: 939px; top: 15px; background-color: rgb(156, 156, 156);">
+                <ui:VisualElement style="position: absolute; height: 176px; width: 256px; top: 1px; left: 0;">
+                    <ui:Button display-tooltip-when-elided="true" name="BSpell4" style="height: 100%; position: absolute; width: 100%;" />
+                    <ui:Label text="SpellName" display-tooltip-when-elided="true" enable-rich-text="true" name="SpellName4" style="font-size: 40px; position: absolute;" />
+                    <ui:Label text="SpellDamage" display-tooltip-when-elided="true" enable-rich-text="true" name="SpellDamage4" style="font-size: 40px; position: absolute; top: 126px; left: 1px;" />
+                </ui:VisualElement>
+            </ui:GroupBox>
+            <ui:Button text="Rest" display-tooltip-when-elided="true" focusable="false" name="BRest" style="position: absolute; top: 132px; left: 1514px; height: 82px; width: 262px; font-size: 45px;" />
         </ui:GroupBox>
     </ui:VisualElement>
 </ui:UXML>

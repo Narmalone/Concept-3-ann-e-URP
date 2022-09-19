@@ -24,7 +24,7 @@ public class Ennemies : MonoBehaviour
     public void GetDamage(Spells target)
     {
         //le joueur a lancé un sort donc ce n'est plus son tour
-        CombatManager.instance.delTurn(false);
+        //CombatManager.instance.delTurn(false);
         ApplyDamage(target.SpellBasicDamage);
 
         //Désactiver le bouton sort que le joueur à lancé
@@ -46,6 +46,7 @@ public class Ennemies : MonoBehaviour
         dmgSubis = damage;
 
         GetComponentInChildren<LifeBarHandler>().SetHealth(life);
+
         CombatManager.instance.delTurn(false);
 
         if (life <= 0)

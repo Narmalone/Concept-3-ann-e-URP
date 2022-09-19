@@ -36,6 +36,7 @@ public class UiManagerSession : MonoBehaviour
 
     // bouton du sort actuel -> équivaut au boutton Spell1, spell2, spell3 ou spell4
     private Button m_spellUsed;
+    private Button m_restButton;
 
     private void Awake()
     {
@@ -64,6 +65,7 @@ public class UiManagerSession : MonoBehaviour
         var rootElement = m_uiDocCombat.rootVisualElement;
         rootElement.style.display = DisplayStyle.Flex;
 
+        #region SpellsButton
         //Spell 1
         SpellName1 = rootElement.Q<Label>("SpellName1");
         SpellName1.text = m_characters[0].CurrentCharaSpell.SpellName;
@@ -93,6 +95,14 @@ public class UiManagerSession : MonoBehaviour
 
         Spell3 = rootElement.Q<Button>("BSpell3");
         Spell3.clickable.clicked += ThirdSpellCliqued;
+        #endregion
+        m_restButton = rootElement.Q<Button>("BRest");
+        m_restButton.clickable.clicked += OnRestButtonCliqued;
+    }
+
+    private void OnRestButtonCliqued()
+    {
+        CombatManager.instance.delTurn(false);
     }
 
     #region Spells

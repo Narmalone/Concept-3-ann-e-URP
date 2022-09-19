@@ -30,7 +30,6 @@ public class CombatManager : MonoBehaviour
         //delegates du joueur combat 
         OnStartCombat = StartCombat;
         delCombat = InCombat;
-        delLeaveCombat = EndCombat;
 
         delTurn = IsPlayerTurn;
     }
@@ -68,24 +67,6 @@ public class CombatManager : MonoBehaviour
         return boolValue;
     }
 
-    private bool EndCombat(bool boolValue)
-    {
-        if (boolValue)
-        {
-            FindObjectOfType<PlayerControllerCity>().enabled = true;
-
-
-            //Info ui de reward
-
-            Debug.Log("Le joueur a terminé le combat: " + boolValue);
-        }
-        else
-        {
-            Debug.LogError("Le joueur a terminé le combat mais il est en combat ? " + boolValue);
-        }
-        return boolValue;
-    }
-
     //Vérifier si c'est au tour du joueur
     //Sinon désactiver tous les boutons dans l'interfaces du joueur
     //Si le spell a déjà été utilisé le spell resteras bloqué
@@ -109,4 +90,14 @@ public class CombatManager : MonoBehaviour
         return boolValue;
     }
 
+    public void StartCorou()
+    {
+        StartCoroutine(CorouBeforeTurn());
+    }
+
+    public IEnumerator CorouBeforeTurn()
+    {
+        yield return new WaitForSeconds(2);
+        delTurn(true);
+    }
 }
