@@ -15,14 +15,15 @@ public class LoadPlayerTeam : MonoBehaviour, IDataPersistence
         }
         instance = this;
     }
+
     public void LoadData(GameData data)
     {
-        this.m_charactersTeam = data.m_playerCharactersOwnedData; 
+        this.m_charactersTeam = data.m_playerTeam;
     }
 
     public void SaveData(GameData data)
     {
-        data.m_playerCharactersOwnedData = this.m_charactersTeam;
+        data.m_playerTeam = this.m_charactersTeam;
     }
 
 }

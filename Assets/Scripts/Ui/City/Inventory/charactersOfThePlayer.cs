@@ -11,8 +11,10 @@ public class charactersOfThePlayer : MonoBehaviour, IDataPersistence
     [SerializeField] private UIDocument m_InventoryDoc;
     [SerializeField] private UIDocument m_MainMenuDoc;
     [SerializeField] private GameObject m_activateGameobject;
+
     //Variables de données
-    public List<Character> m_totalCharacters;
+    [HideInInspector] public List<Character> m_totalCharacters;
+    private List<Character> m_characterTeam;
     private ListView listView;
     private Label life;
     private Label damage;
@@ -34,11 +36,12 @@ public class charactersOfThePlayer : MonoBehaviour, IDataPersistence
     public void LoadData(GameData data)
     {
         this.m_totalCharacters = data.m_playerCharactersOwnedData;
+        this.m_characterTeam = data.m_playerTeam;
     }
 
     public void SaveData(GameData data)
     {
-        return;
+        data.m_playerTeam = this.m_characterTeam;
     }
     private void Awake()
     {
@@ -52,7 +55,7 @@ public class charactersOfThePlayer : MonoBehaviour, IDataPersistence
         var container = m_InventoryDoc.rootVisualElement;
 
         UpdatePlayerTeam();
-
+        SetupPlayerTeam();
         #region bouton
         backButton = container.Q<Button>("B_BackButton");
         backButton.clickable.clicked += OnBackCliqued;
@@ -97,7 +100,6 @@ public class charactersOfThePlayer : MonoBehaviour, IDataPersistence
         listView.onSelectionChange += ListView_onSelectionChange;
         listView.itemIndexChanged += ListView_itemIndexChanged;
         #endregion
-
     }
 
     private void ListView_itemIndexChanged(int oldValue, int newValue)
@@ -106,10 +108,10 @@ public class charactersOfThePlayer : MonoBehaviour, IDataPersistence
 
         m_totalCharacters.RemoveAt(oldValue);
         m_totalCharacters.Insert(newValue, charaSelected);
-        Debug.Log(charaSelected.CharactersName);
-
         listView.Rebuild();
+        SetupPlayerTeam();
     }
+
     private void OnBackCliqued()
     {
         var thisDoc = m_InventoryDoc.rootVisualElement;
@@ -118,6 +120,15 @@ public class charactersOfThePlayer : MonoBehaviour, IDataPersistence
         menuDoc.style.display = DisplayStyle.Flex;
     }
 
+    //Fonction qui permet de donner l'équipe du joueur
+    public void SetupPlayerTeam()
+    {
+        //Les 4 premiers personnages constituent l'équipe du joueur
+        m_characterTeam = m_totalCharacters.GetRange(0, 4);
+
+        //On sauvegarde pour sauvegarder l'équipe actuelle du joueur
+        DataPersistenceManager.instance.SaveGame();
+    }
     //Set au départ
     public void SetBasicSelection()
     {
@@ -128,44 +139,18 @@ public class charactersOfThePlayer : MonoBehaviour, IDataPersistence
         defense = container.Q<Label>("Defense");
         rarity = container.Q<Label>("Rarity");
 
-
-        //rework avec boucle for -> faire un count dans le player team également
-        if (listView.selectedIndex == 0)
+        //Pour chaques stats de chaques personnages dans l'index de la liste on affiche la valeur
+        //de ce qui est actuellement sélectionné
+        for (int i = listView.selectedIndex; i < m_totalCharacters.Count; i++)
         {
-            life.text = "Vie: " + m_totalCharacters[0].CharactersLife.ToString();
-            damage.text = "Dégâts: " + m_totalCharacters[0].CharactersDamage.ToString();
-            defense.text = "Défense: " + m_totalCharacters[0].CharactersDefense.ToString();
-            rarity.text = "Rareté: " + m_totalCharacters[0].CharactersRarity.ToString();
-        }
-
-        else if (listView.selectedIndex == 1)
-        {
-            life.text = "Vie: " + m_totalCharacters[1].CharactersLife.ToString();
-            damage.text = "Dégâts: " + m_totalCharacters[1].CharactersDamage.ToString();
-            defense.text = "Défense: " + m_totalCharacters[1].CharactersDefense.ToString();
-            rarity.text = "Rareté: " + m_totalCharacters[1].CharactersRarity.ToString();
-        }  
-        
-        else if (listView.selectedIndex == 2)
-        {
-            life.text = "Vie: " + m_totalCharacters[2].CharactersLife.ToString();
-            damage.text = "Dégâts: " + m_totalCharacters[2].CharactersDamage.ToString();
-            defense.text = "Défense: " + m_totalCharacters[2].CharactersDefense.ToString();
-            rarity.text = "Rareté: " + m_totalCharacters[2].CharactersRarity.ToString();
-        } 
-        
-        else if (listView.selectedIndex == 3)
-        {
-            life.text = "Vie: " + m_totalCharacters[3].CharactersLife.ToString();
-            damage.text = "Dégâts: " + m_totalCharacters[3].CharactersDamage.ToString();
-            defense.text = "Défense: " + m_totalCharacters[3].CharactersDefense.ToString();
-            rarity.text = "Rareté: " + m_totalCharacters[3].CharactersRarity.ToString();
+            life.text = "Vie: " + m_totalCharacters[listView.selectedIndex].CharactersLife.ToString();
+            damage.text = "Dégâts: " + m_totalCharacters[listView.selectedIndex].CharactersDamage.ToString();
+            defense.text = "Défense: " + m_totalCharacters[listView.selectedIndex].CharactersDefense.ToString();
+            rarity.text = "Rareté: " + m_totalCharacters[listView.selectedIndex].CharactersRarity.ToString();
         }
     }
     private void ListView_onSelectionChange(IEnumerable<object> obj)
     {
-        Debug.Log(obj);
-        //Peut être optimisé pour faire les changements automatiquement et pas à la mano comme un connard mais y'a pas le choix
         var container = m_InventoryDoc.rootVisualElement;
 
         life = container.Q<Label>("Life");
@@ -177,36 +162,13 @@ public class charactersOfThePlayer : MonoBehaviour, IDataPersistence
 
         charaSelected = m_totalCharacters[selectedCharacter];
 
-        if (selectedCharacter == 0)
+        for (int i = listView.selectedIndex; i < m_totalCharacters.Count; i++)
         {
-            life.text = "Vie: " + charaSelected.CharactersName.ToString();
-            damage.text = "Vie: " + m_totalCharacters[selectedCharacter].CharactersDamage.ToString();
-            defense.text = "Défense: " + m_totalCharacters[selectedCharacter].CharactersDefense.ToString();
-            rarity.text = "Rareté: " + m_totalCharacters[selectedCharacter].CharactersRarity.ToString();
+            life.text = "Vie: " + m_totalCharacters[listView.selectedIndex].CharactersLife.ToString();
+            damage.text = "Dégâts: " + m_totalCharacters[listView.selectedIndex].CharactersDamage.ToString();
+            defense.text = "Défense: " + m_totalCharacters[listView.selectedIndex].CharactersDefense.ToString();
+            rarity.text = "Rareté: " + m_totalCharacters[listView.selectedIndex].CharactersRarity.ToString();
         }
-
-        else if (selectedCharacter == 1)
-        {
-            life.text = "Vie: " + m_totalCharacters[selectedCharacter].CharactersName.ToString();
-            damage.text = "Vie: " + m_totalCharacters[selectedCharacter].CharactersDamage.ToString();
-            defense.text = "Défense: " + m_totalCharacters[selectedCharacter].CharactersDefense.ToString();
-            rarity.text = "Rareté: " + m_totalCharacters[selectedCharacter].CharactersRarity.ToString();
-        }
-
-        else if (selectedCharacter == 2)
-        {
-            life.text = "Vie: " + m_totalCharacters[selectedCharacter].CharactersName.ToString();
-            damage.text = "Vie: " + m_totalCharacters[selectedCharacter].CharactersDamage.ToString();
-            defense.text = "Défense: " + m_totalCharacters[selectedCharacter].CharactersDefense.ToString();
-            rarity.text = "Rareté: " + m_totalCharacters[selectedCharacter].CharactersRarity.ToString();
-        }
-
-        else if (listView.selectedIndex == 3)
-        {
-            life.text = "Vie: " + m_totalCharacters[3].CharactersLife.ToString();
-            damage.text = "Dégâts: " + m_totalCharacters[3].CharactersDamage.ToString();
-            defense.text = "Défense: " + m_totalCharacters[3].CharactersDefense.ToString();
-            rarity.text = "Rareté: " + m_totalCharacters[3].CharactersRarity.ToString();
-        }
+      
     }
 }

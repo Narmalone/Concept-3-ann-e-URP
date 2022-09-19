@@ -21,6 +21,7 @@ public class AiManager : MonoBehaviour
     {
         playerCharacter = LoadPlayerTeam.instance.m_charactersTeam;
     }
+
     public void ChoiceSpellAgainstPlayer()
     {
         //si il n'y a plus d'ennemis, alors on lance la fonction du combat manager qui met fin au combat -> vérif avec le count peut etre
