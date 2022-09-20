@@ -8,7 +8,6 @@ public class Ennemies : MonoBehaviour
     private float damage;
     private float defense;
     private float dmgSubis;
-
     [HideInInspector] public Spells m_enemySpell;
 
     private void Awake()
@@ -23,12 +22,7 @@ public class Ennemies : MonoBehaviour
     //Lorsque l'ennemi subis des dégâts
     public void GetDamage(Spells target)
     {
-        //le joueur a lancé un sort donc ce n'est plus son tour
-        //CombatManager.instance.delTurn(false);
         ApplyDamage(target.SpellBasicDamage);
-
-        //Désactiver le bouton sort que le joueur à lancé
-        UiManagerSession.instance.SpellUsed();
     }
 
     //Dégâts reçus par un sort
@@ -39,8 +33,9 @@ public class Ennemies : MonoBehaviour
         //puis pour les dégâts on multiplie dégâts - la défense pour que le sort fasse moins de dégâts
 
         defense = defense / 100;
+
         damage = damage * (1 - defense);
-        Debug.Log("Dégâts subis de l'ennemi: " + damage);
+
         life -= damage;
 
         dmgSubis = damage;

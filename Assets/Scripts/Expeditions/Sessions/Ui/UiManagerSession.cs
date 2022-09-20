@@ -40,6 +40,11 @@ public class UiManagerSession : MonoBehaviour
     private Button m_spellUsed;
     private Button m_restButton;
 
+    public List<Button> spellButtons;
+    public List<Button> buttonsToActivate;
+
+    [HideInInspector] public bool isResting = false;
+
     private void Awake()
     {
         if(instance != null)
@@ -50,6 +55,9 @@ public class UiManagerSession : MonoBehaviour
       
         CombatUi = UiCombat;
         SetDisabledUi();
+
+        buttonsToActivate = new List<Button>();
+        spellButtons = new List<Button>();
     }
 
     private void Start()
@@ -110,13 +118,17 @@ public class UiManagerSession : MonoBehaviour
         #endregion
         m_restButton = rootElement.Q<Button>("BRest");
         m_restButton.clickable.clicked += OnRestButtonCliqued;
+
+
+        buttonsToActivate.Add(Spell1);
+        buttonsToActivate.Add(Spell2);
+        buttonsToActivate.Add(Spell3);
+        buttonsToActivate.Add(Spell4);
+
+        Debug.Log(buttonsToActivate[0].name + buttonsToActivate[1].name + buttonsToActivate[2].name + buttonsToActivate[3].name);
     }
 
-    private void OnRestButtonCliqued()
-    {
-        CombatManager.instance.delTurn(false);
-    }
-
+ 
     #region Spells
     public void FirstSpellCliqued()
     {
@@ -146,14 +158,43 @@ public class UiManagerSession : MonoBehaviour
         PlayerAttack.instance.m_currentSpellSelected = m_characters[3].CurrentCharaSpell;
     }
 
-    //Lorsque le joueur utilise un sort doit désactiver le bouton -> lancé depuis classe ennemy dans GetDamage
     public void SpellUsed()
     {
-        m_spellUsed.SetEnabled(false);
+
+        //Si le personnage rest spellused == null donc on return
+        if(m_spellUsed == null) { return; }
+
+        Debug.Log(m_spellUsed);
+
+        spellButtons.Add(m_spellUsed);
+        
+        //Vérifier chaque bouton dans la list si ils y sont désactiver les boutons
+        foreach (Button btn in spellButtons)
+        {
+            btn.SetEnabled(false);
+            Debug.Log("Boutons désactivé: " + btn.name);
+        }
+
         CombatManager.instance.canSelectMob = false;
     }
 
     #endregion
+
+    //QUAND ON REST LA FONCTION SPELLUSED EST APPELE DONC YA UNE ERREUR
+    private void OnRestButtonCliqued()
+    {
+        m_spellUsed = null;
+
+        spellButtons = new List<Button>();
+
+        foreach(Button btn in buttonsToActivate)
+        {
+            btn.SetEnabled(true);
+            Debug.Log("Boutons activé: " + btn.name);
+        }
+
+        CombatManager.instance.delTurn(false);
+    }
 
     #region Ui par rapport aux tours du joueur
     public void NotPlayerTurn()

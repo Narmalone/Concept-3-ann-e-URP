@@ -98,6 +98,8 @@ public class CombatManager : MonoBehaviour
     public IEnumerator CorouBeforeTurn()
     {
         yield return new WaitForSeconds(2);
+        //Désactiver le bouton sort que le joueur à lancé
+        UiManagerSession.instance.SpellUsed();
         delTurn(true);
     }
 }

@@ -1,0 +1,30 @@
+Ergonomie: 
+- Quand hover le sort on a la description
+- Rajouter équipe sélectionnée quand on est dans l'inventaire
+-> marchand d'esclave polish
+
+Mécaniques:
+- Mécanique de Repos (check)
+-> éléments
+
+Contenus:
+-> Sorts
+-> Items
+
+Features:
+- Forgerons
+- Entraineur
+
+URGENT REVOIR L'AFFICHAGE DES SPELLS CAR CA AFFICHE TOUJOURS LA MEME VALEURS POUR TOUT LES PERSOS
+
+Actuel Debug:
+Quand on rest les boutons doivent être réactivables -> check
+
+Réflexion:
+//sort qui fais des dégâts = dégâts du sort * damage du perso / 100
+
+
+//faire les items après
+-> Structure ? Contenant données et passifs ?
+Comment display les informations dans la listView (image si Item == null --> image avec rien)
+Comment équiper les personnages d'items ?
