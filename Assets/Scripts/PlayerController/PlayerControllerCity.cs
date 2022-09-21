@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlayerControllerCity : MonoBehaviour
 {
-    [SerializeField] private Rigidbody rb;
+    [SerializeField] private CharacterController charaController;
     [SerializeField] private float moveSpeed;
     public InputAction playerControls;
     Vector2 moveDirection = Vector2.zero;
@@ -26,6 +26,6 @@ public class PlayerControllerCity : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(moveDirection.x * moveSpeed, 0f);
+        charaController.SimpleMove(new Vector2(moveDirection.x * moveSpeed, 0f));  
     }
 }

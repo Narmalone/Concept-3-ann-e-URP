@@ -12,12 +12,12 @@ public class CombatManager : MonoBehaviour
 
     public ActionDelegate OnStartCombat;
     public ActionDelegate delCombat;
-    public ActionDelegate delLeaveCombat;
 
     public ActionDelegate delTurn;
     #endregion
 
     public bool canSelectMob = false;
+    public bool isFighting = false;
     private void Awake()
     {
         //création mini-singleton
@@ -57,11 +57,17 @@ public class CombatManager : MonoBehaviour
     {
         if (boolValue)
         {
+            isFighting = true;
             FindObjectOfType<PlayerControllerCity>().enabled = false;
             Debug.Log("Joueur ne peut plus se déplacer car il est en combat: " + boolValue);
         }
         else
         {
+            //Si joueur plus en combat on lui redonne le contrôle
+            isFighting = false;
+            FindObjectOfType<PlayerControllerCity>().enabled = true;
+            delTurn(false);
+            UiManagerSession.instance.NotPlayerTurn();
             Debug.Log("Le joueur n'est plus en combat");
         }
         return boolValue;
@@ -84,8 +90,11 @@ public class CombatManager : MonoBehaviour
             //désactiver l'interface puis c'est au tour de l'IA
             UiManagerSession.instance.NotPlayerTurn();
 
-            //Ai manager pour faire jouer l'IA
-            AiManager.instance.ChoiceSpellAgainstPlayer();
+            if (isFighting)
+            {
+                //Ai manager pour faire jouer l'IA
+                AiManager.instance.ChoiceSpellAgainstPlayer();
+            }
         }
         return boolValue;
     }
@@ -98,8 +107,13 @@ public class CombatManager : MonoBehaviour
     public IEnumerator CorouBeforeTurn()
     {
         yield return new WaitForSeconds(2);
-        //Désactiver le bouton sort que le joueur à lancé
-        UiManagerSession.instance.SpellUsed();
-        delTurn(true);
+
+        if (isFighting)
+        {
+            //Désactiver le bouton sort que le joueur à lancé
+            UiManagerSession.instance.SpellUsed();
+            delTurn(true);
+        }
+       
     }
 }

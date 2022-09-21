@@ -113,6 +113,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e819c77c8c7e4534dbf792b2a9b32434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minLife: 10
+  maxLife: 20
+  minDamage: 5
+  maxDamage: 15
+  minDefense: 0
+  maxDefense: 0
   m_enemySpell:
     m_spellIcon: {fileID: 0}
     m_spellName: 
@@ -290,6 +296,16 @@ PrefabInstance:
     - target: {fileID: 1782415361685827950, guid: 7f23df62f17be8c40a3d9af5d1c31ed5,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4462712488131622920, guid: 7f23df62f17be8c40a3d9af5d1c31ed5,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4462712488131622920, guid: 7f23df62f17be8c40a3d9af5d1c31ed5,
+        type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4494502573513265452, guid: 7f23df62f17be8c40a3d9af5d1c31ed5,

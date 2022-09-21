@@ -20,6 +20,8 @@ public class GameData
     
     public List<Character> m_playerCharactersOwnedData;
     public List<Character> m_playerTeam;
+
+    public List<Spells> AllSpells;
     public bool isIniated;
     //valeurs définies dans le constructeur seront les valeurs par défauts
     //La game commence quand il n'ya a pas de données à charger
@@ -37,6 +39,8 @@ public class GameData
         this.isIniated = false;
         this.m_playerCharactersOwnedData = new List<Character>();
         this.m_playerTeam = new List<Character>();
+
+        this.AllSpells = new List<Spells>();
     }
 
 }

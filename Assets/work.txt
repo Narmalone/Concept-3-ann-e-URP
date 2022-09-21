@@ -2,6 +2,12 @@ Ergonomie:
 - Quand hover le sort on a la description
 - Rajouter équipe sélectionnée quand on est dans l'inventaire
 -> marchand d'esclave polish
+-> Afficher en jeux les statistiques des ennemis (défense, damages...)
+-> Revoir système de groupe de monstres -> script de group avec des données et après dans les ennemis on accède au groupe par un int ID group que possèdent les ennemis
+-> Faire des coffres et un niveau
+-> events & event sender
+-> faire les objets consommables in game -> Potion de soins -> 
+-> Système de rareté
 
 Mécaniques:
 - Mécanique de Repos (check)
@@ -19,6 +25,8 @@ URGENT REVOIR L'AFFICHAGE DES SPELLS CAR CA AFFICHE TOUJOURS LA MEME VALEURS POU
 
 Actuel Debug:
 Quand on rest les boutons doivent être réactivables -> check
+Ne pas appeler le random spell envoyer une fonction qui prend comme param spell qui contient une création d'un spell
+
 
 Réflexion:
 //sort qui fais des dégâts = dégâts du sort * damage du perso / 100

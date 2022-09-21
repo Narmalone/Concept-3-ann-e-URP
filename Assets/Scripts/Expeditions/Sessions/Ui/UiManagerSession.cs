@@ -124,8 +124,6 @@ public class UiManagerSession : MonoBehaviour
         buttonsToActivate.Add(Spell2);
         buttonsToActivate.Add(Spell3);
         buttonsToActivate.Add(Spell4);
-
-        Debug.Log(buttonsToActivate[0].name + buttonsToActivate[1].name + buttonsToActivate[2].name + buttonsToActivate[3].name);
     }
 
  
@@ -164,15 +162,12 @@ public class UiManagerSession : MonoBehaviour
         //Si le personnage rest spellused == null donc on return
         if(m_spellUsed == null) { return; }
 
-        Debug.Log(m_spellUsed);
-
         spellButtons.Add(m_spellUsed);
         
         //Vérifier chaque bouton dans la list si ils y sont désactiver les boutons
         foreach (Button btn in spellButtons)
         {
             btn.SetEnabled(false);
-            Debug.Log("Boutons désactivé: " + btn.name);
         }
 
         CombatManager.instance.canSelectMob = false;
@@ -190,7 +185,6 @@ public class UiManagerSession : MonoBehaviour
         foreach(Button btn in buttonsToActivate)
         {
             btn.SetEnabled(true);
-            Debug.Log("Boutons activé: " + btn.name);
         }
 
         CombatManager.instance.delTurn(false);
