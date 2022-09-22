@@ -5,13 +5,16 @@ using UnityEngine;
 public class CharactersOfPlayers : MonoBehaviour
 {
     private Character thisCharacter;
+    [SerializeField] private int id;
 
     private float life;
     private float damage;
     private float defense;
+
     //itérer comme dans le script ennemies lorsqu'un des personnages prends/reçoits des dégâts et autre
     private void Start()
     {
+        thisCharacter = LoadPlayerTeam.instance.m_charactersTeam[id];
         SetBasicStats();
     }
 

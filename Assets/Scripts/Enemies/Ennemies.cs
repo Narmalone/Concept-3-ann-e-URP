@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class Ennemies : MonoBehaviour, ISpells
+public class Ennemies : MonoBehaviour, ISpell
 {
     [Header("Basiques variables des ennemies")]
 

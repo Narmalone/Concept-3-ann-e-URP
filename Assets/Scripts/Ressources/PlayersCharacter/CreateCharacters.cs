@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CreateCharacters : MonoBehaviour, IDataPersistence, ISpells
+public class CreateCharacters : MonoBehaviour, IDataPersistence, ISpell
 {
     private Character m_characters;
     private Character m_secondaryBasicCharacter;

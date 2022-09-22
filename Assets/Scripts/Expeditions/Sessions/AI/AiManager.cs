@@ -35,6 +35,7 @@ public class AiManager : MonoBehaviour
         CharactersOfPlayers selectedTarget = charaOfPlayers[Random.Range(0, playerCharacter.Count)];
 
         selectedTarget.GetDamage(m_spellAgainstPlayer);
+
         //Démarrer coroutine pour faire réaparaître l'interface après un délai
         CombatManager.instance.StartCorou();
     }
