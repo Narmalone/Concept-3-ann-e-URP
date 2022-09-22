@@ -4,14 +4,13 @@ Ergonomie:
 -> marchand d'esclave polish
 -> Afficher en jeux les statistiques des ennemis (défense, damages...)
 -> Revoir système de groupe de monstres -> script de group avec des données et après dans les ennemis on accède au groupe par un int ID group que possèdent les ennemis
--> Faire des coffres et un niveau
--> events & event sender
--> faire les objets consommables in game -> Potion de soins -> 
+-> Faire système de loot -> List
+-> events & event sender -> Check
+-> faire les objets consommables in game -> Potion de soins -> en cours
 -> Système de rareté
-
-Mécaniques:
-- Mécanique de Repos (check)
--> éléments
+-> Rework Spell system (Interfarce à la place de multiples classes qui héritent) -> en cours
+-> Les ennemis n'attaquent pas à chaques fois -> en cours
+-> Voir un système d'éléments
 
 Contenus:
 -> Sorts
@@ -21,18 +20,5 @@ Features:
 - Forgerons
 - Entraineur
 
-URGENT REVOIR L'AFFICHAGE DES SPELLS CAR CA AFFICHE TOUJOURS LA MEME VALEURS POUR TOUT LES PERSOS
-
-Actuel Debug:
-Quand on rest les boutons doivent être réactivables -> check
-Ne pas appeler le random spell envoyer une fonction qui prend comme param spell qui contient une création d'un spell
-
-
-Réflexion:
-//sort qui fais des dégâts = dégâts du sort * damage du perso / 100
-
-
-//faire les items après
--> Structure ? Contenant données et passifs ?
-Comment display les informations dans la listView (image si Item == null --> image avec rien)
-Comment équiper les personnages d'items ?
+-> items faire des slots clicquables si le joueur peut cliquer display Ui et utiliser ce qu'il
+a sélectionné (avec un index)
