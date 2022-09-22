@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CharactersOfPlayers : MonoBehaviour
 {
-    [SerializeField] private int id;
     private Character thisCharacter;
 
     private float life;
@@ -13,7 +12,6 @@ public class CharactersOfPlayers : MonoBehaviour
     //itérer comme dans le script ennemies lorsqu'un des personnages prends/reçoits des dégâts et autre
     private void Start()
     {
-        thisCharacter = LoadPlayerTeam.instance.m_charactersTeam[id];
         SetBasicStats();
     }
 
@@ -28,18 +26,17 @@ public class CharactersOfPlayers : MonoBehaviour
     }
     public void GetDamage(Spells target)
     {
-        if(id == AiManager.instance.index)
-        {
-            ApplyDamage(target.SpellBasicDamage);
+        float damageTaken = target.SpellBasicDamage - (target.SpellBasicDamage / defense);
+        ApplyDamage(damageTaken);
 
-            Debug.Log(target.SpellBasicDamage);
-        }
+        Debug.Log(target.SpellBasicDamage);
     }
 
     public void ApplyDamage(float damage)
     {
         life -= damage;
         GetComponentInChildren<LifeBarHandler>().SetHealth(life);
+
         if (life <= 0)
         {
             //Destroy(gameObject);

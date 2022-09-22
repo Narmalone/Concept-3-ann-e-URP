@@ -11,7 +11,7 @@ public class AiManager : MonoBehaviour
     private Character selectedTarget;
     private Spells m_spellAgainstPlayer;
     [SerializeField] private List<CharactersOfPlayers> charaOfPlayers;
-    [HideInInspector] public int index;
+
     private void Awake()
     {
         instance = this;
@@ -32,17 +32,11 @@ public class AiManager : MonoBehaviour
     //Classe qui comme ennemies / Player Attack servira pour lancer une attaque aux personnages du joueur
     public void CastToPlayer()
     {
-        selectedTarget = playerCharacter[Random.Range(0, playerCharacter.Count)];
+        CharactersOfPlayers selectedTarget = charaOfPlayers[Random.Range(0, playerCharacter.Count)];
 
-        //si index marche alors index = à l'ID du truc et on lance la fonction getdamage ou on vérifie si index == indexof//
-        foreach(CharactersOfPlayers chara in charaOfPlayers)
-        {
-            index = playerCharacter.IndexOf(selectedTarget);
-            chara.GetDamage(m_spellAgainstPlayer);
-
-            //Démarrer coroutine pour faire réaparaître l'interface après un délai
-            CombatManager.instance.StartCorou();
-        }
+        selectedTarget.GetDamage(m_spellAgainstPlayer);
+        //Démarrer coroutine pour faire réaparaître l'interface après un délai
+        CombatManager.instance.StartCorou();
     }
 
     public void CheckMobGroup()
