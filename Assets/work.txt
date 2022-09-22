@@ -22,3 +22,5 @@ Features:
 
 -> items faire des slots clicquables si le joueur peut cliquer display Ui et utiliser ce qu'il
 a sélectionné (avec un index)
+
+https://forum.unity.com/threads/tutorial-create-an-in-game-inventory-ui-with-ui-toolkit.1051481/
