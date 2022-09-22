@@ -31,20 +31,15 @@ public class CharactersOfPlayers : MonoBehaviour
         if(id == AiManager.instance.index)
         {
             ApplyDamage(target.SpellBasicDamage);
-            Debug.Log("Un character a subis des dégâts");
-        }
-        else
-        {
-            Debug.Log("character get damage mais pas dans la condition");
-        }
 
+            Debug.Log(target.SpellBasicDamage);
+        }
     }
 
     public void ApplyDamage(float damage)
     {
         life -= damage;
         GetComponentInChildren<LifeBarHandler>().SetHealth(life);
-        Debug.Log("Un character a pris des dégâts");
         if (life <= 0)
         {
             //Destroy(gameObject);

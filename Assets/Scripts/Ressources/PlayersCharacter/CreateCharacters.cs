@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CreateCharacters : MonoBehaviour, IDataPersistence
+public class CreateCharacters : MonoBehaviour, IDataPersistence, ISpells
 {
     private Character m_characters;
     private Character m_secondaryBasicCharacter;
@@ -18,31 +18,35 @@ public class CreateCharacters : MonoBehaviour, IDataPersistence
     private float charactersDefense = 0;
 
     [SerializeField] private string[] charactersName;
-
+    [SerializeField] private List<Texture2D> m_iconTextures;
+    [SerializeField] private List<Spells> m_SpellList;
     public void LoadData(GameData data)
     {
         this.charactersPlayerList = data.m_playerCharactersOwnedData;
         this.isCharaCreated = data.isIniated;
+        this.m_SpellList = data.AllSpells;
     }
 
     public void SaveData(GameData data)
     {
         data.m_playerCharactersOwnedData = this.charactersPlayerList;
         data.isIniated = this.isCharaCreated;
+        data.AllSpells = this.m_SpellList;
     }
 
     private void Start()
     {
         if (isCharaCreated == false)
         {
-            CreateCharacter();
+            InitializeBasicsCharacters();
         }
         else
         {
             return;
         }
     }
-    public void CreateCharacter()
+    //Fonction pour initialiser des personnages de base lorsque le joueur crée une partie
+    public void InitializeBasicsCharacters()
     {
         charactersRarity = Random.Range(1, 2);
         charactersLife = Random.Range(40, 50);
@@ -59,13 +63,40 @@ public class CreateCharacters : MonoBehaviour, IDataPersistence
 
         m_fourCharacter = new Character(charactersName[Random.Range(0, charactersName.Length)], Random.Range(40, 50), Random.Range(20, 30), Random.Range(10, 15), Random.Range(1, 2), null);
 
+        CreateSpell(m_characters.CurrentCharaSpell, m_characters);
+        CreateSpell(m_secondaryBasicCharacter.CurrentCharaSpell, m_secondaryBasicCharacter);
+        CreateSpell(m_thirdCharacter.CurrentCharaSpell, m_thirdCharacter);
+        CreateSpell(m_fourCharacter.CurrentCharaSpell, m_fourCharacter);
+
+
         charactersPlayerList.Add(m_characters);
         charactersPlayerList.Add(m_secondaryBasicCharacter);
         charactersPlayerList.Add(m_thirdCharacter);
         charactersPlayerList.Add(m_fourCharacter);
 
-        SpellsManager.instance.CreateSpell();
+        //SpellsManager.instance.CreateSpell();
 
         isCharaCreated = true;
+    }
+
+    //Interface ISpells
+    public void CreateSpell(Spells newSpell, Character target)
+    {
+        newSpell = new Spells(null, "Fireball", "Boule de feu omg", 0, Random.Range(10, 15));
+        m_SpellList.Add(newSpell);
+        target.CurrentCharaSpell = newSpell;
+        AttributeRandomSpell(newSpell);
+    }
+
+    public void AttributeRandomSpell(Spells randomSpell)
+    {
+        randomSpell = m_SpellList[Random.Range(0, m_SpellList.Count)];
+        Debug.Log(randomSpell.SpellName);
+    }
+
+    //no need car besoin d'une target
+    public void CreateSpell(Spells newSpell)
+    {
+        throw new System.NotImplementedException();
     }
 }

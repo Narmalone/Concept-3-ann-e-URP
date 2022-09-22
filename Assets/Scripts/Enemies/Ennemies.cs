@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class Ennemies : MonoBehaviour
+public class Ennemies : MonoBehaviour, ISpells
 {
     [Header("Basiques variables des ennemies")]
-  
+
     [SerializeField] private float minLife;
     [SerializeField] private float maxLife;
     [SerializeField] private float minDamage;
@@ -17,7 +17,7 @@ public class Ennemies : MonoBehaviour
     private float defense;
     private float dmgSubis;
     private float life;
-    
+
     [HideInInspector] public Spells m_enemySpell;
 
     private void Awake()
@@ -26,13 +26,9 @@ public class Ennemies : MonoBehaviour
         damage = Random.Range(minDamage, maxDamage);
         defense = Random.Range(minDefense, maxDefense);
         GetComponentInChildren<LifeBarHandler>().SetMaxHealth(life);
+        CreateSpell(m_enemySpell);
     }
 
-    private void Start()
-    {
-        m_enemySpell = new Spells(null, "Fireball", "Boule de feu", 0, Random.Range(5, 15));
-        Debug.Log(m_enemySpell.SpellName);
-    }
     //Lorsque l'ennemi subis des dégâts
     public void GetDamage(Spells target)
     {
@@ -65,5 +61,27 @@ public class Ennemies : MonoBehaviour
             AiManager.instance.CheckMobGroup();
             Destroy(gameObject);
         }
+    }
+
+    public void CreateSpell(Spells newSpell)
+    {
+        newSpell = new Spells(null, "Fireball", "", 0, Random.Range(5, 10));
+
+        //Puis on demande un sort random
+        //AttributeRandomSpell(newSpell);
+        m_enemySpell = newSpell;
+        Debug.Log(m_enemySpell.SpellName);
+
+    }
+
+    //Pour le moment pas besoin de sorts randoms
+    public void AttributeRandomSpell(Spells randomSpell)
+    {
+    }
+
+    //No need cause no character to target
+    public void CreateSpell(Spells newSpell, Character target)
+    {
+        throw new System.NotImplementedException();
     }
 }

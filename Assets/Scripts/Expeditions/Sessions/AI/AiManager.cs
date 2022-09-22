@@ -26,7 +26,6 @@ public class AiManager : MonoBehaviour
     {
         //si il n'y a plus d'ennemis, alors on lance la fonction du combat manager qui met fin au combat -> vérif avec le count peut etre
         m_spellAgainstPlayer = mobGroup1[Random.Range(0, mobGroup1.Count)].m_enemySpell;
-        Debug.Log("Sort contre le personnage: " + m_spellAgainstPlayer.SpellName);
         CastToPlayer();
     }
 
@@ -34,7 +33,6 @@ public class AiManager : MonoBehaviour
     public void CastToPlayer()
     {
         selectedTarget = playerCharacter[Random.Range(0, playerCharacter.Count)];
-        Debug.Log("Cast to player");
 
         //si index marche alors index = à l'ID du truc et on lance la fonction getdamage ou on vérifie si index == indexof//
         foreach(CharactersOfPlayers chara in charaOfPlayers)

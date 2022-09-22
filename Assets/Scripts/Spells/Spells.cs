@@ -41,4 +41,20 @@ public class Spells
         m_spellId = spellId;
         m_spellBasicDamage = spellBasicDamage;
     }
+
+    public Spells()
+    {
+
+    }
+}
+
+public class Fireball: Spells
+{
+    public Fireball(Texture2D icon, string name, string description, int id, float basicDamage) :  base (icon, name, description, id, basicDamage)
+    {
+        SpellIcon = icon;
+        SpellName = name;
+        SpellDescription = description;
+        SpellBasicDamage = basicDamage;
+    }
 }
