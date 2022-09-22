@@ -1,55 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-[System.Serializable]
-public class SpellsManager : MonoBehaviour, IDataPersistence
+using UnityEditor;
+public class SpellsManager : MonoBehaviour
 {
-    public static SpellsManager instance { get; private set; }
-    [SerializeField] private List<Spells> m_spellList;
-
-    [Header("Textures 2D des spells")]
-    [SerializeField] private Texture2D spelltexture;
-
-    private Spells fireball;
-    
-    [SerializeField] public Spells RandomSpell;
-    private List<Character> listChara;
+    public static SpellsManager instance;
+   
+    [Header("Fireballs")]
+    public List<Spells> FireballSpells;
+    public Texture2D fireballIcon;
 
     private void Awake()
     {
-        if(instance != null)
-        {
-            return;
-        }
-
         instance = this;
     }
-    public void CreateSpell()
+
+    private void Start()
     {
-        //Trouver un moyen de faire une liste de sorts que l'on peut appeler genre new Fireball()
-        foreach(Character chara in listChara)
+        InitializeBasicSpells();
+    }
+
+    public void InitializeBasicSpells()
+    {
+        foreach(Spells spell in FireballSpells)
         {
-            chara.CurrentCharaSpell = new Spells(spelltexture, "Fireball", "Envoie une boule de feu faisant: ", 2, Random.Range(5, 15));
-            m_spellList.Add(chara.CurrentCharaSpell);
+            spell.SetBasicData(fireballIcon, "Firebolt", "Tire une boule de feu causant: "+ spell.m_damage.ToString() +" dégâts", 0, spell.m_damage, spell.m_minSpellDamage, spell.m_maxSpellDamage);
         }
-        //fireball = new Spells(spelltexture, "fireball", "Envoie une boule de feu faisant X points de dégâts", 0, Random.Range(10,15));
-        //m_spellList.Add(fireball);
-        AttributeRandomSpell();
+    }
+    public void SetData()
+    {
+
     }
 
-    public void AttributeRandomSpell()
+    public void GenerateRandomFloat(float random, float minValue, float maxValue)
     {
-        RandomSpell = m_spellList[Random.Range(0, m_spellList.Count)];
-    }
-
-    public void LoadData(GameData data)
-    {
-        this.listChara = data.m_playerCharactersOwnedData;
-    }
-
-    public void SaveData(GameData data)
-    {
-        data.m_playerCharactersOwnedData = this.listChara;
+        random = Random.Range(minValue, maxValue);
     }
 }

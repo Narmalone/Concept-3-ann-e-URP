@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CreateCharacters : MonoBehaviour, IDataPersistence, ISpell
+public class CreateCharacters : MonoBehaviour, IDataPersistence
 {
     private Character m_characters;
     private Character m_secondaryBasicCharacter;
@@ -63,12 +63,6 @@ public class CreateCharacters : MonoBehaviour, IDataPersistence, ISpell
 
         m_fourCharacter = new Character(charactersName[Random.Range(0, charactersName.Length)], Random.Range(40, 50), Random.Range(20, 30), Random.Range(10, 15), Random.Range(1, 2), null);
 
-        CreateSpell(m_characters.CurrentCharaSpell, m_characters);
-        CreateSpell(m_secondaryBasicCharacter.CurrentCharaSpell, m_secondaryBasicCharacter);
-        CreateSpell(m_thirdCharacter.CurrentCharaSpell, m_thirdCharacter);
-        CreateSpell(m_fourCharacter.CurrentCharaSpell, m_fourCharacter);
-
-
         charactersPlayerList.Add(m_characters);
         charactersPlayerList.Add(m_secondaryBasicCharacter);
         charactersPlayerList.Add(m_thirdCharacter);
@@ -79,38 +73,4 @@ public class CreateCharacters : MonoBehaviour, IDataPersistence, ISpell
         isCharaCreated = true;
     }
 
-    //fonction pour re set les dégâts de son sort en fonction de son attaque
-    public void SetDamage(Character target)
-    {
-        //formule pour calculer -> Damage = SpellDamage * CharaDamage / spellDamage
-        target.CurrentCharaSpell.SpellBasicDamage = (target.CurrentCharaSpell.SpellBasicDamage * target.CharactersDamage) / target.CurrentCharaSpell.SpellBasicDamage;
-    }
-
-    //Interface ISpells
-    public void CreateSpell(Spells newSpell, Character target)
-    {
-        newSpell = new Spells(null, "Fireball", "Boule de feu omg", 0, Random.Range(10, 15));
-        m_SpellList.Add(newSpell);
-        target.CurrentCharaSpell = newSpell;
-        AttributeRandomSpell(newSpell, target);
-    }
-
-    public void AttributeRandomSpell(Spells randomSpell)
-    {
-       
-    }
-
-    //no need car besoin d'une target
-    public void CreateSpell(Spells newSpell)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void AttributeRandomSpell(Spells randomSpell, Character target)
-    {
-        randomSpell = m_SpellList[Random.Range(0, m_SpellList.Count)];
-        SetDamage(target);
-
-        Debug.Log(randomSpell.SpellName);
-    }
 }

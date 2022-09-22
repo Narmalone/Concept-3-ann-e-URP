@@ -29,10 +29,10 @@ public class CharactersOfPlayers : MonoBehaviour
     }
     public void GetDamage(Spells target)
     {
-        float damageTaken = target.SpellBasicDamage - (target.SpellBasicDamage / defense);
-        ApplyDamage(damageTaken);
+        //float damageTaken = target.SpellBasicDamage - (target.SpellBasicDamage / defense);
+        //ApplyDamage(damageTaken);
 
-        Debug.Log(target.SpellBasicDamage);
+        //Debug.Log(target.SpellBasicDamage);
     }
 
     public void ApplyDamage(float damage)

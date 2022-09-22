@@ -4,10 +4,10 @@ using UnityEngine;
 
 public interface ISpell
 {
-    public void CastSpell() { }
-    public void CreateSpell(Spells newSpell, Character target);
-    public void CreateSpell(Spells newSpell);
+    //fonction qui permet de lancer un sort n'importe lequel 
+    //appelée dans une classe ou y'a un SO
+    //tableau de ISpell pour récupérer
+    public void CastSpell();
 
-    public void AttributeRandomSpell(Spells randomSpell);
-    public void AttributeRandomSpell(Spells randomSpell, Character target);
+    public void CastEffect();
 }

@@ -30,6 +30,8 @@ public class AiManager : MonoBehaviour
     }
 
     //Classe qui comme ennemies / Player Attack servira pour lancer une attaque aux personnages du joueur
+
+    //Cast depuis ISpell
     public void CastToPlayer()
     {
         CharactersOfPlayers selectedTarget = charaOfPlayers[Random.Range(0, playerCharacter.Count)];

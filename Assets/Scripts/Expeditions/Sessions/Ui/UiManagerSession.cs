@@ -78,40 +78,40 @@ public class UiManagerSession : MonoBehaviour
         #region SpellsButton
         //Spell 1
         SpellName1 = rootElement.Q<Label>("SpellName1");
-        SpellName1.text = m_characters[0].CurrentCharaSpell.SpellName;
+        //SpellName1.text = m_characters[0].CurrentCharaSpell.SpellName;
        
         SpellDamage1 = rootElement.Q<Label>("SpellDamage1");
-        SpellDamage1.text = m_characters[0].CurrentCharaSpell.SpellBasicDamage.ToString();
+        //SpellDamage1.text = m_characters[0].CurrentCharaSpell.SpellBasicDamage.ToString();
 
         Spell1 = rootElement.Q<Button>("BSpell1");
         Spell1.clickable.clicked += FirstSpellCliqued;
 
         //Spell 2
         SpellName2 = rootElement.Q<Label>("SpellName2");
-        SpellName2.text = m_characters[1].CurrentCharaSpell.SpellName;
+        //SpellName2.text = m_characters[1].CurrentCharaSpell.SpellName;
 
         SpellDamage2 = rootElement.Q<Label>("SpellDamage2");
-        SpellDamage2.text = m_characters[1].CurrentCharaSpell.SpellBasicDamage.ToString();
+        //SpellDamage2.text = m_characters[1].CurrentCharaSpell.SpellBasicDamage.ToString();
 
         Spell2 = rootElement.Q<Button>("BSpell2");
         Spell2.clickable.clicked += SecondSpellCliqued;
 
         //Spell 3
         SpellName3 = rootElement.Q<Label>("SpellName3");
-        SpellName3.text = m_characters[2].CurrentCharaSpell.SpellName.ToString();
+        //SpellName3.text = m_characters[2].CurrentCharaSpell.SpellName.ToString();
 
         SpellDamage3 = rootElement.Q<Label>("SpellDamage3");
-        SpellDamage3.text = m_characters[2].CurrentCharaSpell.SpellBasicDamage.ToString();
+        //SpellDamage3.text = m_characters[2].CurrentCharaSpell.SpellBasicDamage.ToString();
 
         Spell3 = rootElement.Q<Button>("BSpell3");
         Spell3.clickable.clicked += ThirdSpellCliqued;
 
         //Spell 4
         SpellName4 = rootElement.Q<Label>("SpellName4");
-        SpellName4.text = m_characters[3].CurrentCharaSpell.SpellName.ToString();
+        //SpellName4.text = m_characters[3].CurrentCharaSpell.SpellName.ToString();
 
         SpellDamage4 = rootElement.Q<Label>("SpellDamage4");
-        SpellDamage4.text = m_characters[3].CurrentCharaSpell.SpellBasicDamage.ToString();
+        //SpellDamage4.text = m_characters[3].CurrentCharaSpell.SpellBasicDamage.ToString();
 
         Spell4 = rootElement.Q<Button>("BSpell4");
         Spell4.clickable.clicked += FourSpellCliqued;
