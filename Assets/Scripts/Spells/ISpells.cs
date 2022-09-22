@@ -8,4 +8,5 @@ public interface ISpells
     public void CreateSpell(Spells newSpell);
 
     public void AttributeRandomSpell(Spells randomSpell);
+    public void AttributeRandomSpell(Spells randomSpell, Character target);
 }

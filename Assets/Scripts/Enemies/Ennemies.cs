@@ -63,20 +63,29 @@ public class Ennemies : MonoBehaviour, ISpells
         }
     }
 
+    public void SetDamage(Spells target)
+    {
+        //V1 = V1 * V2 / V2
+        target.SpellBasicDamage = target.SpellBasicDamage * damage / target.SpellBasicDamage;
+    }
+
+    #region interface ISpell
     public void CreateSpell(Spells newSpell)
     {
         newSpell = new Spells(null, "Fireball", "", 0, Random.Range(5, 10));
 
-        //Puis on demande un sort random
-        //AttributeRandomSpell(newSpell);
-        m_enemySpell = newSpell;
-        Debug.Log(m_enemySpell.SpellName);
+        //Un moment mettre la fonction qui permet d'avoir un truc random ?
 
+        m_enemySpell = newSpell;
+
+        SetDamage(newSpell);
+        Debug.Log(m_enemySpell.SpellName);
     }
 
     //Pour le moment pas besoin de sorts randoms
     public void AttributeRandomSpell(Spells randomSpell)
     {
+        throw new System.NotImplementedException();
     }
 
     //No need cause no character to target
@@ -84,4 +93,10 @@ public class Ennemies : MonoBehaviour, ISpells
     {
         throw new System.NotImplementedException();
     }
+
+    public void AttributeRandomSpell(Spells randomSpell, Character target)
+    {
+        throw new System.NotImplementedException();
+    }
+    #endregion
 }

@@ -79,24 +79,38 @@ public class CreateCharacters : MonoBehaviour, IDataPersistence, ISpells
         isCharaCreated = true;
     }
 
+    //fonction pour re set les dégâts de son sort en fonction de son attaque
+    public void SetDamage(Character target)
+    {
+        //formule pour calculer -> Damage = SpellDamage * CharaDamage / spellDamage
+        target.CurrentCharaSpell.SpellBasicDamage = (target.CurrentCharaSpell.SpellBasicDamage * target.CharactersDamage) / target.CurrentCharaSpell.SpellBasicDamage;
+    }
+
     //Interface ISpells
     public void CreateSpell(Spells newSpell, Character target)
     {
         newSpell = new Spells(null, "Fireball", "Boule de feu omg", 0, Random.Range(10, 15));
         m_SpellList.Add(newSpell);
         target.CurrentCharaSpell = newSpell;
-        AttributeRandomSpell(newSpell);
+        AttributeRandomSpell(newSpell, target);
     }
 
     public void AttributeRandomSpell(Spells randomSpell)
     {
-        randomSpell = m_SpellList[Random.Range(0, m_SpellList.Count)];
-        Debug.Log(randomSpell.SpellName);
+       
     }
 
     //no need car besoin d'une target
     public void CreateSpell(Spells newSpell)
     {
         throw new System.NotImplementedException();
+    }
+
+    public void AttributeRandomSpell(Spells randomSpell, Character target)
+    {
+        randomSpell = m_SpellList[Random.Range(0, m_SpellList.Count)];
+        SetDamage(target);
+
+        Debug.Log(randomSpell.SpellName);
     }
 }
