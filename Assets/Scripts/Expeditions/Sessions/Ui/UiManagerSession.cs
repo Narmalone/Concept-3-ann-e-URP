@@ -5,17 +5,24 @@ using UnityEngine;
 using UnityEngine.UIElements;
 public class UiManagerSession : MonoBehaviour
 {
-    #region delegates
     public static UiManagerSession instance { get; private set; }
+
+    #region delegates
 
     public delegate void ActiveActionDelegate();
 
     public ActiveActionDelegate CombatUi;
     public ActiveActionDelegate delUpdateCombatUi;
     #endregion
-
+    [Header("REFERENCES")]
     [SerializeField] private UIDocument m_uiDocCombat;
+    [SerializeField] private VisualTreeAsset m_spellTemplate;
+    private List<Button> m_buttons;
+    private int index = 0;
+
     private List<Character> m_characters;
+    public List<Spell> spellList;
+
     private List<Character> m_enemiesCharacter;
 
     //Noms des sorts
@@ -57,6 +64,7 @@ public class UiManagerSession : MonoBehaviour
         SetDisabledUi();
 
         buttonsToActivate = new List<Button>();
+        m_buttons = new List<Button>();
         spellButtons = new List<Button>();
     }
 
@@ -80,58 +88,48 @@ public class UiManagerSession : MonoBehaviour
         var rootElement = m_uiDocCombat.rootVisualElement;
         rootElement.style.display = DisplayStyle.Flex;
 
-        #region SpellButton
-        //Spell 1
-        SpellName1 = rootElement.Q<Label>("SpellName1");
-        SpellName1.text = m_characters[0].CurrentCharaSpell.Name;
+        GroupBox container = rootElement.Q<GroupBox>("MainGroupBox");
 
-        SpellDamage1 = rootElement.Q<Label>("SpellDamage1");
-        SpellDamage1.text = m_characters[0].CurrentCharaSpell.Damage.ToString();
+        //Génération de l'interface
+        foreach(Character chara in m_characters)
+        {
+            //Instantier les templates en fonction du nombre de personnage (boucle for marche aussi)
+            VisualElement ui = m_spellTemplate.CloneTree();
 
-        Spell1 = rootElement.Q<Button>("BSpell1");
-        Spell1.clickable.clicked += FirstSpellCliqued;
+            Button btn = ui.Q<Button>();
 
-        //Spell 2
-        SpellName2 = rootElement.Q<Label>("SpellName2");
-        SpellName2.text = m_characters[1].CurrentCharaSpell.Name;
+            btn.name = "BSpell" + index;
 
-        SpellDamage2 = rootElement.Q<Label>("SpellDamage2");
-        SpellDamage2.text = m_characters[1].CurrentCharaSpell.Damage.ToString();
+            //Ajouter le bouton dans une liste de bouton pour redéfinir dans le OnSpellCliqued
+            m_buttons.Add(btn);
 
-        Spell2 = rootElement.Q<Button>("BSpell2");
-        Spell2.clickable.clicked += SecondSpellCliqued;
+            //Chercher le boutton et lui rajouter une clickable la fonction clickable
+            //            btn.clickable.clicked += OnSpellCliqued;
+            btn.clickable.clicked += () =>
+            {
+                CheckButtonCliqued(btn);
+                //Debug.Log(btn.name);
+            };
 
-        //Spell 3
-        SpellName3 = rootElement.Q<Label>("SpellName3");
-        SpellName3.text = m_characters[2].CurrentCharaSpell.Name;
+            //ajouter le sort du personnage actuel (le premier visual crée correspond à son premier sort)
+            spellList.Add(chara.CurrentCharaSpell);
 
-        SpellDamage3 = rootElement.Q<Label>("SpellDamage3");
-        SpellDamage3.text = m_characters[2].CurrentCharaSpell.Damage.ToString();
+            //ajouter au container la template
+            container.Add(ui);
 
-        Spell3 = rootElement.Q<Button>("BSpell3");
-        Spell3.clickable.clicked += ThirdSpellCliqued;
-
-        //Spell 4
-        SpellName4 = rootElement.Q<Label>("SpellName4");
-        SpellName4.text = m_characters[3].CurrentCharaSpell.Name;
-
-        SpellDamage4 = rootElement.Q<Label>("SpellDamage4");
-        SpellDamage4.text = m_characters[3].CurrentCharaSpell.Damage.ToString();
-
-        Spell4 = rootElement.Q<Button>("BSpell4");
-        Spell4.clickable.clicked += FourSpellCliqued;
-        #endregion
-        m_restButton = rootElement.Q<Button>("BRest");
-        m_restButton.clickable.clicked += OnRestButtonCliqued;
-
-
-        buttonsToActivate.Add(Spell1);
-        buttonsToActivate.Add(Spell2);
-        buttonsToActivate.Add(Spell3);
-        buttonsToActivate.Add(Spell4);
+            index++;
+        }
     }
 
-
+    public void CheckButtonCliqued(Button btn)
+    {
+        //Empêcher de le faire comme ça car on est dans un foreach
+        if(btn == m_buttons[0])
+        {
+            m_characters[0].CurrentCharaSpell.CastSpell(spellList[0]);
+        }
+        Debug.Log(btn.name);
+    }
     #region Spell
     public void FirstSpellCliqued()
     {

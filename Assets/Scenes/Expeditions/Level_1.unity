@@ -509,7 +509,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PanelSettings: {fileID: 11400000, guid: 0aeddadfd2f4b684ca1505685af33aca, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 6019b0a87d0b50e4ab77179a097e14bf,
+  sourceAsset: {fileID: 9197481963319205126, guid: 86c68c2cba7ea354b8f6d817bac9dd46,
     type: 3}
   m_SortingOrder: 0
 --- !u!1 &321779225
@@ -553,7 +553,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-200864
+  m_Name: pb_Mesh47418
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3480,6 +3480,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_uiDocCombat: {fileID: 209989566}
+  m_spellTemplate: {fileID: 9197481963319205126, guid: 1ac04b7593f17b44881604fdd09afbc7,
+    type: 3}
   isResting: 0
 --- !u!1001 &1110783002
 PrefabInstance:

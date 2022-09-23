@@ -10,7 +10,7 @@ public class Ennemy : MonoBehaviour
 
     private Character m_thisCharacter;
 
-    private void Awake()
+    private void Start()
     {
         SetData();
     }
