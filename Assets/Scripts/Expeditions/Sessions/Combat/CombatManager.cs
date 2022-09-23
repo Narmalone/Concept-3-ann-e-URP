@@ -93,7 +93,7 @@ public class CombatManager : MonoBehaviour
             if (isFighting)
             {
                 //Ai manager pour faire jouer l'IA
-                AiManager.instance.ChoiceSpellAgainstPlayer();
+                AiManager.instance.MerFunction();
             }
         }
         return boolValue;

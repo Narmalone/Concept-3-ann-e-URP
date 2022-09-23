@@ -1,17 +1,49 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement style="height: 100%; position: relative; width: 100%; top: 4px; left: 4px;">
-        <ui:GroupBox name="Chara1" style="position: absolute; height: 848px; width: 512px; top: 136px; left: 160px;">
-            <ui:VisualElement style="position: absolute; height: 432px; width: 414px; top: 315px; left: 42px; -unity-text-outline-width: 0; background-color: rgb(131, 220, 255);">
-                <ui:Label text="Life" display-tooltip-when-elided="true" name="Life1" style="position: absolute; font-size: 47px; color: rgb(0, 0, 0);" />
-                <ui:Label text="Damage: " display-tooltip-when-elided="true" name="Damage1" style="position: absolute; font-size: 47px; top: 83px; left: 4px; color: rgb(0, 0, 0);" />
-                <ui:Label text="Defense:" display-tooltip-when-elided="true" name="Defense1" style="position: absolute; font-size: 47px; top: 182px; left: 4px; color: rgb(0, 0, 0);" />
-                <ui:Label text="Spell:  " display-tooltip-when-elided="true" name="Spell1" style="position: absolute; font-size: 47px; top: 276px; left: 4px; color: rgb(0, 0, 0);" />
-                <ui:Label text="Rarity: " display-tooltip-when-elided="true" name="Rarity1" style="position: absolute; font-size: 47px; top: 357px; left: 4px; color: rgb(0, 0, 0);" />
-            </ui:VisualElement>
-            <ui:VisualElement style="position: absolute; height: 88px; width: 413px; top: 749px; left: 43px; background-color: rgb(238, 159, 80);">
-                <ui:Button text="COST: " display-tooltip-when-elided="true" name="Cost1" style="position: absolute; height: 85px; width: 408px; font-size: 46px;" />
-            </ui:VisualElement>
-        </ui:GroupBox>
+    <ui:VisualElement style="height: 100%; position: relative; width: 100%; top: 4px; left: 4px; flex-direction: row;">
         <ui:Button text="BACK" display-tooltip-when-elided="true" name="BMenu" focusable="false" style="position: absolute; font-size: 74px; top: 930px; left: 1400px; transform-origin: right bottom; width: 489px;" />
+        <ui:GroupBox name="Characters" style="flex-direction: row; align-items: center;">
+            <ui:GroupBox name="Chara1" style="position: relative; height: auto; width: auto; top: 0; left: 0;">
+                <ui:GroupBox>
+                    <ui:VisualElement style="position: relative; height: 432px; width: 414px; top: 0; left: 0; -unity-text-outline-width: 0; background-color: rgb(131, 220, 255);">
+                        <ui:Label text="Life" display-tooltip-when-elided="true" name="Life1" style="position: absolute; font-size: 47px; color: rgb(0, 0, 0);" />
+                        <ui:Label text="Damage: " display-tooltip-when-elided="true" name="Damage1" style="position: absolute; font-size: 47px; top: 83px; left: 4px; color: rgb(0, 0, 0);" />
+                        <ui:Label text="Defense:" display-tooltip-when-elided="true" name="Defense1" style="position: absolute; font-size: 47px; top: 182px; left: 4px; color: rgb(0, 0, 0);" />
+                        <ui:Label text="Spell:  " display-tooltip-when-elided="true" name="Spell1" style="position: absolute; font-size: 47px; top: 276px; left: 4px; color: rgb(0, 0, 0);" />
+                        <ui:Label text="Rarity: " display-tooltip-when-elided="true" name="Rarity1" style="position: absolute; font-size: 47px; top: 357px; left: 4px; color: rgb(0, 0, 0);" />
+                    </ui:VisualElement>
+                    <ui:VisualElement style="position: relative; height: 88px; width: 413px; top: 0; left: 0; background-color: rgb(238, 159, 80);">
+                        <ui:Button text="COST: " display-tooltip-when-elided="true" name="Cost1" style="position: absolute; height: 85px; width: 408px; font-size: 46px;" />
+                    </ui:VisualElement>
+                </ui:GroupBox>
+            </ui:GroupBox>
+            <ui:GroupBox name="Chara1" style="position: relative; height: auto; width: auto; top: 0; left: 0;">
+                <ui:GroupBox>
+                    <ui:VisualElement style="position: relative; height: 432px; width: 414px; top: 0; left: 0; -unity-text-outline-width: 0; background-color: rgb(131, 220, 255);">
+                        <ui:Label text="Life" display-tooltip-when-elided="true" name="Life1" style="position: absolute; font-size: 47px; color: rgb(0, 0, 0);" />
+                        <ui:Label text="Damage: " display-tooltip-when-elided="true" name="Damage1" style="position: absolute; font-size: 47px; top: 83px; left: 4px; color: rgb(0, 0, 0);" />
+                        <ui:Label text="Defense:" display-tooltip-when-elided="true" name="Defense1" style="position: absolute; font-size: 47px; top: 182px; left: 4px; color: rgb(0, 0, 0);" />
+                        <ui:Label text="Spell:  " display-tooltip-when-elided="true" name="Spell1" style="position: absolute; font-size: 47px; top: 276px; left: 4px; color: rgb(0, 0, 0);" />
+                        <ui:Label text="Rarity: " display-tooltip-when-elided="true" name="Rarity1" style="position: absolute; font-size: 47px; top: 357px; left: 4px; color: rgb(0, 0, 0);" />
+                    </ui:VisualElement>
+                    <ui:VisualElement style="position: relative; height: 88px; width: 413px; top: 0; left: 0; background-color: rgb(238, 159, 80);">
+                        <ui:Button text="COST: " display-tooltip-when-elided="true" name="Cost1" style="position: absolute; height: 85px; width: 408px; font-size: 46px;" />
+                    </ui:VisualElement>
+                </ui:GroupBox>
+            </ui:GroupBox>
+            <ui:GroupBox name="Chara1" style="position: relative; height: auto; width: auto; top: 0; left: 0;">
+                <ui:GroupBox>
+                    <ui:VisualElement style="position: relative; height: 432px; width: 414px; top: 0; left: 0; -unity-text-outline-width: 0; background-color: rgb(131, 220, 255);">
+                        <ui:Label text="Life" display-tooltip-when-elided="true" name="Life1" style="position: absolute; font-size: 47px; color: rgb(0, 0, 0);" />
+                        <ui:Label text="Damage: " display-tooltip-when-elided="true" name="Damage1" style="position: absolute; font-size: 47px; top: 83px; left: 4px; color: rgb(0, 0, 0);" />
+                        <ui:Label text="Defense:" display-tooltip-when-elided="true" name="Defense1" style="position: absolute; font-size: 47px; top: 182px; left: 4px; color: rgb(0, 0, 0);" />
+                        <ui:Label text="Spell:  " display-tooltip-when-elided="true" name="Spell1" style="position: absolute; font-size: 47px; top: 276px; left: 4px; color: rgb(0, 0, 0);" />
+                        <ui:Label text="Rarity: " display-tooltip-when-elided="true" name="Rarity1" style="position: absolute; font-size: 47px; top: 357px; left: 4px; color: rgb(0, 0, 0);" />
+                    </ui:VisualElement>
+                    <ui:VisualElement style="position: relative; height: 88px; width: 413px; top: 0; left: 0; background-color: rgb(238, 159, 80);">
+                        <ui:Button text="COST: " display-tooltip-when-elided="true" name="Cost1" style="position: absolute; height: 85px; width: 408px; font-size: 46px;" />
+                    </ui:VisualElement>
+                </ui:GroupBox>
+            </ui:GroupBox>
+        </ui:GroupBox>
     </ui:VisualElement>
 </ui:UXML>

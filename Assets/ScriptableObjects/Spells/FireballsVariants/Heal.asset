@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d6ca44255e7e855408c887bc2858e245, type: 3}
-  m_Name: Firebolt
+  m_Name: Heal
   m_EditorClassIdentifier: 
-  m_name: Firebolt
-  m_generalId: 0
-  m_damage: 8
-  m_icon: {fileID: 2800000, guid: dffef66376be4fa480fb02b19edbe903, type: 3}
+  m_name: Heal
+  m_generalId: 1
+  m_damage: -10
+  m_icon: {fileID: 3316425174430470091, guid: 5c06fe21ba8367b4a922db5c42a5a406, type: 3}

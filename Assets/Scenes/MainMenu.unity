@@ -1244,7 +1244,7 @@ PrefabInstance:
     - target: {fileID: 3886788249445288650, guid: 320fcc1d7075b984b90cc7d349b25c26,
         type: 3}
       propertyPath: m_sauvegardeAutoDelay
-      value: 5
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 3886788249445288651, guid: 320fcc1d7075b984b90cc7d349b25c26,
         type: 3}

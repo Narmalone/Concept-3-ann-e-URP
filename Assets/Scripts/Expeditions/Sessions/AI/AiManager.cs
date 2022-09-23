@@ -9,7 +9,7 @@ public class AiManager : MonoBehaviour
     [SerializeField] public List<Ennemies> mobGroup1;
     private List<Character> playerCharacter;
     private Character selectedTarget;
-    private Spells m_spellAgainstPlayer;
+    private Spell m_spellAgainstPlayer;
     [SerializeField] private List<CharactersOfPlayers> charaOfPlayers;
 
     private void Awake()
@@ -21,25 +21,29 @@ public class AiManager : MonoBehaviour
     {
         playerCharacter = LoadPlayerTeam.instance.m_charactersTeam;
     }
+    public void MerFunction()
+    {
+        CastToPlayer(ChoiceSpellAgainstPlayer());
 
-    public void ChoiceSpellAgainstPlayer()
+        //Démarrer coroutine pour faire réaparaître l'interface après un délai
+        CombatManager.instance.StartCorou();
+    }
+    public Spell ChoiceSpellAgainstPlayer()
     {
         //si il n'y a plus d'ennemis, alors on lance la fonction du combat manager qui met fin au combat -> vérif avec le count peut etre
         m_spellAgainstPlayer = mobGroup1[Random.Range(0, mobGroup1.Count)].m_enemySpell;
-        CastToPlayer();
+
+        return m_spellAgainstPlayer;
     }
 
     //Classe qui comme ennemies / Player Attack servira pour lancer une attaque aux personnages du joueur
 
     //Cast depuis ISpell
-    public void CastToPlayer()
+    public void CastToPlayer(Spell spell)
     {
         CharactersOfPlayers selectedTarget = charaOfPlayers[Random.Range(0, playerCharacter.Count)];
 
-        selectedTarget.GetDamage(m_spellAgainstPlayer);
-
-        //Démarrer coroutine pour faire réaparaître l'interface après un délai
-        CombatManager.instance.StartCorou();
+        selectedTarget.GetDamage(spell);
     }
 
     public void CheckMobGroup()

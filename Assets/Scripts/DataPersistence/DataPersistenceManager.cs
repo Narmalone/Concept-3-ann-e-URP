@@ -119,7 +119,6 @@ public class DataPersistenceManager : MonoBehaviour
         }
 
         //Pousser les données chargées dans tous les autres scripts qui en ont besoin
-
         foreach(IDataPersistence dataPersistenceObj in dataPersistencesObjects)
         {
             dataPersistenceObj.LoadData(gameData);
@@ -171,7 +170,6 @@ public class DataPersistenceManager : MonoBehaviour
     //Fonction qui permet de retrouver tous les monobehaviour qui utilisent l'interface Data Persistence
     private List<IDataPersistence> FindAllDataPersistencesObjects()
     {
-
         //FindObjectsofType prend dans un booléen optionnel pour inclure les objets inactifs
         IEnumerable<IDataPersistence> dataPersistenceObjects = FindObjectsOfType<MonoBehaviour>(true).OfType<IDataPersistence>();
         return new List<IDataPersistence>(dataPersistenceObjects);

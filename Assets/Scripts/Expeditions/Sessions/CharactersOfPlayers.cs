@@ -27,7 +27,7 @@ public class CharactersOfPlayers : MonoBehaviour
 
         GetComponentInChildren<LifeBarHandler>().SetMaxHealth(life);
     }
-    public void GetDamage(Spells target)
+    public void GetDamage(Spell target)
     {
         //float damageTaken = target.SpellBasicDamage - (target.SpellBasicDamage / defense);
         //ApplyDamage(damageTaken);

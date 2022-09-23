@@ -29,7 +29,7 @@ public class SlaveMerchantScript : MonoBehaviour
     private float fCharaLife1;
     private float fCharaDamage1;
     private float fCharaDefense1;
-    private Spells defaultSpell;
+    private Spell defaultSpell;
 
     //Couts du personnage
     private Label costDisplayed;
@@ -59,9 +59,9 @@ public class SlaveMerchantScript : MonoBehaviour
         fCharaLife1 = Random.Range(40,50);
         fCharaDamage1 = Random.Range(20, 30);
         fCharaDefense1 = Random.Range(10, 15);
-        //defaultSpell = SpellsManager.instance.RandomSpell;
+
         goldCost = Random.Range(150, 200);
-        m_firstGenerated = new Character(fCharaName1, fCharaLife1, fCharaDamage1, fCharaDefense1, 0, defaultSpell);
+        m_firstGenerated = new Character(fCharaName1, fCharaLife1, fCharaDamage1, fCharaDefense1, 0, SpellsManager.instance.GetRandomSpell());
 
         UpdateUi();
     }

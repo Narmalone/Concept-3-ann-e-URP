@@ -75,43 +75,43 @@ public class UiManagerSession : MonoBehaviour
         var rootElement = m_uiDocCombat.rootVisualElement;
         rootElement.style.display = DisplayStyle.Flex;
 
-        #region SpellsButton
+        #region SpellButton
         //Spell 1
         SpellName1 = rootElement.Q<Label>("SpellName1");
-        //SpellName1.text = m_characters[0].CurrentCharaSpell.SpellName;
+        SpellName1.text = m_characters[0].CurrentCharaSpell.Name;
        
         SpellDamage1 = rootElement.Q<Label>("SpellDamage1");
-        //SpellDamage1.text = m_characters[0].CurrentCharaSpell.SpellBasicDamage.ToString();
+        SpellDamage1.text = m_characters[0].CurrentCharaSpell.Damage.ToString();
 
         Spell1 = rootElement.Q<Button>("BSpell1");
         Spell1.clickable.clicked += FirstSpellCliqued;
 
         //Spell 2
         SpellName2 = rootElement.Q<Label>("SpellName2");
-        //SpellName2.text = m_characters[1].CurrentCharaSpell.SpellName;
+        SpellName2.text = m_characters[1].CurrentCharaSpell.Name;
 
         SpellDamage2 = rootElement.Q<Label>("SpellDamage2");
-        //SpellDamage2.text = m_characters[1].CurrentCharaSpell.SpellBasicDamage.ToString();
+        SpellDamage2.text = m_characters[1].CurrentCharaSpell.Damage.ToString();
 
         Spell2 = rootElement.Q<Button>("BSpell2");
         Spell2.clickable.clicked += SecondSpellCliqued;
 
         //Spell 3
         SpellName3 = rootElement.Q<Label>("SpellName3");
-        //SpellName3.text = m_characters[2].CurrentCharaSpell.SpellName.ToString();
+        SpellName3.text = m_characters[2].CurrentCharaSpell.Name;
 
         SpellDamage3 = rootElement.Q<Label>("SpellDamage3");
-        //SpellDamage3.text = m_characters[2].CurrentCharaSpell.SpellBasicDamage.ToString();
+        SpellDamage3.text = m_characters[2].CurrentCharaSpell.Damage.ToString();
 
         Spell3 = rootElement.Q<Button>("BSpell3");
         Spell3.clickable.clicked += ThirdSpellCliqued;
 
         //Spell 4
         SpellName4 = rootElement.Q<Label>("SpellName4");
-        //SpellName4.text = m_characters[3].CurrentCharaSpell.SpellName.ToString();
+        SpellName4.text = m_characters[3].CurrentCharaSpell.Name;
 
         SpellDamage4 = rootElement.Q<Label>("SpellDamage4");
-        //SpellDamage4.text = m_characters[3].CurrentCharaSpell.SpellBasicDamage.ToString();
+        SpellDamage4.text = m_characters[3].CurrentCharaSpell.Damage.ToString();
 
         Spell4 = rootElement.Q<Button>("BSpell4");
         Spell4.clickable.clicked += FourSpellCliqued;
@@ -127,33 +127,33 @@ public class UiManagerSession : MonoBehaviour
     }
 
  
-    #region Spells
+    #region Spell
     public void FirstSpellCliqued()
     {
         m_spellUsed = Spell1;
         CombatManager.instance.canSelectMob = true;
-        PlayerAttack.instance.m_currentSpellSelected = m_characters[0].CurrentCharaSpell;
+        PlayerAttack.instance.m_currentSpellelected = m_characters[0].CurrentCharaSpell;
     } 
     
     public void SecondSpellCliqued()
     {
         m_spellUsed = Spell2;
         CombatManager.instance.canSelectMob = true;
-        PlayerAttack.instance.m_currentSpellSelected = m_characters[1].CurrentCharaSpell;
+        PlayerAttack.instance.m_currentSpellelected = m_characters[1].CurrentCharaSpell;
     }
 
     public void ThirdSpellCliqued()
     {
         m_spellUsed = Spell3;
         CombatManager.instance.canSelectMob = true;
-        PlayerAttack.instance.m_currentSpellSelected = m_characters[2].CurrentCharaSpell;
+        PlayerAttack.instance.m_currentSpellelected = m_characters[2].CurrentCharaSpell;
     }
 
     public void FourSpellCliqued()
     {
         m_spellUsed = Spell4;
         CombatManager.instance.canSelectMob = true;
-        PlayerAttack.instance.m_currentSpellSelected = m_characters[3].CurrentCharaSpell;
+        PlayerAttack.instance.m_currentSpellelected = m_characters[3].CurrentCharaSpell;
     }
 
     public void SpellUsed()

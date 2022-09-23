@@ -9,7 +9,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private LayerMask m_enemyMask;
 
     //Savoir quel spell sélectionne va être envoyé sur quelle cible
-    [System.NonSerialized] public Spells m_currentSpellSelected;
+    [System.NonSerialized] public Spell m_currentSpellelected;
 
     private void Awake()
     {
@@ -21,7 +21,7 @@ public class PlayerAttack : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             //Si le joueur n'a rien sélectionné on ne fait rien
-            if(m_currentSpellSelected == null) return;
+            if(m_currentSpellelected == null) return;
 
             //raycast quand le joueur clique envoyer le sort à la target
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -30,10 +30,10 @@ public class PlayerAttack : MonoBehaviour
             if (Physics.Raycast(ray, out hit, 1000, m_enemyMask))
             {
                 //La fonction get damage se lance toujours 2 fois
-                hit.collider.gameObject.GetComponent<Ennemies>().GetDamage(m_currentSpellSelected);
+                hit.collider.gameObject.GetComponent<Ennemies>().GetDamage(m_currentSpellelected);
 
                 //une fois que le joueur a appuyé il ne doit plus avoir le sort comme sélectionné
-                m_currentSpellSelected = null;
+                m_currentSpellelected = null;
             }
         }
     }

@@ -18,7 +18,7 @@ public class Ennemies : MonoBehaviour
     private float dmgSubis;
     private float life;
 
-    [HideInInspector] public Spells m_enemySpell;
+    [HideInInspector] public Spell m_enemySpell;
 
     private void Awake()
     {
@@ -29,7 +29,7 @@ public class Ennemies : MonoBehaviour
     }
 
     //Lorsque l'ennemi subis des dégâts
-    public void GetDamage(Spells target)
+    public void GetDamage(Spell target)
     {
 
     }
