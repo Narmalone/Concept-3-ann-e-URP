@@ -22,6 +22,9 @@ public class CombatManager : MonoBehaviour
     public List<Character> m_ourTeam;
     public List<Character> m_ennemyTeam;
 
+    //Spell qui correspond au spell du boutton que le joueur a cliqué
+    private Spell m_currentSpellSelected;
+
     private void Awake()
     {
         //création mini-singleton
@@ -115,9 +118,11 @@ public class CombatManager : MonoBehaviour
         if (isFighting)
         {
             //Désactiver le bouton sort que le joueur à lancé
+            //SpellsManager.instance.CastSpell(spellToCast);
             UiManagerSession.instance.SpellUsed();
             delTurn(true);
         }
        
     }
+
 }

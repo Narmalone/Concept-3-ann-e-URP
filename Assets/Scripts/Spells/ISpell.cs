@@ -5,7 +5,6 @@ using UnityEngine;
 public interface ISpell
 {
 
-    //So appelé dans une classe ou y'a besoin d'un sort
     public string Name { get;}
     public string Description { get; set;}
     public int GeneralId { get;}

@@ -5,7 +5,7 @@ using UnityEngine;
 public class LoadPlayerTeam : MonoBehaviour, IDataPersistence
 {
     public static LoadPlayerTeam instance { get; private set; }
-    [System.NonSerialized] public List<Character> m_charactersTeam;
+    public List<Character> m_charactersTeam;
 
     private void Awake()
     {

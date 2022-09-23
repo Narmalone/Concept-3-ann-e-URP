@@ -62,8 +62,13 @@ public class UiManagerSession : MonoBehaviour
 
     private void Start()
     {
-        m_characters = new List<Character>();
         m_characters = LoadPlayerTeam.instance.m_charactersTeam;
+
+        foreach(Character chara in m_characters)
+        {
+            chara.CurrentCharaSpell = SpellsManager.instance.GetSpellById(chara.m_spellID);
+            Debug.Log(chara.CurrentCharaSpell.Damage);
+        }
     }
     public void SetDisabledUi()
     {
@@ -79,7 +84,7 @@ public class UiManagerSession : MonoBehaviour
         //Spell 1
         SpellName1 = rootElement.Q<Label>("SpellName1");
         SpellName1.text = m_characters[0].CurrentCharaSpell.Name;
-       
+
         SpellDamage1 = rootElement.Q<Label>("SpellDamage1");
         SpellDamage1.text = m_characters[0].CurrentCharaSpell.Damage.ToString();
 
@@ -126,7 +131,7 @@ public class UiManagerSession : MonoBehaviour
         buttonsToActivate.Add(Spell4);
     }
 
- 
+
     #region Spell
     public void FirstSpellCliqued()
     {

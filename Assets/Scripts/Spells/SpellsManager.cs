@@ -13,6 +13,7 @@ public class SpellsManager : MonoBehaviour
 
     private void Awake()
     {
+        DontDestroyOnLoad(gameObject);
         instance = this;
     }
 
@@ -35,5 +36,11 @@ public class SpellsManager : MonoBehaviour
     {
         Spell spellSelected = spells.Find(spell => spell.GeneralId == id);
         return spellSelected;
+    }
+
+    public Spell CastSpell(Spell spellToCast)
+    {
+
+        return spellToCast;
     }
 }
