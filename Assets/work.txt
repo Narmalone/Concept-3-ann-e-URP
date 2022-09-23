@@ -3,15 +3,12 @@ Ergonomie:
 - Rajouter équipe sélectionnée quand on est dans l'inventaire
 -> marchand d'esclave polish
 -> Afficher en jeux les statistiques des ennemis (défense, damages...)
--> Revoir système de groupe de monstres -> script de group avec des données et après dans les ennemis on accède au groupe par un int ID group que possèdent les ennemis
+-> Revoir système de groupe de monstres -> script de group avec des données et après dans les ennemis on accède au groupe par un int ID group que possèdent les ennemis -> en cours
 -> Faire système de loot -> List
--> events & event sender -> Check
 -> faire les objets consommables in game -> Potion de soins -> en cours
--> Système de rareté
 -> Rework Spell system (Interfarce à la place de multiples classes qui héritent) -> en cours
--> Les ennemis n'attaquent pas à chaques fois -> en cours
 -> Voir un système d'éléments
-
+-> Revoir le système de combat pour appeler avec interface pour lancer sort etc...
 Contenus:
 -> Sorts
 -> Items
