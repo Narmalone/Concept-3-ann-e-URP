@@ -18,6 +18,10 @@ public class CombatManager : MonoBehaviour
 
     public bool canSelectMob = false;
     public bool isFighting = false;
+
+    public List<Character> m_ourTeam;
+    public List<Character> m_ennemyTeam;
+
     private void Awake()
     {
         //création mini-singleton

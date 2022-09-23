@@ -2716,6 +2716,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e35fc336b639a24f80c53f0565383cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &692775600
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 692775601}
+  - component: {fileID: 692775602}
+  m_Layer: 0
+  m_Name: EnemyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &692775601
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692775600}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1867841815}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &692775602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692775600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df579c09c659320408f5a5f682cc9688, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groups: []
 --- !u!1 &745487447
 GameObject:
   m_ObjectHideFlags: 0
@@ -3631,14 +3676,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3ed530eb57acb34d957ec07140de022, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_spellList: []
-  spelltexture: {fileID: 0}
-  RandomSpell:
-    m_spellIcon: {fileID: 0}
-    m_spellName: 
-    m_spellDescription: 
-    m_spellId: 0
-    m_spellBasicDamage: 0
+  m_baseCharaList: []
+  spells: []
 --- !u!4 &1448634724 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5306684825213347688, guid: 93824f59a3eda2a45aa303956bf85d06,
@@ -3976,6 +4015,7 @@ Transform:
   - {fileID: 1164203450}
   - {fileID: 973202907}
   - {fileID: 1690438957}
+  - {fileID: 692775601}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

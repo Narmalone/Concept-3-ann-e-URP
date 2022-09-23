@@ -9,13 +9,19 @@ public class Spell : ScriptableObject, ISpell
     public int m_generalId;
     public float m_damage;
     public Texture2D m_icon;
+    [Tooltip("Si true la cible est multiple")] public bool m_isSolorOrMultipleTarget;
+    [Tooltip("Si true la target est team")]public bool m_isEnnemiesTargetOrFromTeamTarget;
     public string Name { get => m_name;}
     public string Description { get; set; }
     public int GeneralId { get => m_generalId; }
     public float Damage { get => m_damage;}
     public Texture2D Icon { get => m_icon;}
 
-    public void CastSpell()
+    public bool IsSoloTarget { get => m_isSolorOrMultipleTarget; }
+
+    public bool IsEnemyTarget { get => m_isEnnemiesTargetOrFromTeamTarget; }
+
+    public void CastSpell(Spell spell)
     {
 
     }
