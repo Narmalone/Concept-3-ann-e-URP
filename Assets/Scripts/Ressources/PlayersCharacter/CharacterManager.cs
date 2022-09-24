@@ -49,12 +49,13 @@ public class CharacterManager : MonoBehaviour, IDataPersistence
         for (int i = 0; i < 4; i++)
         {
             int charactersRarity = Random.Range(1, 2);
-            float charactersLife = Random.Range(40, 50);
+            float charactersMaxLife = Random.Range(40, 50);
+            float currentLife = charactersMaxLife;
             float charactersDamage = Random.Range(20, 30);
             float charactersDefense = Random.Range(10, 15);
             string charaName = charactersName[Random.Range(0, charactersName.Length)];
 
-            Character chara = new Character(charaName, charactersLife, charactersDamage, charactersDefense, charactersRarity, SpellsManager.instance.GetRandomSpell());
+            Character chara = new Character(charaName, charactersMaxLife, currentLife, charactersDamage, charactersDefense, charactersRarity, SpellsManager.instance.GetRandomSpell());
 
             charactersPlayerList.Add(chara);
         }

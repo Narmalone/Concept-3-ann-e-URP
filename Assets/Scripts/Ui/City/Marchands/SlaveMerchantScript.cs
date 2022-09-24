@@ -61,7 +61,7 @@ public class SlaveMerchantScript : MonoBehaviour
         fCharaDefense1 = Random.Range(10, 15);
 
         goldCost = Random.Range(150, 200);
-        m_firstGenerated = new Character(fCharaName1, fCharaLife1, fCharaDamage1, fCharaDefense1, 0, SpellsManager.instance.GetRandomSpell());
+        m_firstGenerated = new Character(fCharaName1, fCharaLife1, fCharaLife1, fCharaDamage1, fCharaDefense1, 0, SpellsManager.instance.GetRandomSpell());
 
         UpdateUi();
     }

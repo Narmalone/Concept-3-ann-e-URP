@@ -1,10 +1,12 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
-    <ui:GroupBox name="SpellBox">
-        <ui:GroupBox name="SpellBox1" style="height: 190px; width: 265px; position: relative; left: 0; top: 0; background-color: rgb(156, 156, 156);">
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/USS/Combat/SpellsUss.uss?fileID=7433441132597879392&amp;guid=d9efbc3a0b406bd4f81d7e79796eb493&amp;type=3#SpellsUss" />
+    <ui:GroupBox name="BoxDescription" style="height: 45px; width: 348px; background-color: rgb(82, 82, 82);">
+        <ui:Label text="Label" display-tooltip-when-elided="true" name="Description" style="font-size: 18px;" />
+    </ui:GroupBox>
+    <ui:GroupBox name="SpellBox" style="width: 344px;">
+        <ui:GroupBox name="SpellBox1" style="height: 190px; width: 336px; position: relative; left: 0; top: 0; background-color: rgb(255, 255, 255); color: rgb(255, 255, 255); -unity-background-image-tint-color: rgb(255, 255, 255);">
             <ui:VisualElement>
-                <ui:Button display-tooltip-when-elided="true" name="BSpell1" style="height: 197px; position: absolute; width: 268px; top: -9px; left: -8px;" />
-                <ui:Label text="SpellName" display-tooltip-when-elided="true" enable-rich-text="true" name="SpellName1" style="font-size: 40px; position: absolute;" />
-                <ui:Label text="SpellDamage" display-tooltip-when-elided="true" enable-rich-text="true" name="SpellDamage1" style="font-size: 40px; position: absolute; top: 126px; left: 1px;" />
+                <ui:Button display-tooltip-when-elided="true" name="BSpell1" focusable="false" style="height: 197px; position: absolute; width: 341px; top: -9px; left: -8px;" />
             </ui:VisualElement>
         </ui:GroupBox>
     </ui:GroupBox>

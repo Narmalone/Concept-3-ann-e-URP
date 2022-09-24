@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 6865585537162253577}
   - component: {fileID: 5542809767001541755}
   - component: {fileID: 5334001021421660274}
-  m_Layer: 0
+  - component: {fileID: 4698406997776103630}
+  m_Layer: 7
   m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +113,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e35fc336b639a24f80c53f0565383cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_thisCharacter:
+    m_charactersName: 
+    m_life: 0
+    m_damage: 0
+    m_defense: 0
+    m_rarity: 0
+    m_spellID: 0
   id: 1
+  isTargetable: 0
+--- !u!136 &4698406997776103630
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6865585537162253579}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1665695484244334162
 PrefabInstance:
   m_ObjectHideFlags: 0

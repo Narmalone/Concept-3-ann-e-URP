@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.EventSystems;
 public class CombatManager : MonoBehaviour
 {
     #region delegates
@@ -19,8 +19,16 @@ public class CombatManager : MonoBehaviour
     public bool canSelectMob = false;
     public bool isFighting = false;
 
-    public List<Character> m_ourTeam;
+    public List<CharactersOfPlayers> m_ourTeam;
     public List<Character> m_ennemyTeam;
+
+    public List<Ennemy> m_enemyList;
+    public int GroupIdInFight;
+
+    [HideInInspector] public Group m_currentFightingGroup;
+
+    [SerializeField] private LayerMask m_enemyMask;
+    [SerializeField] private LayerMask m_charactersMask;
 
     //Spell qui correspond au spell du boutton que le joueur a cliqué
     private Spell m_currentSpellSelected;
@@ -46,12 +54,22 @@ public class CombatManager : MonoBehaviour
     {
         if (boolValue)
         {
-            Debug.Log("démarrage du combat: " + boolValue);
-
+            if(GroupIdInFight == 0)
+            {
+                m_enemyList = GroupManager.instance.m_group1;
+            } 
+            else if(GroupIdInFight == 1)
+            {
+                m_enemyList = GroupManager.instance.m_group2;
+            }
+            Debug.Log("Combat contre le groupe d'ennemis ID: " + GroupIdInFight + " a été lancé");
             //Si combat commence alors c'est le tour du joueur
             delTurn(true);
             delCombat(true);
             UiManagerSession.instance.CombatUi();
+
+            //Set the ennmy team from the group we are fighting against
+            m_ennemyTeam = m_currentFightingGroup.EnnemiesList;
         }
         else
         {
@@ -66,16 +84,19 @@ public class CombatManager : MonoBehaviour
         {
             isFighting = true;
             FindObjectOfType<PlayerControllerCity>().enabled = false;
-            Debug.Log("Joueur ne peut plus se déplacer car il est en combat: " + boolValue);
         }
         else
         {
             //Si joueur plus en combat on lui redonne le contrôle
             isFighting = false;
             FindObjectOfType<PlayerControllerCity>().enabled = true;
+
+            //Reset player's Turn
             delTurn(false);
             UiManagerSession.instance.NotPlayerTurn();
-            Debug.Log("Le joueur n'est plus en combat");
+
+            //Clear la liste d'ennemis et le groupe contre lequel on est
+            m_currentFightingGroup = new Group();
         }
         return boolValue;
     }
@@ -100,7 +121,7 @@ public class CombatManager : MonoBehaviour
             if (isFighting)
             {
                 //Ai manager pour faire jouer l'IA
-                AiManager.instance.MerFunction();
+                AiManager.instance.AttackCharacter();
             }
         }
         return boolValue;
@@ -118,11 +139,135 @@ public class CombatManager : MonoBehaviour
         if (isFighting)
         {
             //Désactiver le bouton sort que le joueur à lancé
-            //SpellsManager.instance.CastSpell(spellToCast);
-            UiManagerSession.instance.SpellUsed();
             delTurn(true);
         }
        
     }
 
+    //Fonction qui permmet de savoir qu'est-ce qui est une cible ou pas dans le sort avant de le cast
+    public void CheckSpellTarget(Spell spellCliqued)
+    {
+        //Une fois que le check est fait dire quelles sont les target possibles en fonction des boolens
+        //mettre un check dans les ennemies ? Genre si y'a que notre équipe qui est targetable bah pas les ennemis ? -> avec un foreach ennemies in list
+        //Si Un seul ennemi est targetable comment faire ? 
+        m_currentSpellSelected = spellCliqued;
+        //trouver comment avoir le bon groupe des ennemis
+        if (m_currentSpellSelected.IsSoloTarget && m_currentSpellSelected.IsEnemyTarget)
+        {
+            //Multiples cibles et notre équipe par exemple le sort de heal
+            //Ce genre de sort on le Cast direct car cela touche toute les cibles
+
+            //FAIRE LE CHECK DANS L'INTERFACE SPELL PLUTOT ??? mais dans ce cas comment comprendre quel spell en fonction du bouton
+            Debug.Log("Plusieures cibles de notre équipe");
+            foreach (Ennemy ennemies in m_enemyList)
+            {
+                ennemies.isTargetable = false;
+            }
+
+            foreach (CharactersOfPlayers ourChara in m_ourTeam)
+            {
+                ourChara.isTargetable = true;
+            }
+        }
+        if (m_currentSpellSelected.IsSoloTarget && m_currentSpellSelected.IsEnemyTarget == false)
+        {
+            // Si plusieures cibles et c'est l'equipe ennemie
+            Debug.Log("Plusieurs ennemis sont castables");
+            foreach (Ennemy ennemies in m_enemyList)
+            {
+                ennemies.isTargetable = true;
+            }
+
+            foreach(CharactersOfPlayers ourChara in m_ourTeam)
+            {
+                ourChara.isTargetable = false;
+            }
+        }
+        if (m_currentSpellSelected.IsSoloTarget == false && m_currentSpellSelected.IsEnemyTarget)
+        {
+            //Si une seule cible et que c'est notre équipe
+            Debug.Log("Une seule cible de notre équipe");
+            foreach (Ennemy ennemies in m_enemyList)
+            {
+                ennemies.isTargetable = false;
+            }
+
+            foreach (CharactersOfPlayers ourChara in m_ourTeam)
+            {
+                ourChara.isTargetable = true;
+            }
+        }
+        if(m_currentSpellSelected.IsSoloTarget == false && m_currentSpellSelected.IsEnemyTarget == false)
+        {
+            //Si une seule cible et que c'est celle de l'équipe ennemie
+            Debug.Log("Une seule cible ennemie");
+            foreach (Ennemy ennemies in m_enemyList)
+            {
+                ennemies.isTargetable = true;
+            }
+
+            foreach (CharactersOfPlayers ourChara in m_ourTeam)
+            {
+                ourChara.isTargetable = false;
+            }
+        }
+        //Debug.Log(m_currentSpellSelected.Name);
+    }
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            //Si le joueur n'a rien sélectionné on ne fait rien
+            if (m_currentSpellSelected == null) return;
+
+            //raycast quand le joueur clique envoyer le sort à la target
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, 1000, m_enemyMask))
+            {
+                
+                //Check si la cible est targetable ou pas réfléchir à un autre moyen pour vérifier
+                if(hit.collider.gameObject.GetComponent<Ennemy>().isTargetable == true)
+                {
+                    //si la cible est une target on cast
+                    //CastSpell(hit.collider.gameObject.GetComponent<Ennemy>().m_thisCharacter, m_currentSpellSelected);
+                    hit.collider.gameObject.GetComponent<Ennemy>().SpellCasted(m_currentSpellSelected);
+                    UiManagerSession.instance.SpellUsed();
+                    //Puis update la vie du perso
+                    //hit.collider.gameObject.GetComponent<Ennemy>().UpdateLife();
+                }
+
+                //une fois que le joueur a lancé le sort il n'est plus sélectionné
+                m_currentSpellSelected = null;
+            }
+            
+            else if (Physics.Raycast(ray, out hit, 1000, m_charactersMask))
+            {
+                
+                //Check si la cible est targetable ou pas réfléchir à un autre moyen pour vérifier
+                if(hit.collider.gameObject.GetComponent<CharactersOfPlayers>().isTargetable == true)
+                {
+                    //si la cible est une target on cast
+
+                    //CastSpell(hit.collider.gameObject.GetComponent<CharactersOfPlayers>().m_thisCharacter, m_currentSpellSelected);
+
+                    //trouver un moyen si c'est multicible de prendre tout
+                    hit.collider.gameObject.GetComponent<CharactersOfPlayers>().SpellCasted(m_currentSpellSelected);
+                    UiManagerSession.instance.SpellUsed();
+                }
+
+                //une fois que le joueur a lancé le sort il n'est plus sélectionné
+                m_currentSpellSelected = null;
+            }
+        }
+    }
+
+    public void CastSpell(Character target, Spell spellToTarget)
+    {
+        target.CharactersLife -= spellToTarget.Damage;
+        Debug.Log(target.CharactersName + target.CharactersLife);
+        UiManagerSession.instance.SpellUsed();
+        Debug.Log("Un sort à été casté");
+    }
 }

@@ -7,6 +7,7 @@ public class Character
 {
     //Initialiser les statistiques d'un personnage
     [SerializeField] private string m_charactersName;
+    [SerializeField] private float m_maxLife;
     [SerializeField] private float m_life;
     [SerializeField] private float m_damage;
     [SerializeField] private float m_defense;
@@ -33,6 +34,11 @@ public class Character
     {
         get { return m_life; }
         set { m_life = value; }
+    } 
+    public float CharactersMaxLife
+    {
+        get { return m_maxLife; }
+        set { m_maxLife = value; }
     }
 
     public float CharactersDamage
@@ -58,10 +64,11 @@ public class Character
         get { return m_currentSpell; }
         set { m_currentSpell = value; }
     }
-    public Character(string name, float life, float damage, float defense, int rarity, Spell currentSpell)
+    public Character(string name, float maxLife, float life, float damage, float defense, int rarity, Spell currentSpell)
     {
         m_charactersName = name;
         m_life = life;
+        m_maxLife = maxLife;
         m_damage = damage;
         m_defense = defense;
         m_rarity = rarity;

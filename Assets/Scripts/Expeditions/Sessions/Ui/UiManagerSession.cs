@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.EventSystems;
 public class UiManagerSession : MonoBehaviour
 {
     public static UiManagerSession instance { get; private set; }
@@ -17,31 +18,14 @@ public class UiManagerSession : MonoBehaviour
     [Header("REFERENCES")]
     [SerializeField] private UIDocument m_uiDocCombat;
     [SerializeField] private VisualTreeAsset m_spellTemplate;
+
     private List<Button> m_buttons;
     private int index = 0;
 
     private List<Character> m_characters;
     public List<Spell> spellList;
-
-    private List<Character> m_enemiesCharacter;
-
-    //Noms des sorts
-    private Label SpellName1;
-    private Label SpellName2;
-    private Label SpellName3;
-    private Label SpellName4;
-
-    //dégâts des sorts
-    private Label SpellDamage1;
-    private Label SpellDamage2;
-    private Label SpellDamage3;
-    private Label SpellDamage4;
-
-    //Boutons des sorts
-    private Button Spell1;
-    private Button Spell2;
-    private Button Spell3;
-    private Button Spell4;
+    private Spell currentSpellCliqued;
+    private List<Label> m_spellsDescriptions;
 
     // bouton du sort actuel -> équivaut au boutton Spell1, spell2, spell3 ou spell4
     private Button m_spellUsed;
@@ -63,7 +47,6 @@ public class UiManagerSession : MonoBehaviour
         CombatUi = UiCombat;
         SetDisabledUi();
 
-        buttonsToActivate = new List<Button>();
         m_buttons = new List<Button>();
         spellButtons = new List<Button>();
     }
@@ -88,10 +71,15 @@ public class UiManagerSession : MonoBehaviour
         var rootElement = m_uiDocCombat.rootVisualElement;
         rootElement.style.display = DisplayStyle.Flex;
 
+        m_restButton = rootElement.Q<Button>("BRest");
+        m_restButton.clickable.clicked += OnRestButtonCliqued;
+
         GroupBox container = rootElement.Q<GroupBox>("MainGroupBox");
 
+        index = 0;
+
         //Génération de l'interface
-        foreach(Character chara in m_characters)
+        foreach (Character chara in m_characters)
         {
             //Instantier les templates en fonction du nombre de personnage (boucle for marche aussi)
             VisualElement ui = m_spellTemplate.CloneTree();
@@ -108,11 +96,18 @@ public class UiManagerSession : MonoBehaviour
             btn.clickable.clicked += () =>
             {
                 CheckButtonCliqued(btn);
-                //Debug.Log(btn.name);
             };
 
             //ajouter le sort du personnage actuel (le premier visual crée correspond à son premier sort)
             spellList.Add(chara.CurrentCharaSpell);
+
+            GroupBox boxToQuery = ui.Q<GroupBox>("BoxDescription");
+
+            Label spellDescription = boxToQuery.Q<Label>("Description");
+
+            spellDescription.name = "LDescription" + index;
+
+            spellDescription.text = chara.CurrentCharaSpell.Description + chara.CurrentCharaSpell.Damage;
 
             //ajouter au container la template
             container.Add(ui);
@@ -126,57 +121,51 @@ public class UiManagerSession : MonoBehaviour
         //Empêcher de le faire comme ça car on est dans un foreach
         if(btn == m_buttons[0])
         {
-            m_characters[0].CurrentCharaSpell.CastSpell(spellList[0]);
+            //Si le bouton 0 est cliqué alors l'actuel sélectionné est celui du character 0 et on va dans combat manager pour vérifier la/les cibles
+            //à l'aide des booléens dans le SO Si on doit toucher que un seul ennemis, plusieurs, un personnage de son équipe, nous-même, toute notre équipe
+            //Depuis ces booléens cela renvoie des fonctions qui demandent en paramètres des target
+            m_spellUsed = btn;
+            Debug.Log(m_spellUsed.name);
+            currentSpellCliqued = spellList[0];
+            CombatManager.instance.CheckSpellTarget(currentSpellCliqued);
         }
-        Debug.Log(btn.name);
-    }
-    #region Spell
-    public void FirstSpellCliqued()
-    {
-        m_spellUsed = Spell1;
-        CombatManager.instance.canSelectMob = true;
-        PlayerAttack.instance.m_currentSpellelected = m_characters[0].CurrentCharaSpell;
-    } 
-    
-    public void SecondSpellCliqued()
-    {
-        m_spellUsed = Spell2;
-        CombatManager.instance.canSelectMob = true;
-        PlayerAttack.instance.m_currentSpellelected = m_characters[1].CurrentCharaSpell;
-    }
-
-    public void ThirdSpellCliqued()
-    {
-        m_spellUsed = Spell3;
-        CombatManager.instance.canSelectMob = true;
-        PlayerAttack.instance.m_currentSpellelected = m_characters[2].CurrentCharaSpell;
-    }
-
-    public void FourSpellCliqued()
-    {
-        m_spellUsed = Spell4;
-        CombatManager.instance.canSelectMob = true;
-        PlayerAttack.instance.m_currentSpellelected = m_characters[3].CurrentCharaSpell;
+        else if (btn == m_buttons[1])
+        {
+            m_spellUsed = btn;
+            currentSpellCliqued = spellList[1];
+            CombatManager.instance.CheckSpellTarget(currentSpellCliqued);
+        }
+        else if (btn == m_buttons[2])
+        {
+            m_spellUsed = btn;
+            currentSpellCliqued = spellList[2];
+            CombatManager.instance.CheckSpellTarget(currentSpellCliqued);
+        }
+        else if (btn == m_buttons[3])
+        {
+            m_spellUsed = btn;
+            currentSpellCliqued = spellList[3];
+            CombatManager.instance.CheckSpellTarget(currentSpellCliqued);
+        }
     }
 
     public void SpellUsed()
     {
 
         //Si le personnage rest spellused == null donc on return
-        if(m_spellUsed == null) { return; }
+        if(m_spellUsed == null) { Debug.Log(m_spellUsed); }
 
         spellButtons.Add(m_spellUsed);
-        
+
         //Vérifier chaque bouton dans la list si ils y sont désactiver les boutons
         foreach (Button btn in spellButtons)
         {
-            btn.SetEnabled(false);
+            //faire aussi changer l'image du sort en un truc gris genre il a été utilisé
+            btn.visible = false;
         }
 
         CombatManager.instance.canSelectMob = false;
     }
-
-    #endregion
 
     //QUAND ON REST LA FONCTION SPELLUSED EST APPELE DONC YA UNE ERREUR
     private void OnRestButtonCliqued()
@@ -185,9 +174,9 @@ public class UiManagerSession : MonoBehaviour
 
         spellButtons = new List<Button>();
 
-        foreach(Button btn in buttonsToActivate)
+        foreach(Button btn in m_buttons)
         {
-            btn.SetEnabled(true);
+            btn.visible = true;
         }
 
         CombatManager.instance.delTurn(false);

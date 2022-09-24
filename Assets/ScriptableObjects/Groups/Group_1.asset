@@ -12,7 +12,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab28e8eefe44add428f7eb0032669102, type: 3}
   m_Name: Group_1
   m_EditorClassIdentifier: 
-  m_enemyGroup: []
+  m_enemyGroup:
+  - m_charactersName: Zedock
+    m_maxLife: 23.87
+    m_life: 49
+    m_damage: 27
+    m_defense: 11
+    m_rarity: 0
+    m_spellID: 2
+  - m_charactersName: Addle
+    m_maxLife: 3.83
+    m_life: 44
+    m_damage: 28
+    m_defense: 10
+    m_rarity: 0
+    m_spellID: 1
+  - m_charactersName: Addle
+    m_maxLife: 0
+    m_life: 42
+    m_damage: 27
+    m_defense: 12
+    m_rarity: 0
+    m_spellID: 0
+  - m_charactersName: Addle
+    m_maxLife: 0
+    m_life: 44
+    m_damage: 22
+    m_defense: 12
+    m_rarity: 0
+    m_spellID: 1
   m_maxEnnemiesInGroup: 4
   m_groupId: 0
   ennemiesPossibleName:
@@ -22,3 +50,4 @@ MonoBehaviour:
   - Asahel
   - Zedock
   - Rexword
+  m_isDataInitialized: 1

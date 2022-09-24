@@ -16,5 +16,6 @@ MonoBehaviour:
   m_generalId: 1
   m_damage: -10
   m_icon: {fileID: 3316425174430470091, guid: 5c06fe21ba8367b4a922db5c42a5a406, type: 3}
+  m_description: 'Heal your team of '
   m_isSolorOrMultipleTarget: 1
   m_isEnnemiesTargetOrFromTeamTarget: 1

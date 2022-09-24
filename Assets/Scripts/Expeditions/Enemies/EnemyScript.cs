@@ -6,15 +6,6 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 public class EnemyScript: MonoBehaviour
 {
-    //TO DO: nom, vie -> vie visible en combat par un slider/progressbar
-
-    //Un autre script permettant de créer des groupes d'Ia directement dans le level afin de tester
-    //Ce script contiendras des informations comme nombre d'ennemis dans un groupe
-
-    //trouver un moyen d'afficher les données dans l'ui de combat avec les noms des adversaires et de nos personnages
-    // Ui doc gameobject dans les go player et enemies ?
-    //Pas sur une nouvelle scene mais le playercontroller devra être désactivé
-
     [SerializeField] private LayerMask charatersMask;
     private void OnEnable()
     {
@@ -26,6 +17,10 @@ public class EnemyScript: MonoBehaviour
         {
             GetComponent<Collider>().enabled = false;
             //appel delegate mettre le joueur en combat
+
+            //Si le joueur collide on get son groupe Id par getComponent et on dit que si "GroupId == 0" alors la liste d'ennemi est la première
+            CombatManager.instance.GroupIdInFight = GetComponentInParent<Ennemy>().groupID;
+            CombatManager.instance.m_currentFightingGroup = GetComponentInParent<Ennemy>().m_thisEnemyGroup;
             CombatManager.instance.OnStartCombat(true);
         }
     }

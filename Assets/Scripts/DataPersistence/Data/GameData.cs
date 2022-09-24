@@ -21,8 +21,8 @@ public class GameData
     public List<Character> m_playerCharactersOwnedData;
     public List<Character> m_playerTeam;
 
-    public List<Spell> AllSpell;
     public bool isIniated;
+
     //valeurs définies dans le constructeur seront les valeurs par défauts
     //La game commence quand il n'ya a pas de données à charger
     public GameData()
@@ -39,9 +39,8 @@ public class GameData
         this.isIniated = false;
         this.m_playerCharactersOwnedData = new List<Character>();
 
+        //Charger l'équipe du joueur
         this.m_playerTeam = new List<Character>();
-
-        this.AllSpell = new List<Spell>();
     }
 
 }

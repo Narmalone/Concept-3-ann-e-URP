@@ -1,0 +1,8 @@
+.unity-group-box:hover {
+    background-color: rgba(255, 255, 255, 0);
+    font-size: 12px;
+}
+
+.unity-button:hover {
+    background-color: rgba(207, 127, 34, 255);
+}

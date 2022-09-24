@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class SpellsManager : MonoBehaviour
 {
-    public static SpellsManager instance;
+    public static SpellsManager instance { get; private set; }
 
     [Header("BASIC CHARCATER LIST")]
     public List<Character> m_baseCharaList;
@@ -13,7 +13,12 @@ public class SpellsManager : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        if(instance != null)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        DontDestroyOnLoad(this.gameObject);
         instance = this;
     }
 

@@ -482,5 +482,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b77a48cab29825341bdebe98a186986d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_thisEnemyGroup: {fileID: 0}
+  m_thisEnemyGroup: {fileID: 11400000, guid: 9d0bbd544f3957e4b8cc867ebe62a185, type: 2}
   m_id: 0
+  m_thisCharacter:
+    m_charactersName: 
+    m_life: 0
+    m_damage: 0
+    m_defense: 0
+    m_rarity: 0
+    m_spellID: 0
+  isTargetable: 0

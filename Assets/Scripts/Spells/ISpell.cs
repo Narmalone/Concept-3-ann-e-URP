@@ -6,7 +6,7 @@ public interface ISpell
 {
 
     public string Name { get;}
-    public string Description { get; set;}
+    public string Description { get;}
     public int GeneralId { get;}
     public float Damage { get;}
     public Texture2D Icon { get; }

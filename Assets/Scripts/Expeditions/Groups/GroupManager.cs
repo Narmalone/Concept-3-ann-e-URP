@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class GroupManager : MonoBehaviour
 {
+    public static GroupManager instance { get; private set; }
     [SerializeField] private List<Group> ennemyGroupList;
+    [SerializeField] public List<Ennemy> m_group1;
+    [SerializeField] public List<Ennemy> m_group2;
 
     private void Awake()
     {
+        instance = this;
         InitializeGroups();
     }
 
@@ -15,16 +19,23 @@ public class GroupManager : MonoBehaviour
     {
         foreach(Group group in ennemyGroupList)
         {
+            if (group.IsDataInitialized) return;
+
+            Debug.Log("Initialize groups");
+
             for (int i = 0; i < group.m_maxEnnemiesInGroup; i++)
             {
-                float charactersLife = Random.Range(40, 50);
+                
+                float charactersMaxLife = Random.Range(40, 50);
+                float currentLife = charactersMaxLife;
                 float charactersDamage = Random.Range(20, 30);
                 float charactersDefense = Random.Range(10, 15);
                 string charaName = group.ennemiesPossibleName[Random.Range(0, group.ennemiesPossibleName.Length)];
 
-                Character chara = new Character(charaName, charactersLife, charactersDamage, charactersDefense, 0, SpellsManager.instance.GetRandomSpell());
+                Character chara = new Character(charaName, charactersMaxLife, currentLife, charactersDamage, charactersDefense, 0, SpellsManager.instance.GetRandomSpell());
 
                 group.EnnemiesList.Add(chara);
+                group.IsDataInitialized = true;
             }
         }
     }
