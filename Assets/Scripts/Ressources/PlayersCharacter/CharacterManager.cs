@@ -46,7 +46,7 @@ public class CharacterManager : MonoBehaviour, IDataPersistence
     public void InitializeBasicsCharacters()
     {
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i <= 4; i++)
         {
             int charactersRarity = Random.Range(1, 2);
             float charactersMaxLife = Random.Range(40, 50);

@@ -17,16 +17,15 @@ public class GroupManager : MonoBehaviour
 
     public void InitializeGroups()
     {
-        foreach(Group group in ennemyGroupList)
+        foreach (Group group in ennemyGroupList)
         {
             if (group.IsDataInitialized) return;
-
-            Debug.Log("Initialize groups");
 
             for (int i = 0; i < group.m_maxEnnemiesInGroup; i++)
             {
                 
                 float charactersMaxLife = Random.Range(40, 50);
+                Debug.Log(charactersMaxLife);
                 float currentLife = charactersMaxLife;
                 float charactersDamage = Random.Range(20, 30);
                 float charactersDefense = Random.Range(10, 15);

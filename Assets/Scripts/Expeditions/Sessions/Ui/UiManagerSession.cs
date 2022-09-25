@@ -58,7 +58,6 @@ public class UiManagerSession : MonoBehaviour
         foreach(Character chara in m_characters)
         {
             chara.CurrentCharaSpell = SpellsManager.instance.GetSpellById(chara.m_spellID);
-            Debug.Log(chara.CurrentCharaSpell.Damage);
         }
     }
     public void SetDisabledUi()

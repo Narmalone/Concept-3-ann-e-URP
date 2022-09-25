@@ -234,6 +234,7 @@ public class CombatManager : MonoBehaviour
                     //CastSpell(hit.collider.gameObject.GetComponent<Ennemy>().m_thisCharacter, m_currentSpellSelected);
                     hit.collider.gameObject.GetComponent<Ennemy>().SpellCasted(m_currentSpellSelected);
                     UiManagerSession.instance.SpellUsed();
+                    delTurn(false);
                     //Puis update la vie du perso
                     //hit.collider.gameObject.GetComponent<Ennemy>().UpdateLife();
                 }
@@ -255,6 +256,7 @@ public class CombatManager : MonoBehaviour
                     //trouver un moyen si c'est multicible de prendre tout
                     hit.collider.gameObject.GetComponent<CharactersOfPlayers>().SpellCasted(m_currentSpellSelected);
                     UiManagerSession.instance.SpellUsed();
+                    delTurn(false);
                 }
 
                 //une fois que le joueur a lancé le sort il n'est plus sélectionné
