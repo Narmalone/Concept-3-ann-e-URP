@@ -4,7 +4,7 @@ Ergonomie:
 -> marchand d'esclave polish
 -> Afficher en jeux les statistiques des ennemis (défense, damages...)
 -> Revoir système de groupe de monstres -> script de group avec des données et après dans les ennemis on accède au groupe par un int ID group que possèdent les ennemis -> en cours
--> Faire système de loot -> List
+-> Faire système de loot -> List -> items randoms
 -> faire les objets consommables in game -> Potion de soins -> en cours
 -> Rework Spell system (Interfarce à la place de multiples classes qui héritent) -> en cours
 -> Voir un système d'éléments
