@@ -7,7 +7,9 @@ public class AiManager : MonoBehaviour
     public static AiManager instance { get; private set; }
 
     private List<Character> playerCharacter;
+    private List<Ennemy> ennemyGroup;
     private Character selectedTarget;
+    private Character ennemyTarget;
     private Spell m_spellAgainstPlayer;
     [SerializeField] private List<CharactersOfPlayers> charaOfPlayers;
 
@@ -29,8 +31,7 @@ public class AiManager : MonoBehaviour
     }
     public Spell ChoiceSpellAgainstPlayer()
     { 
-        //Besoin de rework avec l'ID de group car là ça prend forcément le premier mais si joueur pas contre le premier groupe ?
-        //si il n'y a plus d'ennemis, alors on lance la fonction du combat manager qui met fin au combat -> vérif avec le count peut etre
+        //CHECK SI l'ID ne correspond pas à un sort de heal
         m_spellAgainstPlayer = GroupManager.instance.m_group1[Random.Range(0, GroupManager.instance.m_group1.Count)].m_thisCharacter.CurrentCharaSpell;
         Debug.Log(m_spellAgainstPlayer.Name);
         return m_spellAgainstPlayer;
@@ -41,8 +42,19 @@ public class AiManager : MonoBehaviour
     //Cast depuis Combat Manager
     public void CastToPlayer(Spell spell)
     {
-        CharactersOfPlayers selectedTarget = charaOfPlayers[Random.Range(0, playerCharacter.Count)];
-        selectedTarget.GetDamage(spell);
+        if (spell.GeneralId != 1)
+        {
+            CharactersOfPlayers selectedTarget = charaOfPlayers[Random.Range(0, playerCharacter.Count)];
+            selectedTarget.GetDamage(spell);
+        }
+        else
+        {
+            ennemyGroup = CombatManager.instance.m_enemyList;
+            foreach(Ennemy mob in ennemyGroup)
+            {
+                mob.SpellCasted(spell);
+            }
+        }
     }
 
     public void CheckMobGroup()

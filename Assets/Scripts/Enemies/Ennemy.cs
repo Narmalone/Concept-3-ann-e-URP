@@ -42,6 +42,10 @@ public class Ennemy : MonoBehaviour
     {
         if (life <= maxLife)
         {
+            if (life <= 0)
+            {
+                Destroy(gameObject);
+            }
             GetComponentInChildren<LifeBarHandler>().SetHealth(life);
             Debug.Log(life);
         }
