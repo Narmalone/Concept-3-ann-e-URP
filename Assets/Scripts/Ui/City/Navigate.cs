@@ -18,6 +18,7 @@ public class Navigate : MonoBehaviour
     [SerializeField, Tooltip("Référence au bouton servant à faire apparaître/disparaître l'interface de navigation")] private Button m_navigateButton;
 
     private Button m_backButton;
+    private Button m_backExpeditionButton;
     private Button m_expeditionPannel;
     private Button m_InventoryPannel;
     private Button m_slaveMerchantPannel;
@@ -54,6 +55,18 @@ public class Navigate : MonoBehaviour
 
         var rootMerchant = m_SlaveMerchantDoc.rootVisualElement;
         rootMerchant.style.display = DisplayStyle.None;
+
+        m_backExpeditionButton = rootExpedition.Q<Button>("BBack");
+        m_backExpeditionButton.clickable.clicked += OnExpeditionLeave;
+    }
+
+    private void OnExpeditionLeave()
+    {
+        var rootExpedition = m_expeditionDoc.rootVisualElement;
+        rootExpedition.style.display = DisplayStyle.None;
+
+        var rootMenu = m_menuDoc.rootVisualElement;
+        rootMenu.style.display = DisplayStyle.Flex;
     }
 
     private void OnExpeditionCliqued()

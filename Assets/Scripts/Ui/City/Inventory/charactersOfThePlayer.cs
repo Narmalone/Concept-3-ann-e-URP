@@ -253,8 +253,6 @@ public class charactersOfThePlayer : MonoBehaviour, IDataPersistence
             ActivateListView(listView);
             DisableListView(m_viewSpellList);
         }
-      
-
     }
 
     public void ViewSpellOnSelectionChange(IEnumerable<object> obj)
