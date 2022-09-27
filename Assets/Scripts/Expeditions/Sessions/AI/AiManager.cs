@@ -7,7 +7,8 @@ public class AiManager : MonoBehaviour
     public static AiManager instance { get; private set; }
 
     private List<Character> playerCharacter;
-    private List<Ennemy> ennemyGroup;
+    private List<CharactersOfPlayers> m_ourTeam;
+    public List<Ennemy> ennemyGroup;
     private Character selectedTarget;
     private Character ennemyTarget;
     private Spell m_spellAgainstPlayer;
@@ -22,18 +23,24 @@ public class AiManager : MonoBehaviour
     {
         playerCharacter = LoadPlayerTeam.instance.m_charactersTeam;
     }
+    public void SetEnnemies()
+    {
+        m_ourTeam = CombatManager.instance.m_ourTeam;
+        ennemyGroup = CombatManager.instance.m_enemyList;
+
+        AttackCharacter();
+    }
     public void AttackCharacter()
     {
-        CastToPlayer(ChoiceSpellAgainstPlayer());
 
+        StartCoroutine(CorouBeforeAttack(2f));
         //Démarrer coroutine pour faire réaparaître l'interface après un délai
         CombatManager.instance.StartCorou();
     }
     public Spell ChoiceSpellAgainstPlayer()
-    { 
-        //CHECK SI l'ID ne correspond pas à un sort de heal
-        m_spellAgainstPlayer = GroupManager.instance.m_group1[Random.Range(0, GroupManager.instance.m_group1.Count)].m_thisCharacter.CurrentCharaSpell;
-        Debug.Log(m_spellAgainstPlayer.Name);
+    {
+        m_spellAgainstPlayer = ennemyGroup[Random.Range(0, ennemyGroup.Count)].m_thisCharacter.CurrentCharaSpell;
+        Debug.Log("Sort choisis contre le joueur: " + m_spellAgainstPlayer.Name);
         return m_spellAgainstPlayer;
     }
 
@@ -42,27 +49,35 @@ public class AiManager : MonoBehaviour
     //Cast depuis Combat Manager
     public void CastToPlayer(Spell spell)
     {
+
         if (spell.GeneralId != 1)
         {
-            CharactersOfPlayers selectedTarget = charaOfPlayers[Random.Range(0, playerCharacter.Count)];
-            selectedTarget.GetDamage(spell);
+            if(spell.GeneralId == 0)
+            {
+                foreach (CharactersOfPlayers chara in charaOfPlayers)
+                {
+                    chara.SpellCasted(spell);
+                }
+            }
+            if(spell.GeneralId == 2)
+            {
+                CharactersOfPlayers selectedTarget = charaOfPlayers[Random.Range(0, playerCharacter.Count)];
+                selectedTarget.GetDamage(spell);
+            }
         }
         else
         {
             ennemyGroup = CombatManager.instance.m_enemyList;
-            foreach(Ennemy mob in ennemyGroup)
+            foreach (Ennemy mob in ennemyGroup)
             {
                 mob.SpellCasted(spell);
             }
         }
     }
 
-    public void CheckMobGroup()
+    public IEnumerator CorouBeforeAttack(float time)
     {
-        if(GroupManager.instance.m_group1.Count == 0)
-        {
-            CombatManager.instance.delCombat(false);
-        }
+        yield return new WaitForSeconds(time);
+        CastToPlayer(ChoiceSpellAgainstPlayer());
     }
-
 }

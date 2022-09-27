@@ -22,6 +22,7 @@ public class UiManagerSession : MonoBehaviour
     private List<Button> m_buttons;
     private int index = 0;
 
+    //tout ce qui est en rapport avec les personnages
     private List<Character> m_characters;
     public List<Spell> spellList;
     private Spell currentSpellCliqued;
@@ -32,10 +33,10 @@ public class UiManagerSession : MonoBehaviour
     private Button m_restButton;
 
     public List<Button> spellButtons;
-    public List<Button> buttonsToActivate;
+    public List<Button> buttonsToActivate;    
 
     [HideInInspector] public bool isResting = false;
-
+    private bool isUiCreated = false;
     private void Awake()
     {
         if(instance != null)
@@ -53,9 +54,10 @@ public class UiManagerSession : MonoBehaviour
 
     private void Start()
     {
+
         m_characters = LoadPlayerTeam.instance.m_charactersTeam;
 
-        foreach(Character chara in m_characters)
+        foreach (Character chara in m_characters)
         {
             chara.CurrentCharaSpell = SpellsManager.instance.GetSpellById(chara.m_spellID);
         }
@@ -67,6 +69,7 @@ public class UiManagerSession : MonoBehaviour
     }
     public void UiCombat()
     {
+        
         var rootElement = m_uiDocCombat.rootVisualElement;
         rootElement.style.display = DisplayStyle.Flex;
 
@@ -76,6 +79,10 @@ public class UiManagerSession : MonoBehaviour
         GroupBox container = rootElement.Q<GroupBox>("MainGroupBox");
 
         index = 0;
+
+        if (isUiCreated) return;
+
+        //TO DO SI UN DES PERSONNAGES MEURT IL FAuT ACTUATLISER TOTALEMENT LES SORTS
 
         //Génération de l'interface
         foreach (Character chara in m_characters)
@@ -112,6 +119,7 @@ public class UiManagerSession : MonoBehaviour
             container.Add(ui);
 
             index++;
+            isUiCreated = true;
         }
     }
 

@@ -38,23 +38,37 @@ public class Ennemy : MonoBehaviour
         GetComponentInChildren<LifeBarHandler>().SetMaxHealth(maxLife);
     }
 
-    public void UpdateLife()
+    public bool UpdateLife()
     {
-        if (life <= maxLife)
+        bool isAlive = true;
+        if(life > maxLife)
         {
-            if (life <= 0)
-            {
-                Destroy(gameObject);
-            }
-            GetComponentInChildren<LifeBarHandler>().SetHealth(life);
+            life = maxLife;
             Debug.Log(life);
         }
+        else if(life <= 0)
+        {
+            isAlive = false;
+            CombatManager.instance.m_ennemyTeam.Remove(m_thisCharacter);
+            Destroy(this.gameObject);
+            Debug.Log("détruit toi connard");
+        }
+        GetComponentInChildren<LifeBarHandler>().SetHealth(life);
+
+       return isAlive;
     }
 
-    public void SpellCasted(Spell spell)
+    public bool SpellCasted(Spell spell)
     {
-        life -= spell.Damage;
-        Debug.Log(life);
-        UpdateLife();
+        if(spell.GeneralId != 1)
+        {
+            float RealDamageTaken = spell.Damage * (1 - defense / 100);
+            life -= RealDamageTaken;
+        }
+        else
+        {
+            life += damage;
+        }
+        return UpdateLife();
     }
 }

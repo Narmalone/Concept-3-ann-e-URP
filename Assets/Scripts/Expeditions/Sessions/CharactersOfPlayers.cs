@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class CharactersOfPlayers : MonoBehaviour
@@ -34,24 +35,30 @@ public class CharactersOfPlayers : MonoBehaviour
 
     public void UpdateLife()
     {
-        if(life <= maxLife)
+        if(life > maxLife)
         {
-            GetComponentInChildren<LifeBarHandler>().SetHealth(life);
-            Debug.Log(life);
+            life = maxLife;
         }
+        GetComponentInChildren<LifeBarHandler>().SetHealth(life);
     }
 
     public void GetDamage(Spell target)
     {
-        float damageTaken = target.Damage - (target.Damage / defense);
-        ApplyDamage(damageTaken);
-
-        Debug.Log(damageTaken);
+        if(target.GeneralId == 1)
+        {
+            float RealDamage = target.Damage * (1 - defense / 100);
+            ApplyDamage(RealDamage);
+        }
+        else
+        {
+            ApplyDamage(damage);
+        }
     }
 
     public void ApplyDamage(float damage)
     {
         life -= damage;
+
         GetComponentInChildren<LifeBarHandler>().SetHealth(life);
 
         if (life <= 0)
@@ -62,7 +69,14 @@ public class CharactersOfPlayers : MonoBehaviour
 
     public void SpellCasted(Spell spell)
     {
-        life -= spell.Damage;
+        if(spell.GeneralId == 1)
+        {
+            life += spell.Damage;
+        }
+        else
+        {
+            life -= spell.Damage;
+        }
 
         UpdateLife();
     }

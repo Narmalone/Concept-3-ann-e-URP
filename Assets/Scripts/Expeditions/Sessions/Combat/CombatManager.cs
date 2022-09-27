@@ -63,6 +63,7 @@ public class CombatManager : MonoBehaviour
                 m_enemyList = GroupManager.instance.m_group2;
             }
             Debug.Log("Combat contre le groupe d'ennemis ID: " + GroupIdInFight + " a été lancé");
+
             //Si combat commence alors c'est le tour du joueur
             delTurn(true);
             delCombat(true);
@@ -121,7 +122,7 @@ public class CombatManager : MonoBehaviour
             if (isFighting)
             {
                 //Ai manager pour faire jouer l'IA
-                AiManager.instance.AttackCharacter();
+                AiManager.instance.SetEnnemies();
             }
         }
         return boolValue;
@@ -213,6 +214,14 @@ public class CombatManager : MonoBehaviour
         }
         //Debug.Log(m_currentSpellSelected.Name);
     }
+    public void CheckMobGroup()
+    {
+        if(m_enemyList.Count == 0)
+        {
+            m_currentSpellSelected = null;
+            delCombat(false);
+        }
+    }
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -230,13 +239,43 @@ public class CombatManager : MonoBehaviour
                 //Check si la cible est targetable ou pas réfléchir à un autre moyen pour vérifier
                 if(hit.collider.gameObject.GetComponent<Ennemy>().isTargetable == true)
                 {
-                    //si la cible est une target on cast
-                    //CastSpell(hit.collider.gameObject.GetComponent<Ennemy>().m_thisCharacter, m_currentSpellSelected);
-                    hit.collider.gameObject.GetComponent<Ennemy>().SpellCasted(m_currentSpellSelected);
+
+                    if (m_currentSpellSelected.IsSoloTarget)
+                    {
+                        List<Ennemy> ennemyToRemove = new List<Ennemy>();
+                        //Cette ligne
+                        foreach(Ennemy mob in m_enemyList)
+                        {
+                            if (!mob.SpellCasted(m_currentSpellSelected)) { ennemyToRemove.Add(mob); } ;
+                            
+                            Debug.Log(mob.name);
+                        }
+
+                        foreach(Ennemy mob in ennemyToRemove)
+                        {
+                            m_enemyList.Remove(mob);
+                        }
+
+                        if(m_enemyList == null)
+                        {
+                            delCombat(false);
+                            delTurn(false);
+                        }
+                    }
+                    else
+                    {
+                        Ennemy hited;
+                        hited = hit.collider.gameObject.GetComponent<Ennemy>();
+                        if (!hited.SpellCasted(m_currentSpellSelected)) { m_enemyList.Remove(hited); }
+                    }
+
+                    //si la cible est morte sur ce coup
+                    CheckMobGroup();
+
                     UiManagerSession.instance.SpellUsed();
+
                     delTurn(false);
-                    //Puis update la vie du perso
-                    //hit.collider.gameObject.GetComponent<Ennemy>().UpdateLife();
+
                 }
 
                 //une fois que le joueur a lancé le sort il n'est plus sélectionné
@@ -249,12 +288,21 @@ public class CombatManager : MonoBehaviour
                 //Check si la cible est targetable ou pas réfléchir à un autre moyen pour vérifier
                 if(hit.collider.gameObject.GetComponent<CharactersOfPlayers>().isTargetable == true)
                 {
-                    //si la cible est une target on cast
-
-                    //CastSpell(hit.collider.gameObject.GetComponent<CharactersOfPlayers>().m_thisCharacter, m_currentSpellSelected);
+                    List<CharactersOfPlayers> charaToRemove = new List<CharactersOfPlayers>();
 
                     //trouver un moyen si c'est multicible de prendre tout
-                    hit.collider.gameObject.GetComponent<CharactersOfPlayers>().SpellCasted(m_currentSpellSelected);
+                    if (m_currentSpellSelected.IsSoloTarget && m_currentSpellSelected.IsEnemyTarget)
+                    {
+                        foreach(CharactersOfPlayers team in m_ourTeam)
+                        {
+                            team.SpellCasted(m_currentSpellSelected);
+                        }
+                    }
+                    else
+                    {
+                        hit.collider.gameObject.GetComponent<CharactersOfPlayers>().SpellCasted(m_currentSpellSelected);
+                    }
+                    //juste appeller le Ai manager CastSpell
                     UiManagerSession.instance.SpellUsed();
                     delTurn(false);
                 }
@@ -263,13 +311,5 @@ public class CombatManager : MonoBehaviour
                 m_currentSpellSelected = null;
             }
         }
-    }
-
-    public void CastSpell(Character target, Spell spellToTarget)
-    {
-        target.CharactersLife -= spellToTarget.Damage;
-        Debug.Log(target.CharactersName + target.CharactersLife);
-        UiManagerSession.instance.SpellUsed();
-        Debug.Log("Un sort à été casté");
     }
 }

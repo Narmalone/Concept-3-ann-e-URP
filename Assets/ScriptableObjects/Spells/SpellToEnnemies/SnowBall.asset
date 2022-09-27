@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d6ca44255e7e855408c887bc2858e245, type: 3}
-  m_Name: Heal
+  m_Name: SnowBall
   m_EditorClassIdentifier: 
-  m_name: Heal
-  m_generalId: 1
-  m_damage: 5
-  m_icon: {fileID: 3316425174430470091, guid: 5c06fe21ba8367b4a922db5c42a5a406, type: 3}
-  m_description: 'Heal your team of '
-  m_isSolorOrMultipleTarget: 1
-  m_isEnnemiesTargetOrFromTeamTarget: 1
+  m_name: SnowBall
+  m_generalId: 3
+  m_damage: 4.7337475
+  m_icon: {fileID: 4154780841294389669, guid: 5c06fe21ba8367b4a922db5c42a5a406, type: 3}
+  m_description: No damage
+  m_isSolorOrMultipleTarget: 0
+  m_isEnnemiesTargetOrFromTeamTarget: 0

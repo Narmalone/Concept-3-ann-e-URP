@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -8,6 +9,7 @@ public class charactersOfThePlayer : MonoBehaviour, IDataPersistence
 {
 
     public static charactersOfThePlayer instance { get; private set; }
+
     [SerializeField] private UIDocument m_InventoryDoc;
     [SerializeField] private UIDocument m_MainMenuDoc;
     [SerializeField] private GameObject m_activateGameobject;
@@ -24,6 +26,7 @@ public class charactersOfThePlayer : MonoBehaviour, IDataPersistence
 
     private List<Character> chara = new List<Character>();
     private List<string> items;
+    private List<string> itemsSpell;
 
     private int selectedCharacter;
 
@@ -32,6 +35,14 @@ public class charactersOfThePlayer : MonoBehaviour, IDataPersistence
     private VisualElement labelElement;
 
     private Action<VisualElement, int> bindItem;
+    private Action<VisualElement, int> bindItemSpells;
+
+    //Pour changer le sort du personnage
+    private Button m_ActiveChangeSpellPannel;
+    private ListView m_viewSpellList;
+    [SerializeField] private VisualTreeAsset m_spellListViewTemplate;
+    private VisualElement parentToClone;
+    public List<Spell> m_spellListOwned;
 
     public void LoadData(GameData data)
     {
@@ -53,6 +64,7 @@ public class charactersOfThePlayer : MonoBehaviour, IDataPersistence
     {
 
         var container = m_InventoryDoc.rootVisualElement;
+        m_spellListOwned = SpellsManager.instance.spells;
 
         UpdatePlayerTeam();
         SetupPlayerTeam();
@@ -60,6 +72,13 @@ public class charactersOfThePlayer : MonoBehaviour, IDataPersistence
         backButton = container.Q<Button>("B_BackButton");
         backButton.clickable.clicked += OnBackCliqued;
         #endregion
+
+        m_ActiveChangeSpellPannel = container.Q<Button>("BChangeSpell");
+        m_ActiveChangeSpellPannel.clickable.clicked += SpellPannel;
+
+        m_viewSpellList = container.Q<ListView>("LVSpells");
+        DisableListView(m_viewSpellList);
+        DisableListViewObject(m_viewSpellList);
     }
 
     public void UpdatePlayerTeam()
@@ -85,7 +104,7 @@ public class charactersOfThePlayer : MonoBehaviour, IDataPersistence
         // the element with the matching data item (specified as an index in the list)
         bindItem = (labelElement, i) => (labelElement as Label).text = items[i];
 
-        listView = container.Q<ListView>();
+        listView = container.Q<ListView>("ListView");
         listView.makeItem = makeItem;
         listView.bindItem = bindItem;
         listView.itemsSource = items;
@@ -99,6 +118,7 @@ public class charactersOfThePlayer : MonoBehaviour, IDataPersistence
 
         listView.onSelectionChange += ListView_onSelectionChange;
         listView.itemIndexChanged += ListView_itemIndexChanged;
+        ActivateListView(listView);
         #endregion
     }
 
@@ -170,5 +190,72 @@ public class charactersOfThePlayer : MonoBehaviour, IDataPersistence
             rarity.text = "Rareté: " + m_totalCharacters[listView.selectedIndex].CharactersRarity.ToString();
         }
       
+    }
+    public void DisableListView(ListView listToDisable)
+    {
+        listToDisable.style.display = DisplayStyle.None;
+    } 
+    public void DisableListViewObject(ListView listToDisable)
+    {
+        //listToDisable.tabIndex = 1;
+        //listToDisable.visible = false;
+        listToDisable.style.display = DisplayStyle.None;
+        listToDisable.SetEnabled(false);
+    }
+    public void ActivateListView(ListView listToEnable)
+    {
+        //listToEnable.visible = true;
+        //listToEnable.tabIndex = 0;
+        listToEnable.style.display = DisplayStyle.Flex;
+        listToEnable.SetEnabled(true);
+    }
+    public void ActivateButton(Button buttonToEnable)
+    {
+        buttonToEnable.SetEnabled(true);
+    } 
+    
+    public void DisableButton(Button buttonToDisable)
+    {
+        buttonToDisable.SetEnabled(false);
+    }
+    public void SpellPannel()
+    {
+        var container = m_InventoryDoc.rootVisualElement;
+
+        m_viewSpellList = container.Q<ListView>("LVSpells");
+        m_viewSpellList.style.display = DisplayStyle.Flex;
+
+        m_ActiveChangeSpellPannel = container.Q<Button>("BChangeSpell");
+
+        listView = container.Q<ListView>("ListView");
+        DisableButton(m_ActiveChangeSpellPannel);
+        DisableListView(listView);
+        ActivateListView(m_viewSpellList);
+
+        itemsSpell = new List<string>(m_spellListOwned.Count);
+
+        Func<VisualElement> makeItem = () => new Label();
+
+        bindItemSpells = (labelElement, i) => (labelElement as Label).text = itemsSpell[i];
+
+        m_viewSpellList.makeItem = makeItem;
+        m_viewSpellList.bindItem = bindItemSpells;
+        m_viewSpellList.itemsSource = itemsSpell;
+
+        foreach (Spell spells in m_spellListOwned)
+        {
+            //VisualElement visualElement = m_spellListViewTemplate.CloneTree();
+            itemsSpell.Add(spells.Name);
+            //parentToContain.Add(items);
+        }
+       
+        //Le joueur ne peut sélection que un seul personnage pour avoir ses données
+        m_viewSpellList.selectionType = SelectionType.Single;
+
+        //m_ActiveChangeSpellPannel.style.display = DisplayStyle.None;
+
+        //Créations de fonctions lorsque le callback items choisis change
+        m_viewSpellList.SetSelection(0);
+
     }
 }

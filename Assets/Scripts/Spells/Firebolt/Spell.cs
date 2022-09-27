@@ -16,7 +16,7 @@ public class Spell : ScriptableObject, ISpell
     public string Name { get => m_name;}
     public string Description { get => m_description; }
     public int GeneralId { get => m_generalId; }
-    public float Damage { get => m_damage;}
+    public float Damage { get => m_damage; set => m_damage = value; }
     public Texture2D Icon { get => m_icon;}
 
     public bool IsSoloTarget { get => m_isSolorOrMultipleTarget; }

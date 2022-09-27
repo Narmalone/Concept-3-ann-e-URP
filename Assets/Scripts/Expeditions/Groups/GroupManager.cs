@@ -5,6 +5,12 @@ using UnityEngine;
 public class GroupManager : MonoBehaviour
 {
     public static GroupManager instance { get; private set; }
+    [SerializeField] private float minLife = 15;
+    [SerializeField] private float maxLife = 20;
+    [SerializeField] private float minDamage = 5;
+    [SerializeField] private float maxDamage = 10;
+    [SerializeField] private float minDefense = 5;
+    [SerializeField] private float maxDefense = 10;
     [SerializeField] private List<Group> ennemyGroupList;
     [SerializeField] public List<Ennemy> m_group1;
     [SerializeField] public List<Ennemy> m_group2;
@@ -12,6 +18,10 @@ public class GroupManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        foreach(Group grp in ennemyGroupList)
+        {
+            grp.IsDataInitialized = false;
+        }
         InitializeGroups();
     }
 
@@ -20,20 +30,24 @@ public class GroupManager : MonoBehaviour
         foreach (Group group in ennemyGroupList)
         {
             if (group.IsDataInitialized) return;
-
+            Debug.Log("data initialisées");
             for (int i = 0; i < group.m_maxEnnemiesInGroup; i++)
             {
                 
-                float charactersMaxLife = Random.Range(40, 50);
-                Debug.Log(charactersMaxLife);
+                float charactersMaxLife = Random.Range(minLife, maxLife);
                 float currentLife = charactersMaxLife;
-                float charactersDamage = Random.Range(20, 30);
-                float charactersDefense = Random.Range(10, 15);
+                float charactersDamage = Random.Range(minDamage, maxDamage);
+                float charactersDefense = Random.Range(minDefense, maxDefense);
                 string charaName = group.ennemiesPossibleName[Random.Range(0, group.ennemiesPossibleName.Length)];
 
                 Character chara = new Character(charaName, charactersMaxLife, currentLife, charactersDamage, charactersDefense, 0, SpellsManager.instance.GetRandomSpell());
+                if(chara.CurrentCharaSpell.GeneralId != 1)
+                {
+                    chara.CurrentCharaSpell.Damage = chara.CurrentCharaSpell.Damage * chara.CharactersDamage / chara.CurrentCharaSpell.Damage;
+                }
 
                 group.EnnemiesList.Add(chara);
+
                 group.IsDataInitialized = true;
             }
         }
