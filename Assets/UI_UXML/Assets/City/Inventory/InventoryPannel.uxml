@@ -1,10 +1,15 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="VEScrollSpellView" tabindex="0" style="height: 680px; position: absolute; width: 602px; top: 244px; left: 40px;">
+        <ui:ListView focusable="false" name="LVSpells" virtualization-method="FixedHeight" fixed-item-height="100" tabindex="0" style="position: absolute; width: 100%; height: 100%; font-size: 45px;" />
+    </ui:VisualElement>
     <ui:ListView focusable="false" header-title="Player" reorderable="true" name="ListView" fixed-item-height="100" virtualization-method="FixedHeight" show-border="true" horizontal-scrolling="false" tabindex="0" style="height: 676px; width: 598px; position: absolute; font-size: 30px; left: 44px; top: 248px; color: rgb(255, 255, 255);" />
-    <ui:VisualElement style="height: 969px; position: absolute; width: 770px; top: 86px; left: 832px;">
+    <ui:VisualElement style="height: 925px; position: absolute; width: 770px; top: 16px; left: 764px;">
         <ui:VisualElement style="height: 107px; align-items: center; justify-content: space-around; position: absolute; width: 770px; top: 803px;">
-            <ui:Button text="Button" display-tooltip-when-elided="true" name="BChangeSpell" style="justify-content: center; align-items: auto; width: 100%; height: 100%; font-size: 50px;" />
+            <ui:Button text="Button" display-tooltip-when-elided="true" name="BChangeSpell" style="justify-content: center; align-items: auto; width: 100%; height: 100%; font-size: 50px;">
+                <ui:IMGUIContainer name="SpellImage" style="position: absolute; height: 105px; width: 133px; top: 0; left: 84%; background-image: url(&apos;project://database/Assets/TextMesh%20Pro/Sprites/EmojiOne.png?fileID=2800000&amp;guid=dffef66376be4fa480fb02b19edbe903&amp;type=3#EmojiOne&apos;);" />
+            </ui:Button>
         </ui:VisualElement>
-        <ui:IMGUIContainer name="Image" style="height: 370px; position: absolute; width: 424px; top: 114px; left: 153px;" />
+        <ui:IMGUIContainer name="Image" style="height: 370px; position: absolute; width: 424px; top: 114px; left: 153px; background-image: url(&apos;project://database/Assets/TextMesh%20Pro/Sprites/EmojiOne.png?fileID=2800000&amp;guid=dffef66376be4fa480fb02b19edbe903&amp;type=3#EmojiOne&apos;);" />
         <ui:VisualElement name="V_Statistics" style="position: absolute; height: 186px; width: 764px; top: 594px; left: 2px;">
             <ui:Label text="LIFE" display-tooltip-when-elided="true" name="Life" style="position: absolute; font-size: 53px;" />
             <ui:Label text="DAMAGE" display-tooltip-when-elided="true" name="Damage" style="position: absolute; font-size: 53px; top: 118px; left: -2px;" />
@@ -12,10 +17,7 @@
             <ui:Label text="RARITY" display-tooltip-when-elided="true" name="Rarity" style="position: absolute; font-size: 53px; top: 116px; left: 520px;" />
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement style="height: 140px; position: absolute; width: 576px; top: 928px; left: 1338px;">
-        <ui:Button text="Retour" display-tooltip-when-elided="true" name="B_BackButton" enable-rich-text="true" style="position: absolute; height: 122px; width: 513px; left: 27px; top: 8px; font-size: 48px;" />
-    </ui:VisualElement>
-    <ui:VisualElement name="VEScrollSpellView" tabindex="0" style="height: 680px; position: absolute; width: 602px; top: 244px; left: 40px;">
-        <ui:ListView focusable="false" name="LVSpells" virtualization-method="FixedHeight" fixed-item-height="100" tabindex="0" style="position: absolute; width: 100%; height: 100%; font-size: 45px;" />
+    <ui:VisualElement style="height: 140px; position: absolute; width: 576px; top: 928px; left: 1338px; align-items: center; justify-content: center;">
+        <ui:Button text="Retour" display-tooltip-when-elided="true" name="B_BackButton" enable-rich-text="true" style="position: absolute; height: 82px; width: 383px; left: 20%; top: 20%; font-size: 45px; align-items: center; justify-content: flex-end; transform-origin: right bottom;" />
     </ui:VisualElement>
 </ui:UXML>

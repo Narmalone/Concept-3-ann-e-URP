@@ -38,9 +38,10 @@ public class charactersOfThePlayer : MonoBehaviour, IDataPersistence
     private Action<VisualElement, int> bindItemSpells;
 
     //Pour changer le sort du personnage
-    private Button m_ActiveChangeSpellPannel;
+    private Button m_BSCharaSpell;
     private ListView m_viewSpellList;
     [SerializeField] private VisualTreeAsset m_spellListViewTemplate;
+    private int switchButtonCount = 0;
     private VisualElement parentToClone;
     public List<Spell> m_spellListOwned;
 
@@ -73,12 +74,11 @@ public class charactersOfThePlayer : MonoBehaviour, IDataPersistence
         backButton.clickable.clicked += OnBackCliqued;
         #endregion
 
-        m_ActiveChangeSpellPannel = container.Q<Button>("BChangeSpell");
-        m_ActiveChangeSpellPannel.clickable.clicked += SpellPannel;
+        m_BSCharaSpell = container.Q<Button>("BChangeSpell");
+        m_BSCharaSpell.clickable.clicked += SpellPannel;
 
         m_viewSpellList = container.Q<ListView>("LVSpells");
         DisableListView(m_viewSpellList);
-        DisableListViewObject(m_viewSpellList);
     }
 
     public void UpdatePlayerTeam()
@@ -114,12 +114,17 @@ public class charactersOfThePlayer : MonoBehaviour, IDataPersistence
 
         //Créations de fonctions lorsque le callback items choisis change
         listView.SetSelection(0);
+
         SetBasicSelection();
 
         listView.onSelectionChange += ListView_onSelectionChange;
         listView.itemIndexChanged += ListView_itemIndexChanged;
         ActivateListView(listView);
         #endregion
+
+
+        m_BSCharaSpell = container.Q<Button>("BChangeSpell");
+        m_BSCharaSpell.text = m_totalCharacters[0].CurrentCharaSpell.Name;
     }
 
     private void ListView_itemIndexChanged(int oldValue, int newValue)
@@ -180,6 +185,7 @@ public class charactersOfThePlayer : MonoBehaviour, IDataPersistence
 
         selectedCharacter = listView.selectedIndex;
 
+        m_BSCharaSpell = container.Q<Button>("BChangeSpell");
         charaSelected = m_totalCharacters[selectedCharacter];
 
         for (int i = listView.selectedIndex; i < m_totalCharacters.Count; i++)
@@ -188,74 +194,106 @@ public class charactersOfThePlayer : MonoBehaviour, IDataPersistence
             damage.text = "Dégâts: " + m_totalCharacters[listView.selectedIndex].CharactersDamage.ToString();
             defense.text = "Défense: " + m_totalCharacters[listView.selectedIndex].CharactersDefense.ToString();
             rarity.text = "Rareté: " + m_totalCharacters[listView.selectedIndex].CharactersRarity.ToString();
+
+            m_BSCharaSpell.text = charaSelected.CurrentCharaSpell.Name;
         }
-      
+
     }
-    public void DisableListView(ListView listToDisable)
-    {
-        listToDisable.style.display = DisplayStyle.None;
-    } 
-    public void DisableListViewObject(ListView listToDisable)
-    {
-        //listToDisable.tabIndex = 1;
-        //listToDisable.visible = false;
-        listToDisable.style.display = DisplayStyle.None;
-        listToDisable.SetEnabled(false);
-    }
-    public void ActivateListView(ListView listToEnable)
-    {
-        //listToEnable.visible = true;
-        //listToEnable.tabIndex = 0;
-        listToEnable.style.display = DisplayStyle.Flex;
-        listToEnable.SetEnabled(true);
-    }
-    public void ActivateButton(Button buttonToEnable)
-    {
-        buttonToEnable.SetEnabled(true);
-    } 
-    
+ 
     public void DisableButton(Button buttonToDisable)
     {
         buttonToDisable.SetEnabled(false);
     }
     public void SpellPannel()
     {
+        switchButtonCount++;
         var container = m_InventoryDoc.rootVisualElement;
-
         m_viewSpellList = container.Q<ListView>("LVSpells");
-        m_viewSpellList.style.display = DisplayStyle.Flex;
-
-        m_ActiveChangeSpellPannel = container.Q<Button>("BChangeSpell");
-
+        m_BSCharaSpell = container.Q<Button>("BChangeSpell");
         listView = container.Q<ListView>("ListView");
-        DisableButton(m_ActiveChangeSpellPannel);
-        DisableListView(listView);
-        ActivateListView(m_viewSpellList);
 
-        itemsSpell = new List<string>(m_spellListOwned.Count);
-
-        Func<VisualElement> makeItem = () => new Label();
-
-        bindItemSpells = (labelElement, i) => (labelElement as Label).text = itemsSpell[i];
-
-        m_viewSpellList.makeItem = makeItem;
-        m_viewSpellList.bindItem = bindItemSpells;
-        m_viewSpellList.itemsSource = itemsSpell;
-
-        foreach (Spell spells in m_spellListOwned)
+        if (switchButtonCount == 1)
         {
-            //VisualElement visualElement = m_spellListViewTemplate.CloneTree();
-            itemsSpell.Add(spells.Name);
-            //parentToContain.Add(items);
+            m_viewSpellList.style.display = DisplayStyle.Flex;
+
+            //DisableButton(m_BSCharaSpell);
+            DisableListView(listView);
+            ActivateListView(m_viewSpellList);
+
+            itemsSpell = new List<string>(m_spellListOwned.Count);
+
+            Func<VisualElement> makeItem = () => new Label();
+
+            bindItemSpells = (labelElement, i) => (labelElement as Label).text = itemsSpell[i];
+
+            m_viewSpellList.makeItem = makeItem;
+            m_viewSpellList.bindItem = bindItemSpells;
+            m_viewSpellList.itemsSource = itemsSpell;
+
+            foreach (Spell spells in m_spellListOwned)
+            {
+                //VisualElement visualElement = m_spellListViewTemplate.CloneTree();
+                itemsSpell.Add(spells.Name);
+                //parentToContain.Add(items);
+            }
+
+            //Le joueur ne peut sélection que un seul personnage pour avoir ses données
+            m_viewSpellList.selectionType = SelectionType.Single;
+
+            //m_ActiveChangeSpellPannel.style.display = DisplayStyle.None;
+
+            //Créations de fonctions lorsque le callback items choisis change
+            m_viewSpellList.SetSelection(0);
+
+            m_viewSpellList.onSelectionChange += ViewSpellOnSelectionChange;
         }
-       
-        //Le joueur ne peut sélection que un seul personnage pour avoir ses données
-        m_viewSpellList.selectionType = SelectionType.Single;
-
-        //m_ActiveChangeSpellPannel.style.display = DisplayStyle.None;
-
-        //Créations de fonctions lorsque le callback items choisis change
-        m_viewSpellList.SetSelection(0);
+        else
+        {
+            switchButtonCount = 0;
+            ActivateListView(listView);
+            DisableListView(m_viewSpellList);
+        }
+      
 
     }
+
+    public void ViewSpellOnSelectionChange(IEnumerable<object> obj)
+    {
+        VisualElement container = m_InventoryDoc.rootVisualElement;
+
+        m_BSCharaSpell = container.Q<Button>("BChangeSpell");
+        IMGUIContainer spellTexture = container.Q<IMGUIContainer>("SpellImage");
+
+        charaSelected = m_totalCharacters[selectedCharacter];
+
+        for (int i = m_viewSpellList.selectedIndex; i < m_spellListOwned.Count; i++)
+        {
+            charaSelected.CurrentCharaSpell = m_spellListOwned[m_viewSpellList.selectedIndex];
+            //spellTexture.style.
+            m_BSCharaSpell.text = "Current Spell: " + charaSelected.CurrentCharaSpell.Name;
+        }
+    }
+
+
+    public void DisableListView(ListView listToDisable)
+    {
+        listToDisable.style.display = DisplayStyle.None;
+    }
+    public void DisableListViewObject(ListView listToDisable)
+    {
+        listToDisable.SetEnabled(false);
+    }
+    public void ActivateListView(ListView listToEnable)
+    {
+        listToEnable.style.display = DisplayStyle.Flex;
+    }
+    public void ActivateListViewObject(ListView listToEnable)
+    {
+        listToEnable.SetEnabled(true);
+    }
+    public void ActivateButton(Button buttonToEnable)
+    {
+        buttonToEnable.SetEnabled(true);
+    }
+
 }
