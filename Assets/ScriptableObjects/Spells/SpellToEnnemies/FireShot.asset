@@ -15,7 +15,7 @@ MonoBehaviour:
   m_name: FireShot
   m_generalId: 2
   m_damage: 5
-  m_icon: {fileID: -4521532143779581420, guid: 5c06fe21ba8367b4a922db5c42a5a406, type: 3}
+  m_icon: {fileID: 2800000, guid: a71973ba39bfd83409a908f6c57000ba, type: 3}
   m_description: 'A simple gun shot dealing '
   m_isSolorOrMultipleTarget: 0
   m_isEnnemiesTargetOrFromTeamTarget: 0

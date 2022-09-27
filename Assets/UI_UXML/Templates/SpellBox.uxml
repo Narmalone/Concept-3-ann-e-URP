@@ -3,11 +3,10 @@
     <ui:GroupBox name="BoxDescription" style="height: 45px; width: 348px; background-color: rgb(82, 82, 82);">
         <ui:Label text="Label" display-tooltip-when-elided="true" name="Description" style="font-size: 18px;" />
     </ui:GroupBox>
-    <ui:GroupBox name="SpellBox" style="width: 344px;">
-        <ui:GroupBox name="SpellBox1" style="height: 190px; width: 336px; position: relative; left: 0; top: 0; background-color: rgb(255, 255, 255); color: rgb(255, 255, 255); -unity-background-image-tint-color: rgb(255, 255, 255);">
-            <ui:VisualElement>
-                <ui:Button display-tooltip-when-elided="true" name="BSpell1" focusable="false" style="height: 197px; position: absolute; width: 341px; top: -9px; left: -8px;" />
-            </ui:VisualElement>
+    <ui:GroupBox name="SpellBox" style="width: 344px; -unity-background-image-tint-color: rgba(255, 255, 255, 0); color: rgba(210, 210, 210, 0);">
+        <ui:GroupBox name="SpellBoxParent" style="height: 190px; width: 336px; position: relative; left: 0; top: 0; background-color: rgba(255, 255, 255, 0); color: rgba(255, 255, 255, 0); -unity-background-image-tint-color: rgba(255, 255, 255, 0);">
+            <ui:IMGUIContainer name="SpellBoxImage" focusable="false" style="width: 393px; height: 222px; -unity-background-image-tint-color: rgb(255, 6, 6); color: rgb(255, 0, 0); background-image: url(&apos;project://database/Assets/Prefab/Ui/NoSpell.png?fileID=2800000&amp;guid=dc474989010885c4ebaadf822a8a0f0a&amp;type=3#NoSpell&apos;); opacity: 1; position: absolute; top: -14px; left: -24px;" />
+            <ui:Button display-tooltip-when-elided="true" name="BSpell1" focusable="false" style="height: 209px; position: absolute; width: 362px; top: -12px; left: -13px;" />
         </ui:GroupBox>
     </ui:GroupBox>
 </ui:UXML>

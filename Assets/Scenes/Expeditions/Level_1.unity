@@ -3525,6 +3525,7 @@ MonoBehaviour:
     type: 3}
   spellList: []
   isResting: 0
+  SpellImageUsed: {fileID: 2800000, guid: dc474989010885c4ebaadf822a8a0f0a, type: 3}
 --- !u!1 &1164203449
 GameObject:
   m_ObjectHideFlags: 0

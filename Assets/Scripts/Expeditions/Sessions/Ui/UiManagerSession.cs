@@ -37,6 +37,8 @@ public class UiManagerSession : MonoBehaviour
 
     [HideInInspector] public bool isResting = false;
     private bool isUiCreated = false;
+
+    [SerializeField] private Texture2D SpellImageUsed;
     private void Awake()
     {
         if(instance != null)
@@ -91,6 +93,12 @@ public class UiManagerSession : MonoBehaviour
             VisualElement ui = m_spellTemplate.CloneTree();
 
             Button btn = ui.Q<Button>();
+
+            IMGUIContainer img = ui.Q<IMGUIContainer>("SpellBoxImage");
+
+            btn.style.backgroundImage = chara.CurrentCharaSpell.Icon;
+
+            img.style.backgroundImage = SpellImageUsed;
 
             btn.name = "BSpell" + index;
 
