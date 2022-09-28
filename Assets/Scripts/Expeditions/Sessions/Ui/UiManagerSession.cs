@@ -142,6 +142,7 @@ public class UiManagerSession : MonoBehaviour
 
         //Désactiver les bouttons qu'on peut pas utiliser du au manque d'énergie
         ManaManager.instance.CheckEnergy(spellList, m_buttons);
+        ManaManager.instance.UpdateManaUi();
 
     }
     public void CheckButtonCliqued(Button btn)
@@ -200,6 +201,8 @@ public class UiManagerSession : MonoBehaviour
     //QUAND ON REST LA FONCTION SPELLUSED EST APPELE DONC YA UNE ERREUR
     private void OnRestButtonCliqued()
     {
+        ManaManager.instance.NextTurn();
+
         m_spellUsed = null;
 
         spellButtons = new List<Button>();

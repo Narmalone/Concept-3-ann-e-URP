@@ -119,7 +119,6 @@ public class CombatManager : MonoBehaviour
         {
             //si ce n'est pas le temps du joueur
             //désactiver l'interface puis c'est au tour de l'IA
-            ManaManager.instance.NextTurn();
             UiManagerSession.instance.NotPlayerTurn();
 
             if (isFighting)

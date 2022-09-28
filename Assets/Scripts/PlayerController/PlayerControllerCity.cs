@@ -6,26 +6,17 @@ public class PlayerControllerCity : MonoBehaviour
 {
     [SerializeField] private CharacterController charaController;
     [SerializeField] private float moveSpeed;
-    public InputAction playerControls;
-    Vector2 moveDirection = Vector2.zero;
+    Vector3 moveDirection = Vector3.zero;
 
-    private void OnEnable()
+    private void Awake()
     {
-        playerControls.Enable();
+        charaController = GetComponent<CharacterController>();
     }
-
-    private void OnDisable()
-    {
-        playerControls.Disable();
-    }
-
-    private void Update()
-    {
-        moveDirection = playerControls.ReadValue<Vector2>();
-    }
-
+  
     private void FixedUpdate()
     {
-        charaController.SimpleMove(new Vector2(moveDirection.x * moveSpeed, 0f));  
+        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
+        charaController.Move(move * moveSpeed * Time.deltaTime);
+        Debug.Log(moveDirection);
     }
 }

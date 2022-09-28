@@ -9,7 +9,7 @@
             <ui:Button display-tooltip-when-elided="true" name="BSpell1" focusable="false" style="height: 250px; position: absolute; width: 250px; top: -17px; left: -10px; background-image: url(&apos;project://database/Assets/Prefab/Ui/Heal_360x360.png?fileID=2800000&amp;guid=2e87f80c364ae54499194e8d3c9d49ce&amp;type=3#Heal_360x360&apos;);" />
         </ui:GroupBox>
     </ui:GroupBox>
-    <ui:IMGUIContainer style="position: absolute; height: 30px; width: 37px; top: 63px; left: 4px; background-color: rgb(195, 158, 40);">
-        <ui:Label text="8" display-tooltip-when-elided="true" name="SpellCost" style="position: absolute; background-color: rgba(0, 0, 0, 0); font-size: 20px; top: 3px; left: 31%;" />
+    <ui:IMGUIContainer style="position: absolute; height: 39px; width: 48px; top: 63px; left: 4px; background-color: rgb(195, 158, 40);">
+        <ui:Label text="8" display-tooltip-when-elided="true" name="SpellCost" style="position: absolute; background-color: rgba(0, 0, 0, 0); font-size: 30px; top: 0; left: 20%;" />
     </ui:IMGUIContainer>
 </ui:UXML>

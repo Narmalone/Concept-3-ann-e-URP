@@ -29,14 +29,17 @@ public class ManaManager : MonoBehaviour
         //Et set l'énergie actuelle du joueur à l'énergie par tour
         energieTourCount += 2;
         currentEnergie = energieTourCount;
+        UpdateManaUi();
         Debug.Log(energieTourCount);
-
     }
     public void UpdateManaUi()
     {
         uiDocRef = combatUiDoc.rootVisualElement;
         Label energyTour = uiDocRef.Q<Label>("ManaTurn");
         Label currentEnergy = uiDocRef.Q<Label>("PlayersMana");
+
+        energyTour.text = "TOTAL MANA: " + energieTourCount.ToString();
+        currentEnergy.text = "MANA: " + currentEnergie.ToString();
     }
     public void CheckEnergy(List<Spell> target, List<Button> buttonList)
     {

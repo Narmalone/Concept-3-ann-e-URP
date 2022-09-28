@@ -102,7 +102,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1772134348912972526}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.82, y: 0.2, z: 0}
+  m_LocalPosition: {x: -0.95, y: 0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -120,7 +120,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 2.16, y: 1, z: 20.13}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6138673584771662866
 MonoBehaviour:
@@ -483,9 +483,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_thisEnemyGroup: {fileID: 11400000, guid: 9d0bbd544f3957e4b8cc867ebe62a185, type: 2}
+  groupID: 0
   m_id: 0
   m_thisCharacter:
     m_charactersName: 
+    m_maxLife: 0
     m_life: 0
     m_damage: 0
     m_defense: 0
