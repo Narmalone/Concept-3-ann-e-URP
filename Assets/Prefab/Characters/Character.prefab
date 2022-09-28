@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c3e8ff26c160584bbe71200eacf3427, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_playerPosition: {fileID: 0}
+  m_pointToFollow: {fileID: 0}
   agentSpeed: 4
 --- !u!114 &5334001021421660274
 MonoBehaviour:
@@ -115,6 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_thisCharacter:
     m_charactersName: 
+    m_maxLife: 0
     m_life: 0
     m_damage: 0
     m_defense: 0
@@ -201,7 +202,7 @@ PrefabInstance:
     - target: {fileID: 1782415361685827950, guid: 7f23df62f17be8c40a3d9af5d1c31ed5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1
+      value: 0.48
       objectReference: {fileID: 0}
     - target: {fileID: 1782415361685827950, guid: 7f23df62f17be8c40a3d9af5d1c31ed5,
         type: 3}

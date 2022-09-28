@@ -29,8 +29,9 @@ public class charactersOfThePlayer : MonoBehaviour, IDataPersistence
     private List<string> itemsSpell;
 
     private int selectedCharacter;
+    private int selectedSpell;
 
-    private Character charaSelected;
+    [SerializeField] public Character charaSelected;
 
     private VisualElement labelElement;
 
@@ -39,6 +40,7 @@ public class charactersOfThePlayer : MonoBehaviour, IDataPersistence
 
     //Pour changer le sort du personnage
     private Button m_BSCharaSpell;
+    [SerializeField] private Spell spellSelected;
     private ListView m_viewSpellList;
     [SerializeField] private VisualTreeAsset m_spellListViewTemplate;
     private int switchButtonCount = 0;
@@ -53,6 +55,7 @@ public class charactersOfThePlayer : MonoBehaviour, IDataPersistence
 
     public void SaveData(GameData data)
     {
+        this.m_totalCharacters = data.m_playerCharactersOwnedData;
         data.m_playerTeam = this.m_characterTeam;
     }
     private void Awake()
@@ -262,14 +265,15 @@ public class charactersOfThePlayer : MonoBehaviour, IDataPersistence
         m_BSCharaSpell = container.Q<Button>("BChangeSpell");
         IMGUIContainer spellTexture = container.Q<IMGUIContainer>("SpellImage");
 
-        charaSelected = m_totalCharacters[selectedCharacter];
+        //changer le spell au lieu du perso car on a déjà le perso
+        selectedSpell = m_viewSpellList.selectedIndex;
 
-        for (int i = m_viewSpellList.selectedIndex; i < m_spellListOwned.Count; i++)
-        {
-            charaSelected.CurrentCharaSpell = m_spellListOwned[m_viewSpellList.selectedIndex];
-            //spellTexture.style.
-            m_BSCharaSpell.text = "Current Spell: " + charaSelected.CurrentCharaSpell.Name;
-        }
+        charaSelected.m_spellID = selectedSpell;
+        Spell newSpell = SpellsManager.instance.GetSpellById(selectedSpell);
+        charaSelected.CurrentCharaSpell = newSpell;
+        m_BSCharaSpell.text = newSpell.ToString();
+
+        SetupPlayerTeam();
     }
 
 

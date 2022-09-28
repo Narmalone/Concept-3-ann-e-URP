@@ -51,7 +51,6 @@ public class Ennemy : MonoBehaviour
             isAlive = false;
             CombatManager.instance.m_ennemyTeam.Remove(m_thisCharacter);
             Destroy(this.gameObject);
-            Debug.Log("détruit toi connard");
         }
         GetComponentInChildren<LifeBarHandler>().SetHealth(life);
 

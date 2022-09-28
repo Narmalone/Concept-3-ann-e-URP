@@ -7,7 +7,8 @@ public interface ISpell
 
     public string Name { get;}
     public string Description { get;}
-    public int GeneralId { get;}
+    public int Cost { get; set; }
+    public int GeneralId { get; set; }
     public float Damage { get; set; }
     public Texture2D Icon { get; }
     public bool IsEnemyTarget { get; }

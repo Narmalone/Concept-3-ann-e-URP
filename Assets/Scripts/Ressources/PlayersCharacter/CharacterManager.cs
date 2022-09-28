@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 public class CharacterManager : MonoBehaviour, IDataPersistence
 {
-    public static CharacterManager instance { get; set; }
+    public static CharacterManager instance { get; private set; }
 
     public List<Character> charactersPlayerList;
     public bool isCharaCreated = false;
@@ -53,16 +53,21 @@ public class CharacterManager : MonoBehaviour, IDataPersistence
             float currentLife = charactersMaxLife;
             float charactersDamage = Random.Range(20, 30);
             float charactersDefense = Random.Range(10, 15);
+
+            charactersDamage = Mathf.RoundToInt(charactersDamage);
+            charactersDefense = Mathf.RoundToInt(charactersDefense);
+            charactersMaxLife = Mathf.RoundToInt(charactersMaxLife);
+
             string charaName = charactersName[Random.Range(0, charactersName.Length)];
 
-            Character chara = new Character(charaName, charactersMaxLife, currentLife, charactersDamage, charactersDefense, charactersRarity, SpellsManager.instance.GetRandomSpell());
+            Character chara = new Character(charaName, charactersMaxLife, currentLife, charactersDamage, charactersDefense, charactersRarity, SpellsManager.instance.GetRandomCharaSpell());
 
             charactersPlayerList.Add(chara);
         }
 
         SpellsManager.instance.m_baseCharaList = charactersPlayerList;
 
-        SpellsManager.instance.InitializeBasicSpell();
+        //SpellsManager.instance.InitializeBasicSpell();
 
         isCharaCreated = true;
     }

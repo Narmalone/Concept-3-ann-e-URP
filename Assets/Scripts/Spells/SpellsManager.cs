@@ -22,22 +22,15 @@ public class SpellsManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         instance = this;
     }
-
-    public void InitializeBasicSpell()
-    {
-        if (spells.Count == 0) return;
-
-        foreach(Character chara in m_baseCharaList)
-        {
-            chara.CurrentCharaSpell = spells[Random.Range(0, spells.Count)];
-            chara.CurrentCharaSpell.Damage = chara.CurrentCharaSpell.Damage * chara.CharactersDamage / chara.CurrentCharaSpell.Damage;
-        }
-
-        //Après avoir initalisé les personnages de bases
-    }
     public Spell GetRandomSpell()
     {
         return ennemySpells[Random.Range(0, ennemySpells.Count)];
+    }  
+    
+    public Spell GetRandomCharaSpell()
+    {
+        Spell randomSpell = spells[Random.Range(0, spells.Count)];
+        return randomSpell;
     }
 
     public Spell GetSpellById(int id)

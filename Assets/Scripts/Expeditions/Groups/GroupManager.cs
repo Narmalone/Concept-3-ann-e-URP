@@ -40,6 +40,10 @@ public class GroupManager : MonoBehaviour
                 float charactersDefense = Random.Range(minDefense, maxDefense);
                 string charaName = group.ennemiesPossibleName[Random.Range(0, group.ennemiesPossibleName.Length)];
 
+                charactersDamage = Mathf.RoundToInt(charactersDamage);
+                charactersDefense = Mathf.RoundToInt(charactersDefense);
+                charactersMaxLife = Mathf.RoundToInt(charactersMaxLife);
+
                 Character chara = new Character(charaName, charactersMaxLife, currentLife, charactersDamage, charactersDefense, 0, SpellsManager.instance.GetRandomSpell());
                 if(chara.CurrentCharaSpell.GeneralId != 1)
                 {

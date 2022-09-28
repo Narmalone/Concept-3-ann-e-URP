@@ -7,6 +7,7 @@ public class Spell : ScriptableObject, ISpell
 {
     public string m_name;
     public int m_generalId;
+    public int m_spellCost;
     public float m_damage;
     public Texture2D m_icon;
     public string m_description;
@@ -15,7 +16,8 @@ public class Spell : ScriptableObject, ISpell
     [Tooltip("Si true la target est team")]public bool m_isEnnemiesTargetOrFromTeamTarget;
     public string Name { get => m_name;}
     public string Description { get => m_description; }
-    public int GeneralId { get => m_generalId; }
+    public int GeneralId { get => m_generalId; set => m_generalId = value; }
+    public int Cost { get => m_spellCost; set => m_spellCost = value; }
     public float Damage { get => m_damage; set => m_damage = value; }
     public Texture2D Icon { get => m_icon;}
 

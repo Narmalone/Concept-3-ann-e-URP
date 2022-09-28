@@ -23,7 +23,7 @@ public class UiManagerSession : MonoBehaviour
     private int index = 0;
 
     //tout ce qui est en rapport avec les personnages
-    private List<Character> m_characters;
+    public List<Character> m_characters;
     public List<Spell> spellList;
     private Spell currentSpellCliqued;
     private List<Label> m_spellsDescriptions;
@@ -39,6 +39,7 @@ public class UiManagerSession : MonoBehaviour
     private bool isUiCreated = false;
 
     [SerializeField] private Texture2D SpellImageUsed;
+    [SerializeField] private Texture2D RestImage;
     private void Awake()
     {
         if(instance != null)
@@ -56,7 +57,6 @@ public class UiManagerSession : MonoBehaviour
 
     private void Start()
     {
-
         m_characters = LoadPlayerTeam.instance.m_charactersTeam;
 
         foreach (Character chara in m_characters)
@@ -77,8 +77,15 @@ public class UiManagerSession : MonoBehaviour
 
         m_restButton = rootElement.Q<Button>("BRest");
         m_restButton.clickable.clicked += OnRestButtonCliqued;
+        m_restButton.style.backgroundImage = RestImage;
 
         GroupBox container = rootElement.Q<GroupBox>("MainGroupBox");
+
+        Label energyTour = rootElement.Q<Label>("ManaTurn");
+        Label currentEnergy = rootElement.Q<Label>("PlayersMana");
+
+        energyTour.text = ManaManager.instance.energieTourCount.ToString();
+        currentEnergy.text = ManaManager.instance.currentEnergie.ToString();
 
         index = 0;
 
@@ -123,14 +130,20 @@ public class UiManagerSession : MonoBehaviour
 
             spellDescription.text = chara.CurrentCharaSpell.Description + chara.CurrentCharaSpell.Damage;
 
+            Label spellCost = ui.Q<Label>("SpellCost");
+            spellCost.text = chara.CurrentCharaSpell.Cost.ToString();
+
             //ajouter au container la template
             container.Add(ui);
 
             index++;
             isUiCreated = true;
         }
-    }
 
+        //Désactiver les bouttons qu'on peut pas utiliser du au manque d'énergie
+        ManaManager.instance.CheckEnergy(spellList, m_buttons);
+
+    }
     public void CheckButtonCliqued(Button btn)
     {
         //Empêcher de le faire comme ça car on est dans un foreach
@@ -167,8 +180,10 @@ public class UiManagerSession : MonoBehaviour
     public void SpellUsed()
     {
 
+        ManaManager.instance.UsedEnergy(currentSpellCliqued);
+
         //Si le personnage rest spellused == null donc on return
-        if(m_spellUsed == null) { Debug.Log(m_spellUsed); }
+        if (m_spellUsed == null) { Debug.Log(m_spellUsed); }
 
         spellButtons.Add(m_spellUsed);
 
@@ -202,6 +217,8 @@ public class UiManagerSession : MonoBehaviour
     {
         var rootElement = m_uiDocCombat.rootVisualElement;
         rootElement.style.display = DisplayStyle.None;
+
+        ManaManager.instance.CheckEnergy(spellList, m_buttons);
     }
 
     public void PlayerTurn()

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Event", menuName = "Nouvel Event", order = 0)]
@@ -16,7 +17,7 @@ public class Event : ScriptableObject
         m_vectorEvent?.Invoke(vectorPosition);
     }
 
-    public void DoSomething()
+    public void DoSomething(object obj)
     {
         m_somethingEvent?.Invoke();
     }

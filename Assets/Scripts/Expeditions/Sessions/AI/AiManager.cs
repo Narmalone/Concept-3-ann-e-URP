@@ -32,7 +32,6 @@ public class AiManager : MonoBehaviour
     }
     public void AttackCharacter()
     {
-
         StartCoroutine(CorouBeforeAttack(2f));
         //Démarrer coroutine pour faire réaparaître l'interface après un délai
         CombatManager.instance.StartCorou();
@@ -47,6 +46,7 @@ public class AiManager : MonoBehaviour
     //Classe qui comme ennemies / Player Attack servira pour lancer une attaque aux personnages du joueur
 
     //Cast depuis Combat Manager
+    //rework le cast spell de l'iA et faire plutôt avec les checks du spell
     public void CastToPlayer(Spell spell)
     {
 
@@ -62,7 +62,7 @@ public class AiManager : MonoBehaviour
             if(spell.GeneralId == 2)
             {
                 CharactersOfPlayers selectedTarget = charaOfPlayers[Random.Range(0, playerCharacter.Count)];
-                selectedTarget.GetDamage(spell);
+                selectedTarget.SpellCasted(spell);
             }
         }
         else

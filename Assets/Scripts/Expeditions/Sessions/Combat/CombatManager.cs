@@ -67,6 +67,8 @@ public class CombatManager : MonoBehaviour
             //Si combat commence alors c'est le tour du joueur
             delTurn(true);
             delCombat(true);
+            ManaManager.instance.SetFirstTurn();
+
             UiManagerSession.instance.CombatUi();
 
             //Set the ennmy team from the group we are fighting against
@@ -117,6 +119,7 @@ public class CombatManager : MonoBehaviour
         {
             //si ce n'est pas le temps du joueur
             //désactiver l'interface puis c'est au tour de l'IA
+            ManaManager.instance.NextTurn();
             UiManagerSession.instance.NotPlayerTurn();
 
             if (isFighting)

@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d6ca44255e7e855408c887bc2858e245, type: 3}
-  m_Name: SnowBall
+  m_Name: FrozenArrow
   m_EditorClassIdentifier: 
   m_name: SnowBall
   m_generalId: 3
-  m_damage: 4.7337475
-  m_icon: {fileID: 4154780841294389669, guid: 5c06fe21ba8367b4a922db5c42a5a406, type: 3}
-  m_description: No damage
+  m_spellCost: 10
+  m_damage: 4
+  m_icon: {fileID: 2800000, guid: 4b64b9ef2efa00c4394d18a27556bb45, type: 3}
+  m_description: 'Dealing To 1 ennemy: '
   m_isSolorOrMultipleTarget: 0
   m_isEnnemiesTargetOrFromTeamTarget: 0

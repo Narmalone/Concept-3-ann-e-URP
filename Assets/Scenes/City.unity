@@ -640,7 +640,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1517915494}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &920824867
 MonoBehaviour:
@@ -851,8 +851,17 @@ MonoBehaviour:
   m_MainMenuDoc: {fileID: 2134362857}
   m_activateGameobject: {fileID: 2134362856}
   m_totalCharacters: []
+  charaSelected:
+    m_charactersName: 
+    m_maxLife: 0
+    m_life: 0
+    m_damage: 0
+    m_defense: 0
+    m_rarity: 0
+    m_spellID: 0
   m_spellListViewTemplate: {fileID: 9197481963319205126, guid: 5585f62e86971eb4298e8e4b81fb44e2,
     type: 3}
+  m_spellListOwned: []
 --- !u!1 &1470557260
 GameObject:
   m_ObjectHideFlags: 0
@@ -884,7 +893,7 @@ Transform:
   m_Children:
   - {fileID: 1622049489}
   m_Father: {fileID: 1517915494}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1470557262
 MonoBehaviour:
@@ -931,10 +940,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1358645172}
+  - {fileID: 920824866}
   - {fileID: 1746735229}
   - {fileID: 1613637545}
   - {fileID: 1470557261}
-  - {fileID: 920824866}
   - {fileID: 1697215043}
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -1041,7 +1050,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1517915494}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1746735230
 MonoBehaviour:
@@ -1515,7 +1524,7 @@ PrefabInstance:
     - target: {fileID: 7100658528455416724, guid: 6842ca6722653b54db505a4804cc2b54,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7100658528455416724, guid: 6842ca6722653b54db505a4804cc2b54,
         type: 3}
@@ -1581,12 +1590,12 @@ PrefabInstance:
         type: 3}
       propertyPath: spells.Array.data[3]
       value: 
-      objectReference: {fileID: 11400000, guid: f1b942020f7a1c3409efb86597fdd783,
+      objectReference: {fileID: 11400000, guid: 5096544061248294ca948e0f38671b0d,
         type: 2}
     - target: {fileID: 7100658528455416727, guid: 6842ca6722653b54db505a4804cc2b54,
         type: 3}
       propertyPath: ennemySpells.Array.size
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7100658528455416727, guid: 6842ca6722653b54db505a4804cc2b54,
         type: 3}
@@ -1610,7 +1619,7 @@ PrefabInstance:
         type: 3}
       propertyPath: ennemySpells.Array.data[3]
       value: 
-      objectReference: {fileID: 11400000, guid: f1b942020f7a1c3409efb86597fdd783,
+      objectReference: {fileID: 11400000, guid: 5096544061248294ca948e0f38671b0d,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6842ca6722653b54db505a4804cc2b54, type: 3}

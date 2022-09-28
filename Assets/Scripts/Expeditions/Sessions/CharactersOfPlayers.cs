@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class CharactersOfPlayers : MonoBehaviour
 {
@@ -33,51 +35,38 @@ public class CharactersOfPlayers : MonoBehaviour
         GetComponentInChildren<LifeBarHandler>().SetMaxHealth(maxLife);
     }
 
-    public void UpdateLife()
+    public bool UpdateLife()
     {
-        if(life > maxLife)
+        bool isAlive = true;
+        if (life > maxLife)
         {
             life = maxLife;
+            Debug.Log(life);
+        }
+        else if (life <= 0)
+        {
+            isAlive = false;
+            CombatManager.instance.m_ennemyTeam.Remove(m_thisCharacter);
+            Destroy(this.gameObject);
         }
         GetComponentInChildren<LifeBarHandler>().SetHealth(life);
+
+        return isAlive;
     }
 
-    public void GetDamage(Spell target)
+    public bool SpellCasted(Spell spell)
     {
-        if(target.GeneralId == 1)
-        {
-            float RealDamage = target.Damage * (1 - defense / 100);
-            ApplyDamage(RealDamage);
-        }
-        else
-        {
-            ApplyDamage(damage);
-        }
-    }
+        float RealDamage = spell.Damage * (1 - defense / 100);
 
-    public void ApplyDamage(float damage)
-    {
-        life -= damage;
-
-        GetComponentInChildren<LifeBarHandler>().SetHealth(life);
-
-        if (life <= 0)
-        {
-            //Destroy(gameObject);
-        }
-    }
-
-    public void SpellCasted(Spell spell)
-    {
-        if(spell.GeneralId == 1)
+        if (spell.GeneralId == 1)
         {
             life += spell.Damage;
         }
         else
         {
-            life -= spell.Damage;
+            life -= RealDamage;
         }
 
-        UpdateLife();
+        return UpdateLife();
     }
 }
