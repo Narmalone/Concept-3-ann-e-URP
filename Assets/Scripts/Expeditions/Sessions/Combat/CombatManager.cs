@@ -54,7 +54,9 @@ public class CombatManager : MonoBehaviour
     {
         if (boolValue)
         {
-            if(GroupIdInFight == 0)
+            CamScript.instance.OnCombat();
+
+            if (GroupIdInFight == 0)
             {
                 m_enemyList = GroupManager.instance.m_group1;
             } 
@@ -91,6 +93,8 @@ public class CombatManager : MonoBehaviour
         else
         {
             ManaManager.instance.SetFirstTurn();
+
+            CamScript.instance.OnCombatEnd();
 
             //Si joueur plus en combat on lui redonne le contrôle
             isFighting = false;

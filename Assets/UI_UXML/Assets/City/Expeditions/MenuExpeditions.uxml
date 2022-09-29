@@ -1,12 +1,12 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/USS/MainMenu/ressources.uss?fileID=7433441132597879392&amp;guid=41b19a3b2442fab419731f2258d387b8&amp;type=3#ressources" />
     <ui:VisualElement style="height: 104px;">
-        <ui:IMGUIContainer style="height: 100%; background-image: none; background-color: rgb(106, 106, 106); position: absolute; width: 100%; top: 0; left: 0; margin-left: 0; margin-right: 0; align-items: stretch; justify-content: center; overflow: visible; -unity-text-align: upper-center; -unity-background-scale-mode: stretch-to-fill;" />
-        <ui:Label text="Gold: XXX" display-tooltip-when-elided="true" name="PlayerGoldLabel" style="position: absolute; font-size: 50px; align-items: stretch; -unity-text-align: upper-left; flex-direction: column; transform-origin: right top; top: 22px; left: 1537px;" />
-        <ui:Label text="EXPEDITIONS" display-tooltip-when-elided="true" name="Expedition" style="position: absolute; font-size: 50px; align-items: stretch; -unity-text-align: upper-left; flex-direction: column; transform-origin: right top; top: 22px; left: 40%;" />
+        <ui:IMGUIContainer style="height: 100%; background-image: none; background-color: rgb(0, 0, 0); position: absolute; width: 100%; top: 0; left: 0; margin-left: 0; margin-right: 0; align-items: stretch; justify-content: center; overflow: visible; -unity-text-align: upper-center; -unity-background-scale-mode: stretch-to-fill;" />
+        <ui:Label text="EXPEDITIONS" display-tooltip-when-elided="true" name="Expedition" style="position: absolute; font-size: 50px; align-items: stretch; -unity-text-align: upper-left; flex-direction: column; transform-origin: right top; top: 22px; left: 40%; color: rgb(255, 202, 71);" />
     </ui:VisualElement>
     <ui:GroupBox style="height: 190px;">
         <ui:GroupBox name="ExpeditionsSlot" style="position: absolute; width: 100%; height: 100%;">
-            <ui:Button text="Start Expedition" display-tooltip-when-elided="true" name="StartExpedition" focusable="true" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; font-size: 54px;" />
+            <ui:Button text="Start Expedition" display-tooltip-when-elided="true" name="StartExpedition" focusable="true" class="MenuButtons" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; font-size: 54px; color: rgb(231, 201, 58);" />
             <ui:Label text="Level: " display-tooltip-when-elided="true" name="LevelName" style="position: absolute; font-size: 72px;" />
         </ui:GroupBox>
     </ui:GroupBox>

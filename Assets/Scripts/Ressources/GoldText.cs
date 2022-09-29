@@ -48,26 +48,14 @@ public class GoldText : MonoBehaviour, IDataPersistence
         var rootElement = m_Document.rootVisualElement;
 
         m_playerMoneyLabel = rootElement.Q<Label>("PlayersMoneyLabel");
-        m_freeGoldButton = rootElement.Q<Button>("GiveFreeGolds");
-        m_freeGoldButton.clickable.clicked += FreeGoldClicked;
     }
 
     private void Awake()
     {
         instance = this;
     }
-    private void OnDisable()
-    {
-        m_freeGoldButton.clickable.clicked -= FreeGoldClicked;
-    }
     private void Start()
     {
-        UpdateGold();
-    }
-    //Fonction de debug pour tester la montée en or du joueur, les objectifs et l'update de ces dernier//
-    public void FreeGoldClicked()
-    {
-        m_playerGoldCount += 50;
         UpdateGold();
     }
 

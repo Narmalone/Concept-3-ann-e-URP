@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6ca44255e7e855408c887bc2858e245, type: 3}
   m_Name: FrozenArrow
   m_EditorClassIdentifier: 
-  m_name: SnowBall
+  m_name: Frozen Arrow
   m_generalId: 3
   m_spellCost: 7
-  m_damage: 3
+  m_damage: 7
   m_icon: {fileID: 2800000, guid: 4b64b9ef2efa00c4394d18a27556bb45, type: 3}
   m_description: 'Dealing To 1 ennemy: '
   m_isSolorOrMultipleTarget: 0

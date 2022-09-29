@@ -15,12 +15,7 @@ public class EnemyScript: MonoBehaviour
     {
         if((charatersMask.value & (1 << other.gameObject.layer)) > 0)
         {
-
-            CamScript.instance.isLerping = true;
             GetComponent<Collider>().enabled = false;
-            //appel delegate mettre le joueur en combat
-
-            //Si le joueur collide on get son groupe Id par getComponent et on dit que si "GroupId == 0" alors la liste d'ennemi est la première
             CombatManager.instance.GroupIdInFight = GetComponentInParent<Ennemy>().groupID;
             CombatManager.instance.m_currentFightingGroup = GetComponentInParent<Ennemy>().m_thisEnemyGroup;
             CombatManager.instance.OnStartCombat(true);

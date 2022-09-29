@@ -153,13 +153,15 @@ GameObject:
   - component: {fileID: 152288783}
   - component: {fileID: 152288782}
   - component: {fileID: 152288781}
+  - component: {fileID: 152288786}
+  - component: {fileID: 152288785}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &152288781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,6 +244,44 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &152288785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 152288780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &152288786
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 152288780}
+  m_CullTransparentMesh: 1
 --- !u!1 &400447835
 GameObject:
   m_ObjectHideFlags: 0
@@ -1306,13 +1346,13 @@ PrefabInstance:
         type: 3}
       propertyPath: spells.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: c39ccc87837104c4db9b387162a2257e,
+      objectReference: {fileID: 11400000, guid: aacaff3aa2d78134cb7874f7abeebbb1,
         type: 2}
     - target: {fileID: 7100658528455416727, guid: 6842ca6722653b54db505a4804cc2b54,
         type: 3}
       propertyPath: spells.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: aacaff3aa2d78134cb7874f7abeebbb1,
+      objectReference: {fileID: 11400000, guid: c39ccc87837104c4db9b387162a2257e,
         type: 2}
     - target: {fileID: 7100658528455416727, guid: 6842ca6722653b54db505a4804cc2b54,
         type: 3}

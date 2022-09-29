@@ -5,37 +5,21 @@ using UnityEngine;
 public class CamScript : MonoBehaviour
 {
     public static CamScript instance { get; private set; }
-    [SerializeField] private Transform camTarget;
-    [SerializeField] private Transform InCombat;
-    //Lerp de position et rotation
-    [SerializeField] private float pLerp = .02f;
-    [SerializeField] private float rLerp = .02f;
-
-    public bool isLerping = false;
+    [SerializeField] private Animation motion;
     private void Awake()
     {
         instance = this;
-        Vector3 firstSpot = transform.localPosition;
-        Quaternion firstRotation = transform.localRotation;
-    }
-
-    private void Update()
-    {
-        OnCombat();
+        motion = GetComponent<Animation>();
     }
     public void OnCombat()
     {
-        if (isLerping)
-        {
-            //Use move toward instead ?
-            transform.localPosition = Vector3.Lerp(transform.localPosition, InCombat.position, pLerp);
-            transform.localRotation = Quaternion.Lerp(transform.localRotation, InCombat.rotation, rLerp);
-        }
-        else
-        {
-            return;
-        }
-        
+        AnimationManager.instance.PlayAnim(motion, WrapMode.Once);
+    }
+
+    public void OnCombatEnd()
+    {
+        motion.GetClip("EndCombat");
+        AnimationManager.instance.PlayAnim(motion, WrapMode.Once);
     }
 
     

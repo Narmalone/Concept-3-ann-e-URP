@@ -1,36 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &773827766263863810
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2431051322290859579}
-  m_Layer: 0
-  m_Name: TR_Combat
-  m_TagString: Untagged
-  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2431051322290859579
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 773827766263863810}
-  m_LocalRotation: {x: 0.13917309, y: 0, z: 0, w: 0.9902681}
-  m_LocalPosition: {x: -0, y: 2.881, z: -2.495}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4971238310765829980}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 16, y: 0, z: 0}
 --- !u!1 &3239487778283923459
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,6 +233,7 @@ GameObject:
   - component: {fileID: 4971238310765829982}
   - component: {fileID: 4971238310765829979}
   - component: {fileID: 7752905905740451010}
+  - component: {fileID: 8201951815757103786}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -282,8 +252,7 @@ Transform:
   m_LocalPosition: {x: 1.48, y: 1, z: -9.64}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2431051322290859579}
+  m_Children: []
   m_Father: {fileID: 4971238310329644704}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -383,10 +352,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90b7b121d97bbcb4280f9a044c6c7d94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camTarget: {fileID: 4971238310329644704}
-  InCombat: {fileID: 2431051322290859579}
-  pLerp: 0.02
-  rLerp: 0.02
+  motion: {fileID: 0}
+--- !u!111 &8201951815757103786
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4971238310765829983}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &5605676222815212288
 GameObject:
   m_ObjectHideFlags: 0

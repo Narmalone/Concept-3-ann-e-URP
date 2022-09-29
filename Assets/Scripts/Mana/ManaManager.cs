@@ -14,6 +14,7 @@ public class ManaManager : MonoBehaviour
     private int maxEnergie = 16;
     public int currentEnergie;
     private List<Character> characters;
+    List<Button> globalListToCheck;
     private void Awake()
     {
         instance = this;
@@ -43,10 +44,9 @@ public class ManaManager : MonoBehaviour
         energyTour.text = "TOTAL ÉNERGIE: " + currentEneryTourCount.ToString();
         currentEnergy.text = "ÉNERGIE: " + currentEnergie.ToString();
     }
-    public void CheckEnergy(List<Spell> target, List<Button> buttonList)
+    public void CheckEnergy(List<Spell> target, List<Button> buttonList, Button BtnSpellUsed)
     {
         characters = UiManagerSession.instance.m_characters;
-
         List<Button> buttonToDisable = new List<Button>();
         List<Button> buttonToEnable = new List<Button>();
 
@@ -55,12 +55,27 @@ public class ManaManager : MonoBehaviour
         {
             currentEneryTourCount = maxEnergie;  
         }
-
+        
         for(int i = 0; i < buttonList.Count; i++)
         {
             if (target[i].Cost <= currentEneryTourCount)
             {
-                buttonToEnable.Add(buttonList[i]);
+                if(BtnSpellUsed != null)
+                {
+                    if (BtnSpellUsed == buttonList[i])
+                    {
+                        buttonToDisable.Add(buttonList[i]);
+                    }
+                    else
+                    {
+                        buttonToEnable.Add(buttonList[i]);
+                    }
+                }
+                else
+                {
+                    buttonToEnable.Add(buttonList[i]);
+                }
+
             }
             else if (target[i].Cost > currentEneryTourCount)
             {

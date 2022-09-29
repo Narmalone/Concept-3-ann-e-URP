@@ -140,7 +140,7 @@ public class UiManagerSession : MonoBehaviour
         }
 
         //Désactiver les bouttons qu'on peut pas utiliser du au manque d'énergie
-        ManaManager.instance.CheckEnergy(spellList, m_buttons);
+        ManaManager.instance.CheckEnergy(spellList, m_buttons, m_spellUsed);
         ManaManager.instance.UpdateManaUi();
 
     }
@@ -179,11 +179,6 @@ public class UiManagerSession : MonoBehaviour
 
     public void SpellUsed()
     {
-
-        ManaManager.instance.UsedEnergy(currentSpellCliqued);
-        ManaManager.instance.CheckEnergy(spellList, m_buttons);
-        ManaManager.instance.UpdateManaUi();
-
         //Si le personnage rest spellused == null donc on return
         if (m_spellUsed == null) { Debug.Log(m_spellUsed); }
 
@@ -194,7 +189,11 @@ public class UiManagerSession : MonoBehaviour
         {
             //faire aussi changer l'image du sort en un truc gris genre il a été utilisé
             btn.visible = false;
-        }
+        } 
+      
+        ManaManager.instance.UsedEnergy(currentSpellCliqued);
+        ManaManager.instance.CheckEnergy(spellList, m_buttons, m_spellUsed);
+        ManaManager.instance.UpdateManaUi();
 
         CombatManager.instance.canSelectMob = false;
     }
@@ -222,7 +221,7 @@ public class UiManagerSession : MonoBehaviour
         var rootElement = m_uiDocCombat.rootVisualElement;
         rootElement.style.display = DisplayStyle.None;
 
-        ManaManager.instance.CheckEnergy(spellList, m_buttons);
+        //ManaManager.instance.CheckEnergy(spellList, m_buttons, m_spellUsed);
     }
 
     public void PlayerTurn()
@@ -230,7 +229,7 @@ public class UiManagerSession : MonoBehaviour
         var rootElement = m_uiDocCombat.rootVisualElement;
         rootElement.style.display = DisplayStyle.Flex;
 
-        ManaManager.instance.CheckEnergy(spellList, m_buttons);
+        //ManaManager.instance.CheckEnergy(spellList, m_buttons, m_spellUsed);
     }
     #endregion
 }

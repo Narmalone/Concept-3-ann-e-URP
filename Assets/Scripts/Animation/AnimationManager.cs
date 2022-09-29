@@ -11,13 +11,9 @@ public class AnimationManager : MonoBehaviour
         instance = this;
     }
 
-    public void PlayAnim(Animation playMotion, bool isLooping)
+    public void PlayAnim(Animation playMotion, WrapMode wrapMode)
     {
-        if (isLooping)
-        {
-            playMotion.clip.wrapMode = WrapMode.Loop;
-        }
-
+        playMotion.wrapMode = wrapMode;
         playMotion.Play();
     }
 }
