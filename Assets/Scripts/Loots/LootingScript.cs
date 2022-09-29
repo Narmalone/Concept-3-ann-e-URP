@@ -25,7 +25,7 @@ public class LootingScript : MonoBehaviour
         moneyEarned += loot.Money;
         Debug.Log(moneyEarned);
         m_motionToPlay.Play();
-        AnimationManager.instance.PlayAnim(m_motionToPlay, false, "ChestAnim");
+        AnimationManager.instance.PlayAnim(m_motionToPlay, false);
         return moneyEarned;
     }
 }

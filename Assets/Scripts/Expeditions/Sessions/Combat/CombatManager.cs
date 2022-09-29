@@ -62,12 +62,12 @@ public class CombatManager : MonoBehaviour
             {
                 m_enemyList = GroupManager.instance.m_group2;
             }
-            Debug.Log("Combat contre le groupe d'ennemis ID: " + GroupIdInFight + " a été lancé");
 
             //Si combat commence alors c'est le tour du joueur
             delTurn(true);
             delCombat(true);
             ManaManager.instance.SetFirstTurn();
+            ManaManager.instance.UpdateManaUi();
 
             UiManagerSession.instance.CombatUi();
 
@@ -90,6 +90,8 @@ public class CombatManager : MonoBehaviour
         }
         else
         {
+            ManaManager.instance.SetFirstTurn();
+
             //Si joueur plus en combat on lui redonne le contrôle
             isFighting = false;
             FindObjectOfType<PlayerControllerCity>().enabled = true;

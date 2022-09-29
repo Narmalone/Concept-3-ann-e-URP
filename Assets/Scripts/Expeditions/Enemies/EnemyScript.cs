@@ -15,6 +15,8 @@ public class EnemyScript: MonoBehaviour
     {
         if((charatersMask.value & (1 << other.gameObject.layer)) > 0)
         {
+
+            CamScript.instance.isLerping = true;
             GetComponent<Collider>().enabled = false;
             //appel delegate mettre le joueur en combat
 

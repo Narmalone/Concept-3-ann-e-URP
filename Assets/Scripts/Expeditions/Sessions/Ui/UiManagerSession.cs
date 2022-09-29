@@ -84,8 +84,7 @@ public class UiManagerSession : MonoBehaviour
         Label energyTour = rootElement.Q<Label>("ManaTurn");
         Label currentEnergy = rootElement.Q<Label>("PlayersMana");
 
-        energyTour.text = ManaManager.instance.energieTourCount.ToString();
-        currentEnergy.text = ManaManager.instance.currentEnergie.ToString();
+        ManaManager.instance.UpdateManaUi();
 
         index = 0;
 
@@ -182,6 +181,8 @@ public class UiManagerSession : MonoBehaviour
     {
 
         ManaManager.instance.UsedEnergy(currentSpellCliqued);
+        ManaManager.instance.CheckEnergy(spellList, m_buttons);
+        ManaManager.instance.UpdateManaUi();
 
         //Si le personnage rest spellused == null donc on return
         if (m_spellUsed == null) { Debug.Log(m_spellUsed); }
@@ -228,6 +229,8 @@ public class UiManagerSession : MonoBehaviour
     {
         var rootElement = m_uiDocCombat.rootVisualElement;
         rootElement.style.display = DisplayStyle.Flex;
+
+        ManaManager.instance.CheckEnergy(spellList, m_buttons);
     }
     #endregion
 }

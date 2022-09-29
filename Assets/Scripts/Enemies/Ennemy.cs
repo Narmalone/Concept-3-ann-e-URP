@@ -44,7 +44,6 @@ public class Ennemy : MonoBehaviour
         if(life > maxLife)
         {
             life = maxLife;
-            Debug.Log(life);
         }
         else if(life <= 0)
         {
@@ -59,15 +58,17 @@ public class Ennemy : MonoBehaviour
 
     public bool SpellCasted(Spell spell)
     {
-        if(spell.GeneralId != 1)
+        if(spell.GeneralId == 1) 
+        {
+            life += spell.Damage;
+        }
+        else
         {
             float RealDamageTaken = spell.Damage * (1 - defense / 100);
             life -= RealDamageTaken;
         }
-        else
-        {
-            life += damage;
-        }
+        
+        
         return UpdateLife();
     }
 }

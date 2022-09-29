@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerControllerCity : MonoBehaviour
 {
     [SerializeField] private CharacterController charaController;
-    [SerializeField] private float moveSpeed;
+    [SerializeField] private float moveSpeed = 1;
     Vector3 moveDirection = Vector3.zero;
 
     private void Awake()
@@ -16,7 +16,6 @@ public class PlayerControllerCity : MonoBehaviour
     private void FixedUpdate()
     {
         Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
-        charaController.Move(move * moveSpeed * Time.deltaTime);
-        Debug.Log(moveDirection);
+        charaController.SimpleMove(move * moveSpeed);
     }
 }

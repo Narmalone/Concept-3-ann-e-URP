@@ -9,7 +9,8 @@ public class ManaManager : MonoBehaviour
     public static ManaManager instance { get; private set; }
     [SerializeField] private UIDocument combatUiDoc;
     VisualElement uiDocRef;
-    public int energieTourCount = 0;
+    public int currentEneryTourCount = 0;
+    private int ennergyTourCount = 0;
     private int maxEnergie = 16;
     public int currentEnergie;
     private List<Character> characters;
@@ -20,17 +21,18 @@ public class ManaManager : MonoBehaviour
 
     public void SetFirstTurn()
     {
-        energieTourCount = 5;
-        currentEnergie = energieTourCount;
+        ennergyTourCount = 5;
+        currentEneryTourCount = ennergyTourCount;
+        currentEnergie = currentEneryTourCount;
     }
     public void NextTurn()
     {
         //Quand prochain tour énergie max + 2
         //Et set l'énergie actuelle du joueur à l'énergie par tour
-        energieTourCount += 2;
-        currentEnergie = energieTourCount;
+        ennergyTourCount += 2;
+        currentEneryTourCount = ennergyTourCount;
+        currentEnergie = currentEneryTourCount;
         UpdateManaUi();
-        Debug.Log(energieTourCount);
     }
     public void UpdateManaUi()
     {
@@ -38,8 +40,8 @@ public class ManaManager : MonoBehaviour
         Label energyTour = uiDocRef.Q<Label>("ManaTurn");
         Label currentEnergy = uiDocRef.Q<Label>("PlayersMana");
 
-        energyTour.text = "TOTAL MANA: " + energieTourCount.ToString();
-        currentEnergy.text = "MANA: " + currentEnergie.ToString();
+        energyTour.text = "TOTAL ÉNERGIE: " + currentEneryTourCount.ToString();
+        currentEnergy.text = "ÉNERGIE: " + currentEnergie.ToString();
     }
     public void CheckEnergy(List<Spell> target, List<Button> buttonList)
     {
@@ -49,18 +51,18 @@ public class ManaManager : MonoBehaviour
         List<Button> buttonToEnable = new List<Button>();
 
         //Si l'énergie par tour est au max
-        if (energieTourCount >= maxEnergie)
+        if (currentEneryTourCount >= maxEnergie)
         {
-            energieTourCount = maxEnergie;  
+            currentEneryTourCount = maxEnergie;  
         }
 
         for(int i = 0; i < buttonList.Count; i++)
         {
-            if (target[i].Cost <= energieTourCount)
+            if (target[i].Cost <= currentEneryTourCount)
             {
                 buttonToEnable.Add(buttonList[i]);
             }
-            else if (target[i].Cost > energieTourCount)
+            else if (target[i].Cost > currentEneryTourCount)
             {
                 buttonToDisable.Add(buttonList[i]);
             }
@@ -73,21 +75,23 @@ public class ManaManager : MonoBehaviour
     {
         foreach(Button btn in buttons)
         {
-            btn.SetEnabled(false);
+            btn.visible = false;
+            //btn.SetEnabled(false);
         }
     }
     public void EnableButtonList(List<Button> buttons)
     {
         foreach(Button btn in buttons)
         {
-            btn.SetEnabled(true);
+            btn.visible = true;
+            //btn.SetEnabled(true);
         }
     }
 
     public void UsedEnergy(Spell spell)
     {
         currentEnergie -= spell.Cost;
-        Debug.Log(currentEnergie);
+        currentEneryTourCount = currentEnergie;
     }
 
 }

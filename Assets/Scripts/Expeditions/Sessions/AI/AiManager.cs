@@ -39,7 +39,6 @@ public class AiManager : MonoBehaviour
     public Spell ChoiceSpellAgainstPlayer()
     {
         m_spellAgainstPlayer = ennemyGroup[Random.Range(0, ennemyGroup.Count)].m_thisCharacter.CurrentCharaSpell;
-        Debug.Log("Sort choisis contre le joueur: " + m_spellAgainstPlayer.Name);
         return m_spellAgainstPlayer;
     }
 
@@ -52,17 +51,19 @@ public class AiManager : MonoBehaviour
 
         if (spell.GeneralId != 1)
         {
-            if(spell.GeneralId == 0)
+            if(spell.m_isSolorOrMultipleTarget && spell.IsEnemyTarget == false)
             {
                 foreach (CharactersOfPlayers chara in charaOfPlayers)
                 {
                     chara.SpellCasted(spell);
                 }
+                Debug.Log("multiple & cible ennemy");
             }
-            if(spell.GeneralId == 2)
+            if(spell.m_isSolorOrMultipleTarget == false && spell.IsEnemyTarget == false)
             {
                 CharactersOfPlayers selectedTarget = charaOfPlayers[Random.Range(0, playerCharacter.Count)];
                 selectedTarget.SpellCasted(spell);
+                Debug.Log("solo & cible ennemy");
             }
         }
         else

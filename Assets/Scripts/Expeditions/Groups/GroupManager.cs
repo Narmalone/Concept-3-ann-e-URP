@@ -14,6 +14,8 @@ public class GroupManager : MonoBehaviour
     [SerializeField] private List<Group> ennemyGroupList;
     [SerializeField] public List<Ennemy> m_group1;
     [SerializeField] public List<Ennemy> m_group2;
+    [SerializeField] public List<Ennemy> m_group3;
+    [SerializeField] public List<Ennemy> m_group4;
 
     private void Awake()
     {

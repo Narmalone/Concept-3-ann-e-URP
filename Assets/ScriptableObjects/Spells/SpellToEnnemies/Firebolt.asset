@@ -16,7 +16,7 @@ MonoBehaviour:
   m_generalId: 0
   m_spellCost: 5
   m_damage: 3
-  m_icon: {fileID: 2800000, guid: 7f71f03aeec1be348aba2f13c8b9ad37, type: 3}
+  m_icon: {fileID: 2800000, guid: 447ff5d8c17a36041aa5002bb3b875ad, type: 3}
   m_description: 'Dealing to all ennemies: '
   m_isSolorOrMultipleTarget: 1
   m_isEnnemiesTargetOrFromTeamTarget: 0

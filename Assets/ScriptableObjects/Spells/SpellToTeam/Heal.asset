@@ -16,7 +16,7 @@ MonoBehaviour:
   m_generalId: 1
   m_spellCost: 3
   m_damage: 5
-  m_icon: {fileID: 2800000, guid: 2e87f80c364ae54499194e8d3c9d49ce, type: 3}
+  m_icon: {fileID: 2800000, guid: affbf5818f33da34bbfe933e160d5ecd, type: 3}
   m_description: 'Heal your team of: '
   m_isSolorOrMultipleTarget: 1
   m_isEnnemiesTargetOrFromTeamTarget: 1
