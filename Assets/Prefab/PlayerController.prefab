@@ -99,6 +99,7 @@ Transform:
   - {fileID: 4971238310765829980}
   - {fileID: 8246128068713479372}
   - {fileID: 8213471590937237647}
+  - {fileID: 2593903717853276420}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -109,7 +110,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4971238310329644708}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 0}
 --- !u!23 &4971238310329644706
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -567,4 +568,79 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1782415361685827950, guid: 7f23df62f17be8c40a3d9af5d1c31ed5,
     type: 3}
   m_PrefabInstance: {fileID: 7695605689790549410}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8971727442436792264
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4971238310329644704}
+    m_Modifications:
+    - target: {fileID: 6067843551546600566, guid: f4ba405138d3a79438a42cb079f76c9a,
+        type: 3}
+      propertyPath: m_Name
+      value: GuerillaDroid_LODG_ScrapSkin
+      objectReference: {fileID: 0}
+    - target: {fileID: 6881112254014830284, guid: f4ba405138d3a79438a42cb079f76c9a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6881112254014830284, guid: f4ba405138d3a79438a42cb079f76c9a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6881112254014830284, guid: f4ba405138d3a79438a42cb079f76c9a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6881112254014830284, guid: f4ba405138d3a79438a42cb079f76c9a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6881112254014830284, guid: f4ba405138d3a79438a42cb079f76c9a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6881112254014830284, guid: f4ba405138d3a79438a42cb079f76c9a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6881112254014830284, guid: f4ba405138d3a79438a42cb079f76c9a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6881112254014830284, guid: f4ba405138d3a79438a42cb079f76c9a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6881112254014830284, guid: f4ba405138d3a79438a42cb079f76c9a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6881112254014830284, guid: f4ba405138d3a79438a42cb079f76c9a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6881112254014830284, guid: f4ba405138d3a79438a42cb079f76c9a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f4ba405138d3a79438a42cb079f76c9a, type: 3}
+--- !u!4 &2593903717853276420 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6881112254014830284, guid: f4ba405138d3a79438a42cb079f76c9a,
+    type: 3}
+  m_PrefabInstance: {fileID: 8971727442436792264}
   m_PrefabAsset: {fileID: 0}
