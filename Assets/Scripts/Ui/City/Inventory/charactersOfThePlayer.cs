@@ -29,6 +29,7 @@ public class charactersOfThePlayer : MonoBehaviour, IDataPersistence
     private List<string> itemsSpell;
 
     private int selectedCharacter;
+    private int selectedLabelCount;
     private int selectedSpell;
 
     [SerializeField] public Character charaSelected;
@@ -37,6 +38,7 @@ public class charactersOfThePlayer : MonoBehaviour, IDataPersistence
 
     private Action<VisualElement, int> bindItem;
     private Action<VisualElement, int> bindItemSpells;
+    private Action<VisualElement, int> bindItemTeam;
 
     //Pour changer le sort du personnage
     private Button m_BSCharaSpell;
@@ -47,6 +49,14 @@ public class charactersOfThePlayer : MonoBehaviour, IDataPersistence
     private VisualElement parentToClone;
     public List<Spell> m_spellListOwned;
 
+
+    //Set our team
+    [SerializeField] private VisualTreeAsset m_ourTeamAsset;
+    private ListView m_viewOurTeam;
+    public List<Label> m_ourTeamElement;
+    private Label selectedLabel;
+    private int oldValueData;
+    private int newValueData;
     public void LoadData(GameData data)
     {
         this.m_totalCharacters = data.m_playerCharactersOwnedData;
@@ -61,6 +71,7 @@ public class charactersOfThePlayer : MonoBehaviour, IDataPersistence
     private void Awake()
     {
         instance = this;
+        m_ourTeamElement = new List<Label>();
     }
 
     //Dans le start quand les données sont initialisées
@@ -72,6 +83,7 @@ public class charactersOfThePlayer : MonoBehaviour, IDataPersistence
 
         UpdatePlayerTeam();
         SetupPlayerTeam();
+        SetOurTeam();
         #region bouton
         backButton = container.Q<Button>("B_BackButton");
         backButton.clickable.clicked += OnBackCliqued;
@@ -82,8 +94,40 @@ public class charactersOfThePlayer : MonoBehaviour, IDataPersistence
 
         m_viewSpellList = container.Q<ListView>("LVSpells");
         DisableListView(m_viewSpellList);
+        m_viewOurTeam = container.Q<ListView>("TeamView");
     }
+    public void SetOurTeam()
+    {
+        //Plutôt foutre ça dans une listview plus simple sur le index change
+        var container = m_InventoryDoc.rootVisualElement;
+        m_viewOurTeam = container.Q<ListView>("TeamView");
 
+        List<string> items = new List<string>(m_characterTeam.Count);
+
+        List<VisualElement> vsList = new List<VisualElement>();
+        Func<VisualElement> makeItem = () => m_ourTeamAsset.CloneTree();
+
+        bindItemTeam = (vs, i) => (vs).Q<Label>().text = items[i];
+        m_viewOurTeam.makeItem = makeItem;
+        m_viewOurTeam.bindItem = bindItemTeam;
+        m_viewOurTeam.itemsSource = items;
+
+        foreach (Character character in m_characterTeam)
+        {
+            items.Add(character.CharactersName);
+        }
+        //m_viewOurTeam.itemIndexChanged += UpdateChangedCharactersInTeam;
+    }
+    private void UpdateChangedCharactersInTeam(int oldValue, int newValue)
+    {
+        var container = m_InventoryDoc.rootVisualElement;
+        m_viewOurTeam = container.Q<ListView>("TeamView");
+
+        selectedLabelCount = m_viewOurTeam.selectedIndex;
+        m_ourTeamElement[newValue].text = m_characterTeam[newValue].CharactersName;
+        m_viewOurTeam.Rebuild();
+    }
+ 
     public void UpdatePlayerTeam()
     {
         var container = m_InventoryDoc.rootVisualElement;
@@ -133,11 +177,15 @@ public class charactersOfThePlayer : MonoBehaviour, IDataPersistence
     private void ListView_itemIndexChanged(int oldValue, int newValue)
     {
         m_totalCharacters[selectedCharacter] = charaSelected;
-
         m_totalCharacters.RemoveAt(oldValue);
         m_totalCharacters.Insert(newValue, charaSelected);
+        oldValueData = oldValue;
+        newValueData = newValue;
+        Debug.Log(oldValue);
+        Debug.Log(newValue);
         listView.Rebuild();
         SetupPlayerTeam();
+        //UpdateChangedCharactersInTeam(oldValue, newValue);
     }
 
     private void OnBackCliqued()
@@ -153,7 +201,7 @@ public class charactersOfThePlayer : MonoBehaviour, IDataPersistence
     {
         //Les 4 premiers personnages constituent l'équipe du joueur
         m_characterTeam = m_totalCharacters.GetRange(0, 4);
-
+        //UpdateChangedCharactersInTeam(oldValueData, newValueData);
         //On sauvegarde pour sauvegarder l'équipe actuelle du joueur
         DataPersistenceManager.instance.SaveGame();
     }
@@ -225,19 +273,26 @@ public class charactersOfThePlayer : MonoBehaviour, IDataPersistence
 
             itemsSpell = new List<string>(m_spellListOwned.Count);
 
-            Func<VisualElement> makeItem = () => new Label();
+            List<VisualElement> vsList = new List<VisualElement>();
 
-            bindItemSpells = (labelElement, i) => (labelElement as Label).text = itemsSpell[i];
+            Func<VisualElement> makeItem = () => m_spellListViewTemplate.CloneTree();
 
+            bindItemSpells = (vs, i) => (vs).Q<Label>().text = itemsSpell[i];
+            
             m_viewSpellList.makeItem = makeItem;
             m_viewSpellList.bindItem = bindItemSpells;
             m_viewSpellList.itemsSource = itemsSpell;
 
             foreach (Spell spells in m_spellListOwned)
             {
-                //VisualElement visualElement = m_spellListViewTemplate.CloneTree();
-                itemsSpell.Add(spells.Name);
-                //parentToContain.Add(items);
+                if(spells.GeneralId == 1)
+                {
+                    itemsSpell.Add(spells.Name + " " + spells.Description + " " + spells.Damage + " Cost: " + spells.Cost);
+                }
+                else
+                {
+                    itemsSpell.Add(spells.Name + " " + spells.Description + " damage = " + spells.Damage + " Cost: " + spells.Cost);
+                }
             }
 
             //Le joueur ne peut sélection que un seul personnage pour avoir ses données

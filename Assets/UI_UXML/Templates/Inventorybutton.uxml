@@ -1,3 +1,5 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
-    <ui:Button text="SpellName" display-tooltip-when-elided="true" focusable="false" style="font-size: 50px;" />
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement style="flex-direction: row;">
+        <ui:Label text="SPELL INFO" display-tooltip-when-elided="true" style="font-size: 46px; height: 143px; white-space: normal; width: 100%; -unity-text-align: upper-left;" />
+    </ui:VisualElement>
 </ui:UXML>

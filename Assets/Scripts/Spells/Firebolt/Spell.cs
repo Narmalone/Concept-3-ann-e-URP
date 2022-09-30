@@ -14,6 +14,7 @@ public class Spell : ScriptableObject, ISpell
 
     [Tooltip("Si true la cible est multiple")] public bool m_isSolorOrMultipleTarget;
     [Tooltip("Si true la target est team")]public bool m_isEnnemiesTargetOrFromTeamTarget;
+    [Tooltip("Si true le/les personnages se healent")]public bool m_isHealing;
     public string Name { get => m_name;}
     public string Description { get => m_description; }
     public int GeneralId { get => m_generalId; set => m_generalId = value; }
@@ -25,8 +26,5 @@ public class Spell : ScriptableObject, ISpell
 
     public bool IsEnemyTarget { get => m_isEnnemiesTargetOrFromTeamTarget; }
 
-    public void CastSpell(Spell spell)
-    {
-
-    }
+    public bool IsHealing { get => m_isHealing; }
 }

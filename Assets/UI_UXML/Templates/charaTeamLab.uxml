@@ -1,0 +1,5 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:VisualElement style="flex-direction: column-reverse; align-items: flex-start; height: 44px; width: 248px; position: relative;">
+        <ui:Label text="Current Team: " display-tooltip-when-elided="true" style="font-size: 32px;" />
+    </ui:VisualElement>
+</ui:UXML>

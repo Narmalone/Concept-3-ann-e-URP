@@ -6,10 +6,11 @@
     <ui:GroupBox name="SpellBox" style="width: 100%; -unity-background-image-tint-color: rgba(255, 255, 255, 0); color: rgba(210, 210, 210, 0); height: 252px;">
         <ui:GroupBox name="SpellBoxParent" style="height: 226px; width: 237px; position: relative; left: 0; top: 0; background-color: rgba(255, 255, 255, 0); color: rgba(255, 255, 255, 0); -unity-background-image-tint-color: rgba(255, 255, 255, 0);">
             <ui:IMGUIContainer name="SpellBoxImage" focusable="false" style="width: 250px; height: 250px; -unity-background-image-tint-color: rgb(255, 6, 6); color: rgb(255, 0, 0); background-image: url(&apos;project://database/Assets/Prefab/Ui/NoSpell.png?fileID=2800000&amp;guid=dc474989010885c4ebaadf822a8a0f0a&amp;type=3#NoSpell&apos;); opacity: 1; position: absolute; top: -21px; left: -10px;" />
-            <ui:Button display-tooltip-when-elided="true" name="BSpell1" focusable="false" style="height: 250px; position: absolute; width: 250px; top: -17px; left: -10px; background-image: url(&apos;project://database/Assets/Prefab/Ui/Heal_360x360.png?fileID=2800000&amp;guid=2e87f80c364ae54499194e8d3c9d49ce&amp;type=3#Heal_360x360&apos;);" />
+            <ui:Button display-tooltip-when-elided="true" name="BSpell1" focusable="false" style="height: 250px; position: absolute; width: 250px; top: -17px; left: -10px; background-image: url(&apos;project://database/Assets/Prefab/Ui/FrozenArrow.png?fileID=2800000&amp;guid=4b64b9ef2efa00c4394d18a27556bb45&amp;type=3#FrozenArrow&apos;);" />
         </ui:GroupBox>
     </ui:GroupBox>
-    <ui:IMGUIContainer style="position: absolute; height: 39px; width: 48px; top: 63px; left: 4px; background-color: rgb(195, 158, 40);">
-        <ui:Label text="8" display-tooltip-when-elided="true" name="SpellCost" style="position: absolute; background-color: rgba(0, 0, 0, 0); font-size: 30px; top: 0; left: 20%;" />
-    </ui:IMGUIContainer>
+    <ui:IMGUIContainer style="position: absolute; height: 39px; width: 48px; top: 63px; left: 4px; background-color: rgb(0, 0, 0); background-image: url(&apos;project://database/Assets/Prefab/Ui/EnergyIcon.png?fileID=2800000&amp;guid=192a1b8efcd6390459333749c4b5efc6&amp;type=3#EnergyIcon&apos;);" />
+    <ui:VisualElement style="position: absolute; height: 39px; width: 33px; top: 63px; left: 52px; color: rgb(255, 28, 28); background-color: rgb(0, 0, 0);">
+        <ui:Label text="8" display-tooltip-when-elided="true" name="SpellCost" style="position: absolute; background-color: rgba(0, 0, 0, 0); font-size: 30px; top: 1px; left: 3px; color: rgb(255, 148, 28);" />
+    </ui:VisualElement>
 </ui:UXML>

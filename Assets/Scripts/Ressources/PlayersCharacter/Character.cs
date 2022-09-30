@@ -15,7 +15,6 @@ public class Character
     private Spell m_currentSpell;
 
     [SerializeField] public int m_spellID;
-
     enum mRarity{
        Normal,
        Rare,

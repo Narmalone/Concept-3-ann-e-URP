@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlayerControllerCity : MonoBehaviour
 {
+    public static PlayerControllerCity Instance { get; private set; }
     [SerializeField] private CharacterController charaController;
     [SerializeField] private float moveSpeed = 1;
     Vector3 moveDirection = Vector3.zero;
@@ -15,20 +16,33 @@ public class PlayerControllerCity : MonoBehaviour
 
     private void Awake()
     {
+        Instance = this;
         charaController = GetComponent<CharacterController>();
     }
     private void Update()
     {
-       
-        if (isWalking)
+        if (CombatManager.instance.isFighting == false) 
         {
-            m_charaAnim.SetBool("isWalking" , true);
+            if (isWalking)
+            {
+                m_charaAnim.SetBool("isWalking", true);
+            }
+            else
+            {
+                m_charaAnim.SetBool("isWalking", false);
+            }
         }
         else
         {
             m_charaAnim.SetBool("isWalking", false);
         }
+      
         Debug.Log(m_charaAnim);
+    }
+
+    public void StopAnim()
+    {
+        m_charaAnim.SetBool("isWalking", false);
     }
 
     private void FixedUpdate()

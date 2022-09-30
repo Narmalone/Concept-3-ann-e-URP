@@ -18,6 +18,7 @@ public class EnemyScript: MonoBehaviour
             GetComponent<Collider>().enabled = false;
             CombatManager.instance.GroupIdInFight = GetComponentInParent<Ennemy>().groupID;
             CombatManager.instance.m_currentFightingGroup = GetComponentInParent<Ennemy>().m_thisEnemyGroup;
+            PlayerControllerCity.Instance.StopAnim();
             CombatManager.instance.OnStartCombat(true);
         }
     }

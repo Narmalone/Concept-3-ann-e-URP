@@ -859,9 +859,12 @@ MonoBehaviour:
     m_defense: 0
     m_rarity: 0
     m_spellID: 0
+  spellSelected: {fileID: 0}
   m_spellListViewTemplate: {fileID: 9197481963319205126, guid: 5585f62e86971eb4298e8e4b81fb44e2,
     type: 3}
   m_spellListOwned: []
+  m_ourTeamAsset: {fileID: 9197481963319205126, guid: 1ed6d81bcd9fb3b4ab046701b1d0f910,
+    type: 3}
 --- !u!1 &1470557260
 GameObject:
   m_ObjectHideFlags: 0
