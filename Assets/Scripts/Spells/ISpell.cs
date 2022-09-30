@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public interface ISpell
 {
-
     public string Name { get;}
     public string Description { get;}
     public int Cost { get; set; }

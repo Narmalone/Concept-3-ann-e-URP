@@ -286,6 +286,7 @@ public class CombatManager : MonoBehaviour
 
                 }
 
+                VFXManager.instance.PlayVfx(m_currentSpellSelected.GeneralId);
                 //une fois que le joueur a lancé le sort il n'est plus sélectionné
                 m_currentSpellSelected = null;
             }
@@ -315,6 +316,7 @@ public class CombatManager : MonoBehaviour
                     delTurn(false);
                 }
 
+                VFXManager.instance.PlayVfx(m_currentSpellSelected.GeneralId);
                 //une fois que le joueur a lancé le sort il n'est plus sélectionné
                 m_currentSpellSelected = null;
             }

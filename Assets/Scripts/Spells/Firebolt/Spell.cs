@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 [CreateAssetMenu(fileName = "Spell", menuName = "New Spell", order = 1)]
 public class Spell : ScriptableObject, ISpell
@@ -21,7 +22,6 @@ public class Spell : ScriptableObject, ISpell
     public int Cost { get => m_spellCost; set => m_spellCost = value; }
     public float Damage { get => m_damage; set => m_damage = value; }
     public Texture2D Icon { get => m_icon;}
-
     public bool IsSoloTarget { get => m_isSolorOrMultipleTarget; }
 
     public bool IsEnemyTarget { get => m_isEnnemiesTargetOrFromTeamTarget; }
